@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>General Pathology Exam - Dr. Jamal ALSAidi</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f8fafc; margin: 0; padding: 15px; }
+    .container { max-width: 750px; margin: auto; background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    h2, h3 { text-align: center; color: #1e3a8a; margin-top: 0; }
+    .input-group { margin-bottom: 25px; }
+    .input-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #334155; }
+    .input-group input { width: 100%; padding: 12px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+    .q-card { margin-bottom: 20px; padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; direction: ltr; text-align: left; }
+    .q-title { font-weight: bold; margin-bottom: 12px; color: #0f172a; font-size: 15px; }
+    .opt-label { display: block; margin: 8px 0; padding: 10px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; font-size: 14px; }
+    .opt-label:hover { background: #eff6ff; }
+    button#submitBtn { width: 100%; padding: 15px; background: #2563eb; color: #ffffff; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; }
+    button#submitBtn:disabled { background: #94a3b8; }
+    #resultBox { display: none; text-align: center; padding: 25px; background: #ecfdf5; border: 1px solid #6ee7b7; border-radius: 8px; margin-top: 20px; color: #065f46; font-size: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>اختبار علم الأمراض العام (Pathology)</h2>
+  <h3 style="color:#64748b; font-size:14px;">كلية طب الأسنان - جامعة المحويت | د. جمال الصعيدي</h3>
+
+  <div class="input-group">
+    <label for="studentName">اسم الطالب الثلاثي أو الرباعي:</label>
+    <input type="text" id="studentName" placeholder="اكتب اسمك هنا قبل البدء..." required>
+  </div>
+
+  <form id="quizForm">
+    <div id="questionsContainer"></div>
+    <button type="button" id="submitBtn" onclick="submitExam()">إرسال النتيجة وإنهاء الاختبار</button>
+  </form>
+
+  <div id="resultBox"></div>
+</div>
+
+<script>
+  // بيانات الربط المجهزة للبوت وحسابك
+  const BOT_TOKEN = "8874796430:AAHIL5Q6JjLN-tPlE9ylSL5s6hIZblkOD8k";
+  const CHAT_ID = "8475624731";
+
+  const quizData = [
+    {
+      q: "1. The fundamental difference between simple atrophy and numerous atrophy is:",
+      options: ["Loss of cell size only vs loss of cell size and number via apoptosis", "Physiologic etiology vs pathologic etiology", "Reversible vs irreversible injury", "Cytoplasmic swelling vs fragmentation"],
+      answer: 0
+    },
+    {
+      q: "2. Which cellular adaptation is characterized by an increase in the size of parenchymal cells resulting in organ enlargement?",
+      options: ["Hyperplasia", "Hypertrophy", "Metaplasia", "Atrophy"],
+      answer: 1
+    },
+    {
+      q: "3. Left ventricular hypertrophy in systemic hypertension is classified as:",
+      options: ["Compensatory hypertrophy due to increased workload", "Physiologic hyperplasia", "Pathologic metaplasia", "Disuse atrophy"],
+      answer: 0
+    },
+    {
+      q: "4. Hyperplasia can occur alongside hypertrophy in various tissues EXCEPT in:",
+      options: ["Uterine smooth muscle", "Cardiac and skeletal muscles", "Breast glandular tissue", "Liver parenchyma"],
+      answer: 1
+    },
+    {
+      q: "5. Cigarette smoking classically induces which adaptive epithelial change in the bronchi?",
+      options: ["Squamous metaplasia", "Glandular hyperplasia", "Simple atrophy", "Dysplastic hypertrophy"],
+      answer: 0
+    },
+    {
+      q: "6. The hallmark reversible changes visible on light microscopy following cellular injury are:",
+      options: ["Hydropic change and fatty change", "Pyknosis and karyolysis", "Caseous necrosis and calcification", "Fibrinoid degeneration"],
+      answer: 0
+    },
+    {
+      q: "7. Which type of necrosis characteristically maintains the structural cellular architecture ('ghost cells')?",
+      options: ["Liquefactive necrosis", "Coagulative necrosis", "Caseous necrosis", "Fat necrosis"],
+      answer: 1
+    },
+    {
+      q: "8. Ischemic necrosis occurring in the brain classically manifests as:",
+      options: ["Coagulative necrosis", "Liquefactive necrosis", "Caseous necrosis", "Fibrinoid necrosis"],
+      answer: 1
+    },
+    {
+      q: "9. Langhans multinucleated giant cells characteristically feature nuclei arranged in:",
+      options: ["A peripheral horseshoe pattern", "A random scatter throughout the cytoplasm", "Two parallel linear rows", "A single centrally clumped mass"],
+      answer: 0
+    },
+    {
+      q: "10. In contrast to foreign body giant cells, Langhans giant cells are typically diagnostic of:",
+      options: ["Tuberculosis", "Silicosis", "Asbestosis", "Suture reactions"],
+      answer: 0
+    },
+    {
+      q: "11. The predominant leukocyte present during the initial 24 hours of acute inflammation is the:",
+      options: ["Neutrophil", "Macrophage", "Lymphocyte", "Plasma cell"],
+      answer: 0
+    },
+    {
+      q: "12. Leukocyte rolling along endothelial surfaces is primarily mediated by:",
+      options: ["Selectins", "Integrins", "PECAM-1 (CD31)", "Histamine"],
+      answer: 0
+    },
+    {
+      q: "13. Firm adhesion of leukocytes to endothelial cells requires binding mediated by:",
+      options: ["Integrins (ICAM-1 interactions)", "Selectins", "Prostaglandins", "Bradykinin"],
+      answer: 0
+    },
+    {
+      q: "14. Which cytokine is recognized as the most potent activator of macrophages in chronic inflammation?",
+      options: ["Interferon-gamma (IFN-γ)", "Interleukin-1 (IL-1)", "Tumor necrosis factor-alpha", "Histamine"],
+      answer: 0
+    },
+    {
+      q: "15. The elevated Erythrocyte Sedimentation Rate (ESR) seen in the acute-phase response is driven by increased hepatic synthesis of:",
+      options: ["Fibrinogen", "Albumin", "Transferrin", "Superoxide dismutase"],
+      answer: 0
+    },
+    {
+      q: "16. Cells that continuously divide throughout life to replace lost cells (e.g., surface epithelia) are classified as:",
+      options: ["Labile cells", "Stable cells", "Permanent cells", "Quiescent cells"],
+      answer: 0
+    },
+    {
+      q: "17. Cardiac myocytes and neurons are incapable of postnatal division and are classified as:",
+      options: ["Permanent cells", "Stable cells", "Labile cells", "Stem cells"],
+      answer: 0
+    },
+    {
+      q: "18. Histologically, granulation tissue is composed of:",
+      options: ["Newly formed vessels (angiogenesis), fibroblasts, and inflammatory cells", "Dense mature collagen with complete absence of vessels", "Amorphous caseous debris", "Purely squamous keratinized layers"],
+      answer: 0
+    },
+    {
+      q: "19. The cellular element responsible for wound contraction during tissue repair is the:",
+      options: ["Myofibroblast", "Endothelial cell", "Neutrophil", "Keratinocyte"],
+      answer: 0
+    },
+    {
+      q: "20. A complication of wound healing characterized by excessive collagen accumulation protruding beyond original wound margins is:",
+      options: ["Keloid", "Hypertrophic scar", "Contracture", "Ulcer"],
+      answer: 0
+    }
+  ];
+
+  // توليد الأسئلة في الواجهة
+  const container = document.getElementById("questionsContainer");
+  quizData.forEach((item, idx) => {
+    let qDiv = document.createElement("div");
+    qDiv.className = "q-card";
+    qDiv.innerHTML = `<div class="q-title">${item.q}</div>`;
+    item.options.forEach((opt, optIdx) => {
+      qDiv.innerHTML += `
+        <label class="opt-label">
+          <input type="radio" name="q_${idx}" value="${optIdx}"> ${opt}
+        </label>
+      `;
+    });
+    container.appendChild(qDiv);
+  });
+
+  // إرسال النتيجة إلى التيليجرام
+  async function submitExam() {
+    const nameInput = document.getElementById("studentName");
+    const name = nameInput.value.trim();
+
+    if (!name) {
+      alert("يرجى كتابة اسمك أولاً في الخانة المخصصة بالأعلى!");
+      nameInput.focus();
+      return;
+    }
+
+    let score = 0;
+    quizData.forEach((item, idx) => {
+      const selected = document.querySelector(`input[name="q_${idx}"]:checked`);
+      if (selected && parseInt(selected.value) === item.answer) {
+        score++;
+      }
+    });
+
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.disabled = true;
+    submitBtn.innerText = "جارٍ إرسال النتيجة والتسليم...";
+
+    const text = `🔔 تسليم اختبار باثولوجي جديد!\n\n👤 اسم الطالب: ${name}\n📊 الدرجة: ${score} من ${quizData.length}\n⏰ التاريخ: ${new Date().toLocaleTimeString('ar-YE')}`;
+    const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`;
+
+    try {
+      await fetch(telegramUrl);
+    } catch (err) {
+      console.error(err);
+    }
+
+    document.getElementById("quizForm").style.display = "none";
+    const resBox = document.getElementById("resultBox");
+    resBox.style.display = "block";
+    resBox.innerHTML = `تم تسليم إجابتك بنجاح يا <b>${name}</b> ووصلت نتيجتك للدكتور.<br><br>درجتك: ${score} من ${quizData.length}`;
+  }
+</script>
+
+</body>
+</html>
