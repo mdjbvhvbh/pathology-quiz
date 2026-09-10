@@ -1,199 +1,1106 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>General Pathology Exam</title>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f8fafc; margin: 0; padding: 15px; }
-    .container { max-width: 800px; margin: auto; background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-    h2, h3 { text-align: center; color: #1e3a8a; margin-top: 0; }
-    .input-group { margin-bottom: 25px; }
-    .input-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #334155; }
-    .input-group input { width: 100%; padding: 12px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
-    .q-card { margin-bottom: 20px; padding: 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; direction: ltr; text-align: left; }
-    .q-title { font-weight: bold; margin-bottom: 12px; color: #0f172a; font-size: 15px; line-height: 1.4; }
-    .opt-label { display: block; margin: 8px 0; padding: 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.2s ease; }
-    .opt-label:hover { background: #f1f5f9; }
-    .opt-label.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; font-weight: bold; }
-    .opt-label.wrong { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; font-weight: bold; }
-    .opt-label.disabled { pointer-events: none; opacity: 0.85; }
-    .feedback-msg { margin-top: 10px; font-size: 13px; font-weight: bold; }
-    button#submitBtn { width: 100%; padding: 15px; background: #2563eb; color: #ffffff; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-    button#submitBtn:disabled { background: #94a3b8; cursor: not-allowed; }
-    #resultBox { display: none; text-align: center; padding: 25px; background: #ecfdf5; border: 1px solid #6ee7b7; border-radius: 8px; margin-top: 20px; color: #065f46; font-size: 20px; font-weight: bold; }
-  </style>
-</head>
-<body>
+<!DOCTYPE html>  <html lang="ar" dir="rtl">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>General Pathology Exam</title>    <style>  
+    body {  
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;  
+      background-color: #f8fafc;  
+      margin: 0;  
+      padding: 15px;  
+    }  
+  
+    .container {  
+      max-width: 800px;  
+      margin: auto;  
+      background: #ffffff;  
+      padding: 25px;  
+      border-radius: 12px;  
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);  
+    }  
+  
+    h2, h3 {  
+      text-align: center;  
+      color: #1e3a8a;  
+      margin-top: 0;  
+    }  
+  
+    .input-group {  
+      margin-bottom: 25px;  
+    }  
+  
+    .input-group label {  
+      display: block;  
+      font-weight: bold;  
+      margin-bottom: 8px;  
+      color: #334155;  
+    }  
+  
+    .input-group input {  
+      width: 100%;  
+      padding: 12px;  
+      border: 1.5px solid #cbd5e1;  
+      border-radius: 8px;  
+      font-size: 16px;  
+      box-sizing: border-box;  
+    }  
+  
+    .q-card {  
+      margin-bottom: 20px;  
+      padding: 16px;  
+      background: #f8fafc;  
+      border: 1px solid #e2e8f0;  
+      border-radius: 8px;  
+      direction: ltr;  
+      text-align: left;  
+    }  
+  
+    .q-title {  
+      font-weight: bold;  
+      margin-bottom: 12px;  
+      color: #0f172a;  
+      font-size: 15px;  
+      line-height: 1.4;  
+    }  
+  
+    .opt-label {  
+      display: block;  
+      margin: 8px 0;  
+      padding: 12px;  
+      background: #ffffff;  
+      border: 1.5px solid #cbd5e1;  
+      border-radius: 6px;  
+      cursor: pointer;  
+      font-size: 14px;  
+      transition: all 0.2s ease;  
+    }  
+  
+    .opt-label:hover {  
+      background: #f1f5f9;  
+    }  
+  
+    .opt-label.correct {  
+      background-color: #dcfce7 !important;  
+      border-color: #22c55e !important;  
+      color: #15803d !important;  
+      font-weight: bold;  
+    }  
+  
+    .opt-label.wrong {  
+      background-color: #fee2e2 !important;  
+      border-color: #ef4444 !important;  
+      color: #b91c1c !important;  
+      font-weight: bold;  
+    }  
+  
+    .opt-label.disabled {  
+      pointer-events: none;  
+      opacity: 0.85;  
+    }  
+  
+    .feedback-msg {  
+      margin-top: 10px;  
+      font-size: 13px;  
+      font-weight: bold;  
+    }  
+  
+    button#submitBtn {  
+      width: 100%;  
+      padding: 15px;  
+      background: #2563eb;  
+      color: #ffffff;  
+      border: none;  
+      border-radius: 8px;  
+      font-size: 18px;  
+      font-weight: bold;  
+      cursor: pointer;  
+      margin-top: 20px;  
+    }  
+  
+    button#submitBtn:disabled {  
+      background: #94a3b8;  
+      cursor: not-allowed;  
+    }  
+  
+    #resultBox {  
+      display: none;  
+      text-align: center;  
+      padding: 25px;  
+      background: #ecfdf5;  
+      border: 1px solid #6ee7b7;  
+      border-radius: 8px;  
+      margin-top: 20px;  
+      color: #065f46;  
+      font-size: 20px;  
+      font-weight: bold;  
+    }  
+  </style>  </head>  <body>  <div class="container">    <h2>اختبار علم الأمراض العام (General Pathology)</h2>    <h3 style="color:#64748b; font-size:14px;">  
+    كلية طب الأسنان | 50 سؤالاً للمراجعة والتقييم  
+  </h3>    <div class="input-group">  
+    <label for="studentName">  
+      اسم الطالب الثلاثي أو الرباعي:  
+    </label>  <input  
+  type="text"  
+  id="studentName"  
+  placeholder="اكتب اسمك هنا قبل البدء..."  
+  required  
+>
 
-<div class="container">
-  <h2>اختبار علم الأمراض العام (General Pathology)</h2>
-  <h3 style="color:#64748b; font-size:14px;">كلية طب الأسنان | 50 سؤالاً للمراجعة والتقييم</h3>
+  </div>    <form id="quizForm">  <div id="questionsContainer"></div>  
 
-  <div class="input-group">
-    <label for="studentName">اسم الطالب الثلاثي أو الرباعي:</label>
-    <input type="text" id="studentName" placeholder="اكتب اسمك هنا قبل البدء..." required>
-  </div>
+<button  
+  type="button"  
+  id="submitBtn"  
+  onclick="submitExam()"  
+>  
+  إرسال النتيجة وإنهاء الاختبار  
+</button>
 
-  <form id="quizForm">
-    <div id="questionsContainer"></div>
-    <button type="button" id="submitBtn" onclick="submitExam()">إرسال النتيجة وإنهاء الاختبار</button>
-  </form>
-
-  <div id="resultBox"></div>
-</div>
-
-<script>
-  const BOT_TOKEN = "8874796430:AAHIL5Q6JjLN-tPlE9ylSL5s6hIZblkOD8k";
-  const CHAT_ID = "8475624731";
-
-  const quizData = [
-    { q: "1. The fundamental difference between simple atrophy and numerous atrophy is:", options: ["Loss of cell size only vs loss of cell size and number via apoptosis", "Physiologic etiology vs pathologic etiology", "Reversible vs irreversible injury", "Cytoplasmic swelling vs fragmentation"], answer: 0 },
-    { q: "2. Which cellular adaptation is characterized by an increase in the size of parenchymal cells resulting in organ enlargement?", options: ["Hyperplasia", "Hypertrophy", "Metaplasia", "Atrophy"], answer: 1 },
-    { q: "3. Left ventricular hypertrophy in systemic hypertension is classified as:", options: ["Compensatory hypertrophy due to increased workload", "Physiologic hyperplasia", "Pathologic metaplasia", "Disuse atrophy"], answer: 0 },
-    { q: "4. Hyperplasia can occur alongside hypertrophy in various tissues EXCEPT in:", options: ["Uterine smooth muscle", "Cardiac and skeletal muscles", "Breast glandular tissue", "Liver parenchyma"], answer: 1 },
-    { q: "5. Cigarette smoking classically induces which adaptive epithelial change in the bronchi?", options: ["Squamous metaplasia", "Glandular hyperplasia", "Simple atrophy", "Dysplastic hypertrophy"], answer: 0 },
-    { q: "6. The hallmark reversible changes visible on light microscopy following cellular injury are:", options: ["Hydropic change and fatty change", "Pyknosis and karyolysis", "Caseous necrosis and calcification", "Fibrinoid degeneration"], answer: 0 },
-    { q: "7. Which type of necrosis characteristically maintains the structural cellular architecture ('ghost cells')?", options: ["Liquefactive necrosis", "Coagulative necrosis", "Caseous necrosis", "Fat necrosis"], answer: 1 },
-    { q: "8. Ischemic necrosis occurring in the brain classically manifests as:", options: ["Coagulative necrosis", "Liquefactive necrosis", "Caseous necrosis", "Fibrinoid necrosis"], answer: 1 },
-    { q: "9. Langhans multinucleated giant cells characteristically feature nuclei arranged in:", options: ["A peripheral horseshoe pattern", "A random scatter throughout the cytoplasm", "Two parallel linear rows", "A single centrally clumped mass"], answer: 0 },
-    { q: "10. In contrast to foreign body giant cells, Langhans giant cells are typically diagnostic of:", options: ["Tuberculosis", "Silicosis", "Asbestosis", "Suture reactions"], answer: 0 },
-    { q: "11. The predominant leukocyte present during the initial 24 hours of acute inflammation is the:", options: ["Neutrophil", "Macrophage", "Lymphocyte", "Plasma cell"], answer: 0 },
-    { q: "12. Leukocyte rolling along endothelial surfaces is primarily mediated by:", options: ["Selectins", "Integrins", "PECAM-1 (CD31)", "Histamine"], answer: 0 },
-    { q: "13. Firm adhesion of leukocytes to endothelial cells requires binding mediated by:", options: ["Integrins (ICAM-1 interactions)", "Selectins", "Prostaglandins", "Bradykinin"], answer: 0 },
-    { q: "14. Which cytokine is recognized as the most potent activator of macrophages in chronic inflammation?", options: ["Interferon-gamma (IFN-γ)", "Interleukin-1 (IL-1)", "Tumor necrosis factor-alpha", "Histamine"], answer: 0 },
-    { q: "15. The elevated Erythrocyte Sedimentation Rate (ESR) seen in the acute-phase response is driven by increased hepatic synthesis of:", options: ["Fibrinogen", "Albumin", "Transferrin", "Superoxide dismutase"], answer: 0 },
-    { q: "16. Cells that continuously divide throughout life to replace lost cells (e.g., surface epithelia) are classified as:", options: ["Labile cells", "Stable cells", "Permanent cells", "Quiescent cells"], answer: 0 },
-    { q: "17. Cardiac myocytes and neurons are incapable of postnatal division and are classified as:", options: ["Permanent cells", "Stable cells", "Labile cells", "Stem cells"], answer: 0 },
-    { q: "18. Histologically, granulation tissue is composed of:", options: ["Newly formed vessels (angiogenesis), fibroblasts, and inflammatory cells", "Dense mature collagen with complete absence of vessels", "Amorphous caseous debris", "Purely squamous keratinized layers"], answer: 0 },
-    { q: "19. The cellular element responsible for wound contraction during tissue repair is the:", options: ["Myofibroblast", "Endothelial cell", "Neutrophil", "Keratinocyte"], answer: 0 },
-    { q: "20. A complication of wound healing characterized by excessive collagen accumulation protruding beyond original wound margins is:", options: ["Keloid", "Hypertrophic scar", "Contracture", "Ulcer"], answer: 0 },
-    { q: "21. Irreversible nuclear condensation characterized by shrinkage and increased basophilia is known as:", options: ["Pyknosis", "Karyorrhexis", "Karyolysis", "Autophagy"], answer: 0 },
-    { q: "22. The fragmentation of a pyknotic nucleus during cell death is defined as:", options: ["Karyorrhexis", "Karyolysis", "Apoptosis", "Heterophagy"], answer: 0 },
-    { q: "23. Enzymatic fat necrosis, classically observed in acute pancreatitis, results in chalky white deposits via:", options: ["Saponification with calcium", "Caseation necrosis", "Lipofuscin deposition", "Hyaline accumulation"], answer: 0 },
-    { q: "24. Fibrinoid necrosis is most commonly encountered in which of the following conditions?", options: ["Immune complex-mediated vasculitis", "Myocardial infarction", "Bacterial abscesses", "Tuberculous lymphadenitis"], answer: 0 },
-    { q: "25. Which pathway of apoptosis is initiated by the release of Cytochrome c from mitochondria?", options: ["Intrinsic (mitochondrial) pathway", "Extrinsic (death receptor) pathway", "Perforin-granzyme pathway", "Necroptotic pathway"], answer: 0 },
-    { q: "26. The extrinsic pathway of apoptosis is triggered via the activation of:", options: ["Fas (CD95) and TNF receptor 1", "Bcl-2 overexpression", "Caspase-9 directly", "C-reactive protein"], answer: 0 },
-    { q: "27. Which of the following is considered an anti-apoptotic protein?", options: ["Bcl-2", "Bax", "Bak", "Bid"], answer: 0 },
-    { q: "28. 'Brown atrophy' of the heart in aging or malnourished patients is caused by cytoplasmic accumulation of:", options: ["Lipofuscin", "Hemosiderin", "Melanin", "Glycogen"], answer: 0 },
-    { q: "29. Dystrophic calcification occurs under which of the following biochemical conditions?", options: ["Normal serum calcium levels in necrotic or degenerating tissues", "Elevated serum calcium levels in normal tissues", "Systemic hyperparathyroidism", "Hypervitaminosis D"], answer: 0 },
-    { q: "30. Metastatic calcification is primarily driven by:", options: ["Systemic hypercalcemia", "Localized tissue necrosis", "Decreased serum phosphate", "Atherosclerotic plaques only"], answer: 0 },
-    { q: "31. The primary chemical mediator responsible for the immediate transient phase of vascular permeability in acute inflammation is:", options: ["Histamine", "Leukotriene B4", "Transforming growth factor-beta", "Platelet-derived growth factor"], answer: 0 },
-    { q: "32. The transmigration of leukocytes across the vascular basement membrane is termed:", options: ["Diapedesis", "Chemotaxis", "Margination", "Opsonization"], answer: 0 },
-    { q: "33. Which molecule acts as an opsonin to facilitate phagocytosis?", options: ["C3b", "C5a", "Bradykinin", "Serotonin"], answer: 0 },
-    { q: "34. The classic cardinal signs of acute inflammation (Rubor, Tumor, Calor, Dolor) were first described by:", options: ["Celsus", "Virchow", "Hunter", "Cohnheim"], answer: 0 },
-    { q: "35. The fifth clinical sign of acute inflammation, 'Functio laesa' (loss of function), was added by:", options: ["Rudolf Virchow", "John Hunter", "Julius Cohnheim", "Elie Metchnikoff"], answer: 0 },
-    { q: "36. A localized collection of purulent exudate (pus) within an organ or confined tissue space is termed:", options: ["Abscess", "Ulcer", "Phlegmon", "Seroma"], answer: 0 },
-    { q: "37. Granulomatous inflammation is a distinctive histologic pattern of:", options: ["Chronic inflammation characterized by aggregated epithelioid macrophages", "Acute suppurative inflammation", "Serous inflammation seen in burns", "Purely non-immune hypersensitivity"], answer: 0 },
-    { q: "38. Non-caseating granulomas are characteristically identified in which systemic granulomatous disorder?", options: ["Sarcoidosis", "Tuberculosis", "Histoplasmosis", "Coccidioidomycosis"], answer: 0 },
-    { q: "39. Which key growth factor is central to collagen synthesis, fibroblast migration, and terminating chronic inflammation?", options: ["TGF-beta", "Histamine", "TNF-alpha", "Interleukin-8"], answer: 0 },
-    { q: "40. Healing by primary intention differs from secondary intention because primary intention exhibits:", options: ["Clean, closely approximated margins with minimal tissue loss and scar", "Extensive tissue defects requiring abundant granulation tissue", "Prominent wound contraction by myofibroblasts", "Higher rates of ulceration and delayed re-epithelialization"], answer: 0 },
-    { q: "41. An essential dietary cofactor required for the post-translational hydroxylation of proline and lysine in collagen synthesis is:", options: ["Vitamin C", "Vitamin D", "Vitamin A", "Vitamin K"], answer: 0 },
-    { q: "42. Trace element essential for collagen cross-linking via lysyl oxidase is:", options: ["Copper", "Iron", "Zinc", "Magnesium"], answer: 0 },
-    { q: "43. Edema fluid with low protein content, low specific gravity (<1.012), and caused by altered hemodynamic forces is a:", options: ["Transudate", "Exudate", "Purulent fluid", "Fibrinous effusion"], answer: 0 },
-    { q: "44. An inflammatory edema fluid characterized by high protein content and cellular debris is termed:", options: ["Exudate", "Transudate", "Lymph fluid", "Interstitial filtrate"], answer: 0 },
-    { q: "45. The classic triad of Virchow contributing to pathologic intravascular thrombosis includes:", options: ["Endothelial injury, stasis/turbulent flow, and hypercoagulability", "Hypertension, hyperlipidemia, and diabetes", "Infection, fever, and leukocytosis", "Vasoconstriction, vasodilation, and vascular stasis"], answer: 0 },
-    { q: "46. Arterial thrombi most commonly originate at sites of:", options: ["Endothelial injury and atherosclerosis", "Venous valve pockets", "Normal capillary beds", "Arteriovenous shunts"], answer: 0 },
-    { q: "47. Lines of Zahn are characteristic microscopic/gross features that distinguish:", options: ["Antemortem thrombi from postmortem clots", "Coagulative necrosis from liquefactive necrosis", "Transudate from exudate", "Labile cells from stable cells"], answer: 0 },
-    { q: "48. The most common source of pulmonary thromboemboli is:", options: ["Deep venous thrombosis (DVT) of the lower extremities", "Right ventricular mural thrombi", "Upper extremity veins", "Mesenteric veins"], answer: 0 },
-    { q: "49. Red (hemorrhagic) infarcts typically occur in organs with:", options: ["Dual or collateral blood supply (e.g., lungs and small intestine)", "Single terminal end-arterial circulation (e.g., spleen, kidney)", "No collateral vascular networks", "Dense fibrotic capsule preventing perfusion"], answer: 0 },
-    { q: "50. White (anemic) infarcts characteristically occur in solid organs with end-arterial supplies, such as the:", options: ["Kidney and spleen", "Lungs and liver", "Small intestine and ovaries", "Brain and meninges"], answer: 0 }
-  ];
-
-  const container = document.getElementById("questionsContainer");
-  const userAnswers = {};
-
-  quizData.forEach((item, idx) => {
-    let qDiv = document.createElement("div");
-    qDiv.className = "q-card";
-    qDiv.id = `qCard_${idx}`;
-    qDiv.innerHTML = `<div class="q-title">${item.q}</div>`;
-
-    item.options.forEach((opt, optIdx) => {
-      qDiv.innerHTML += `
-        <label class="opt-label" id="opt_${idx}_${optIdx}" onclick="handleOptionSelect(${idx}, ${optIdx})">
-          <input type="radio" name="q_${idx}" value="${optIdx}" style="display:none;"> ${opt}
-        </label>
-      `;
-    });
-
-    const feedbackDiv = document.createElement("div");
-    feedbackDiv.className = "feedback-msg";
-    feedbackDiv.id = `feedback_${idx}`;
-    qDiv.appendChild(feedbackDiv);
-
-    container.appendChild(qDiv);
-  });
-
-  function handleOptionSelect(qIdx, selectedOptIdx) {
-    if (userAnswers[qIdx] !== undefined) return; // تم الإجابة مسبقاً
-
-    userAnswers[qIdx] = selectedOptIdx;
-    const correctOptIdx = quizData[qIdx].answer;
-    const feedback = document.getElementById(`feedback_${qIdx}`);
-
-    quizData[qIdx].options.forEach((_, optIdx) => {
-      const label = document.getElementById(`opt_${qIdx}_${optIdx}`);
-      label.classList.add("disabled");
-    });
-
-    const selectedLabel = document.getElementById(`opt_${qIdx}_${selectedOptIdx}`);
-    const correctLabel = document.getElementById(`opt_${qIdx}_${correctOptIdx}`);
-
-    if (selectedOptIdx === correctOptIdx) {
-      selectedLabel.classList.add("correct");
-      feedback.style.color = "#15803d";
-      feedback.innerHTML = "✓ إجابة صحيحة!";
-    } else {
-      selectedLabel.classList.add("wrong");
-      correctLabel.classList.add("correct");
-      feedback.style.color = "#b91c1c";
-      feedback.innerHTML = "✗ إجابة غير صحيحة! الإجابة الصحيحة محددة بالأخضر.";
-    }
-  }
-
-  async function submitExam() {
-    const nameInput = document.getElementById("studentName");
-    const name = nameInput.value.trim();
-
-    if (!name) {
-      alert("يرجى كتابة اسمك أولاً في الخانة المخصصة بالأعلى!");
-      nameInput.focus();
-      return;
-    }
-
-    const answeredCount = Object.keys(userAnswers).length;
-    if (answeredCount < quizData.length) {
-      const confirmSubmit = confirm(`لقد أجبت على ${answeredCount} من أصل 50 سؤالاً فقط. هل تريد التسليم فعلاً؟`);
-      if (!confirmSubmit) return;
-    }
-
-    let score = 0;
-    quizData.forEach((item, idx) => {
-      if (userAnswers[idx] === item.answer) {
-        score++;
-      }
-    });
-
-    const submitBtn = document.getElementById("submitBtn");
-    submitBtn.disabled = true;
-    submitBtn.innerText = "جارٍ إرسال النتيجة والتسليم...";
-
-    const text = `🔔 تسليم اختبار باثولوجي (50 سؤال)!\n\n👤 اسم الطالب: ${name}\n📊 النتيجة: ${score} من ${quizData.length}\n⏰ الوقت: ${new Date().toLocaleTimeString('ar-YE')}`;
-    const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`;
-
-    try {
-      await fetch(telegramUrl);
-    } catch (err) {
-      console.error(err);
-    }
-
-    document.getElementById("quizForm").style.display = "none";
-    const resBox = document.getElementById("resultBox");
-    resBox.style.display = "block";
-    resBox.innerHTML = `تم تسليم إجابتك بنجاح يا <b>${name}</b>.<br><br>درجتك النهائية: ${score} من ${quizData.length}`;
-  }
-</script>
-
-</body>
-</html>
+  </form>    <div id="resultBox"></div>  </div>  <script>  
+  
+  /*  
+   * ضع بيانات Telegram الجديدة هنا.  
+   * لا تستخدم التوكن الذي نشرته سابقاً.  
+   */  
+  
+  const BOT_TOKEN = "ضع_التوكن_الجديد_هنا";  
+  const CHAT_ID = "8475624731";  
+  
+  
+  /*  
+   * =====================================================  
+   * الأسئلة  
+   * =====================================================  
+   */  
+  
+  const quizData = [  
+  
+    {  
+      q: "1. The fundamental difference between simple atrophy and numerous atrophy is:",  
+      options: [  
+        "Loss of cell size only vs loss of cell size and number via apoptosis",  
+        "Physiologic etiology vs pathologic etiology",  
+        "Reversible vs irreversible injury",  
+        "Cytoplasmic swelling vs fragmentation"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "2. Which cellular adaptation is characterized by an increase in the size of parenchymal cells resulting in organ enlargement?",  
+      options: [  
+        "Hyperplasia",  
+        "Hypertrophy",  
+        "Metaplasia",  
+        "Atrophy"  
+      ],  
+      answer: 1  
+    },  
+  
+    {  
+      q: "3. Left ventricular hypertrophy in systemic hypertension is classified as:",  
+      options: [  
+        "Compensatory hypertrophy due to increased workload",  
+        "Physiologic hyperplasia",  
+        "Pathologic metaplasia",  
+        "Disuse atrophy"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "4. Hyperplasia can occur alongside hypertrophy in various tissues EXCEPT in:",  
+      options: [  
+        "Uterine smooth muscle",  
+        "Cardiac and skeletal muscles",  
+        "Breast glandular tissue",  
+        "Liver parenchyma"  
+      ],  
+      answer: 1  
+    },  
+  
+    {  
+      q: "5. Cigarette smoking classically induces which adaptive epithelial change in the bronchi?",  
+      options: [  
+        "Squamous metaplasia",  
+        "Glandular hyperplasia",  
+        "Simple atrophy",  
+        "Dysplastic hypertrophy"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "6. The hallmark reversible changes visible on light microscopy following cellular injury are:",  
+      options: [  
+        "Hydropic change and fatty change",  
+        "Pyknosis and karyolysis",  
+        "Caseous necrosis and calcification",  
+        "Fibrinoid degeneration"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "7. Which type of necrosis characteristically maintains the structural cellular architecture ('ghost cells')?",  
+      options: [  
+        "Liquefactive necrosis",  
+        "Coagulative necrosis",  
+        "Caseous necrosis",  
+        "Fat necrosis"  
+      ],  
+      answer: 1  
+    },  
+  
+    {  
+      q: "8. Ischemic necrosis occurring in the brain classically manifests as:",  
+      options: [  
+        "Coagulative necrosis",  
+        "Liquefactive necrosis",  
+        "Caseous necrosis",  
+        "Fibrinoid necrosis"  
+      ],  
+      answer: 1  
+    },  
+  
+    {  
+      q: "9. Langhans multinucleated giant cells characteristically feature nuclei arranged in:",  
+      options: [  
+        "A peripheral horseshoe pattern",  
+        "A random scatter throughout the cytoplasm",  
+        "Two parallel linear rows",  
+        "A single centrally clumped mass"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "10. In contrast to foreign body giant cells, Langhans giant cells are typically diagnostic of:",  
+      options: [  
+        "Tuberculosis",  
+        "Silicosis",  
+        "Asbestosis",  
+        "Suture reactions"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "11. The predominant leukocyte present during the initial 24 hours of acute inflammation is the:",  
+      options: [  
+        "Neutrophil",  
+        "Macrophage",  
+        "Lymphocyte",  
+        "Plasma cell"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "12. Leukocyte rolling along endothelial surfaces is primarily mediated by:",  
+      options: [  
+        "Selectins",  
+        "Integrins",  
+        "PECAM-1 (CD31)",  
+        "Histamine"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "13. Firm adhesion of leukocytes to endothelial cells requires binding mediated by:",  
+      options: [  
+        "Integrins (ICAM-1 interactions)",  
+        "Selectins",  
+        "Prostaglandins",  
+        "Bradykinin"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "14. Which cytokine is recognized as the most potent activator of macrophages in chronic inflammation?",  
+      options: [  
+        "Interferon-gamma (IFN-γ)",  
+        "Interleukin-1 (IL-1)",  
+        "Tumor necrosis factor-alpha",  
+        "Histamine"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "15. The elevated Erythrocyte Sedimentation Rate (ESR) seen in the acute-phase response is driven by increased hepatic synthesis of:",  
+      options: [  
+        "Fibrinogen",  
+        "Albumin",  
+        "Transferrin",  
+        "Superoxide dismutase"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "16. Cells that continuously divide throughout life to replace lost cells (e.g., surface epithelia) are classified as:",  
+      options: [  
+        "Labile cells",  
+        "Stable cells",  
+        "Permanent cells",  
+        "Quiescent cells"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "17. Cardiac myocytes and neurons are incapable of postnatal division and are classified as:",  
+      options: [  
+        "Permanent cells",  
+        "Stable cells",  
+        "Labile cells",  
+        "Stem cells"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "18. Histologically, granulation tissue is composed of:",  
+      options: [  
+        "Newly formed vessels (angiogenesis), fibroblasts, and inflammatory cells",  
+        "Dense mature collagen with complete absence of vessels",  
+        "Amorphous caseous debris",  
+        "Purely squamous keratinized layers"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "19. The cellular element responsible for wound contraction during tissue repair is the:",  
+      options: [  
+        "Myofibroblast",  
+        "Endothelial cell",  
+        "Neutrophil",  
+        "Keratinocyte"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "20. A complication of wound healing characterized by excessive collagen accumulation protruding beyond original wound margins is:",  
+      options: [  
+        "Keloid",  
+        "Hypertrophic scar",  
+        "Contracture",  
+        "Ulcer"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "21. Irreversible nuclear condensation characterized by shrinkage and increased basophilia is known as:",  
+      options: [  
+        "Pyknosis",  
+        "Karyorrhexis",  
+        "Karyolysis",  
+        "Autophagy"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "22. The fragmentation of a pyknotic nucleus during cell death is defined as:",  
+      options: [  
+        "Karyorrhexis",  
+        "Karyolysis",  
+        "Apoptosis",  
+        "Heterophagy"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "23. Enzymatic fat necrosis, classically observed in acute pancreatitis, results in chalky white deposits via:",  
+      options: [  
+        "Saponification with calcium",  
+        "Caseation necrosis",  
+        "Lipofuscin deposition",  
+        "Hyaline accumulation"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "24. Fibrinoid necrosis is most commonly encountered in which of the following conditions?",  
+      options: [  
+        "Immune complex-mediated vasculitis",  
+        "Myocardial infarction",  
+        "Bacterial abscesses",  
+        "Tuberculous lymphadenitis"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "25. Which pathway of apoptosis is initiated by the release of Cytochrome c from mitochondria?",  
+      options: [  
+        "Intrinsic (mitochondrial) pathway",  
+        "Extrinsic (death receptor) pathway",  
+        "Perforin-granzyme pathway",  
+        "Necroptotic pathway"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "26. The extrinsic pathway of apoptosis is triggered via the activation of:",  
+      options: [  
+        "Fas (CD95) and TNF receptor 1",  
+        "Bcl-2 overexpression",  
+        "Caspase-9 directly",  
+        "C-reactive protein"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "27. Which of the following is considered an anti-apoptotic protein?",  
+      options: [  
+        "Bcl-2",  
+        "Bax",  
+        "Bak",  
+        "Bid"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "28. 'Brown atrophy' of the heart in aging or malnourished patients is caused by cytoplasmic accumulation of:",  
+      options: [  
+        "Lipofuscin",  
+        "Hemosiderin",  
+        "Melanin",  
+        "Glycogen"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "29. Dystrophic calcification occurs under which of the following biochemical conditions?",  
+      options: [  
+        "Normal serum calcium levels in necrotic or degenerating tissues",  
+        "Elevated serum calcium levels in normal tissues",  
+        "Systemic hyperparathyroidism",  
+        "Hypervitaminosis D"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "30. Metastatic calcification is primarily driven by:",  
+      options: [  
+        "Systemic hypercalcemia",  
+        "Localized tissue necrosis",  
+        "Decreased serum phosphate",  
+        "Atherosclerotic plaques only"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "31. The primary chemical mediator responsible for the immediate transient phase of vascular permeability in acute inflammation is:",  
+      options: [  
+        "Histamine",  
+        "Leukotriene B4",  
+        "Transforming growth factor-beta",  
+        "Platelet-derived growth factor"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "32. The transmigration of leukocytes across the vascular basement membrane is termed:",  
+      options: [  
+        "Diapedesis",  
+        "Chemotaxis",  
+        "Margination",  
+        "Opsonization"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "33. Which molecule acts as an opsonin to facilitate phagocytosis?",  
+      options: [  
+        "C3b",  
+        "C5a",  
+        "Bradykinin",  
+        "Serotonin"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "34. The classic cardinal signs of acute inflammation (Rubor, Tumor, Calor, Dolor) were first described by:",  
+      options: [  
+        "Celsus",  
+        "Virchow",  
+        "Hunter",  
+        "Cohnheim"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "35. The fifth clinical sign of acute inflammation, 'Functio laesa' (loss of function), was added by:",  
+      options: [  
+        "Rudolf Virchow",  
+        "John Hunter",  
+        "Julius Cohnheim",  
+        "Elie Metchnikoff"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "36. A localized collection of purulent exudate (pus) within an organ or confined tissue space is termed:",  
+      options: [  
+        "Abscess",  
+        "Ulcer",  
+        "Phlegmon",  
+        "Seroma"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "37. Granulomatous inflammation is a distinctive histologic pattern of:",  
+      options: [  
+        "Chronic inflammation characterized by aggregated epithelioid macrophages",  
+        "Acute suppurative inflammation",  
+        "Serous inflammation seen in burns",  
+        "Purely non-immune hypersensitivity"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "38. Non-caseating granulomas are characteristically identified in which systemic granulomatous disorder?",  
+      options: [  
+        "Sarcoidosis",  
+        "Tuberculosis",  
+        "Histoplasmosis",  
+        "Coccidioidomycosis"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "39. Which key growth factor is central to collagen synthesis, fibroblast migration, and terminating chronic inflammation?",  
+      options: [  
+        "TGF-beta",  
+        "Histamine",  
+        "TNF-alpha",  
+        "Interleukin-8"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "40. Healing by primary intention differs from secondary intention because primary intention exhibits:",  
+      options: [  
+        "Clean, closely approximated margins with minimal tissue loss and scar",  
+        "Extensive tissue defects requiring abundant granulation tissue",  
+        "Prominent wound contraction by myofibroblasts",  
+        "Higher rates of ulceration and delayed re-epithelialization"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "41. An essential dietary cofactor required for the post-translational hydroxylation of proline and lysine in collagen synthesis is:",  
+      options: [  
+        "Vitamin C",  
+        "Vitamin D",  
+        "Vitamin A",  
+        "Vitamin K"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "42. Trace element essential for collagen cross-linking via lysyl oxidase is:",  
+      options: [  
+        "Copper",  
+        "Iron",  
+        "Zinc",  
+        "Magnesium"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "43. Edema fluid with low protein content, low specific gravity (<1.012), and caused by altered hemodynamic forces is a:",  
+      options: [  
+        "Transudate",  
+        "Exudate",  
+        "Purulent fluid",  
+        "Fibrinous effusion"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "44. An inflammatory edema fluid characterized by high protein content and cellular debris is termed:",  
+      options: [  
+        "Exudate",  
+        "Transudate",  
+        "Lymph fluid",  
+        "Interstitial filtrate"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "45. The classic triad of Virchow contributing to pathologic intravascular thrombosis includes:",  
+      options: [  
+        "Endothelial injury, stasis/turbulent flow, and hypercoagulability",  
+        "Hypertension, hyperlipidemia, and diabetes",  
+        "Infection, fever, and leukocytosis",  
+        "Vasoconstriction, vasodilation, and vascular stasis"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "46. Arterial thrombi most commonly originate at sites of:",  
+      options: [  
+        "Endothelial injury and atherosclerosis",  
+        "Venous valve pockets",  
+        "Normal capillary beds",  
+        "Arteriovenous shunts"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "47. Lines of Zahn are characteristic microscopic/gross features that distinguish:",  
+      options: [  
+        "Antemortem thrombi from postmortem clots",  
+        "Coagulative necrosis from liquefactive necrosis",  
+        "Transudate from exudate",  
+        "Labile cells from stable cells"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "48. The most common source of pulmonary thromboemboli is:",  
+      options: [  
+        "Deep venous thrombosis (DVT) of the lower extremities",  
+        "Right ventricular mural thrombi",  
+        "Upper extremity veins",  
+        "Mesenteric veins"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "49. Red (hemorrhagic) infarcts typically occur in organs with:",  
+      options: [  
+        "Dual or collateral blood supply (e.g., lungs and small intestine)",  
+        "Single terminal end-arterial circulation (e.g., spleen, kidney)",  
+        "No collateral vascular networks",  
+        "Dense fibrotic capsule preventing perfusion"  
+      ],  
+      answer: 0  
+    },  
+  
+    {  
+      q: "50. White (anemic) infarcts characteristically occur in solid organs with end-arterial supplies, such as the:",  
+      options: [  
+        "Kidney and spleen",  
+        "Lungs and liver",  
+        "Small intestine and ovaries",  
+        "Brain and meninges"  
+      ],  
+      answer: 0  
+    }  
+  
+  ];  
+  
+  
+  /*  
+   * =====================================================  
+   * دالة خلط الخيارات  
+   * =====================================================  
+   */  
+  
+  function shuffleArray(array) {  
+  
+    for (let i = array.length - 1; i > 0; i--) {  
+  
+      const j = Math.floor(Math.random() * (i + 1));  
+  
+      [array[i], array[j]] = [array[j], array[i]];  
+  
+    }  
+  
+    return array;  
+  }  
+  
+  
+  /*  
+   * =====================================================  
+   * خلط خيارات الأسئلة  
+   *  
+   * يتم حفظ الإجابة الصحيحة قبل الخلط،  
+   * ثم تحديد موقعها الجديد بعد الخلط.  
+   * =====================================================  
+   */  
+  
+  quizData.forEach(item => {  
+  
+    const optionsWithStatus = item.options.map(  
+      (option, index) => ({  
+        text: option,  
+        correct: index === item.answer  
+      })  
+    );  
+  
+    shuffleArray(optionsWithStatus);  
+  
+    item.options = optionsWithStatus.map(  
+      option => option.text  
+    );  
+  
+    item.answer = optionsWithStatus.findIndex(  
+      option => option.correct  
+    );  
+  
+  });  
+  
+  
+  /*  
+   * =====================================================  
+   * إنشاء الأسئلة  
+   * =====================================================  
+   */  
+  
+  const container =  
+    document.getElementById("questionsContainer");  
+  
+  const userAnswers = {};  
+  
+  
+  quizData.forEach((item, idx) => {  
+  
+    const qDiv = document.createElement("div");  
+  
+    qDiv.className = "q-card";  
+    qDiv.id = `qCard_${idx}`;  
+  
+    qDiv.innerHTML =  
+      `<div class="q-title">${item.q}</div>`;  
+  
+  
+    item.options.forEach((opt, optIdx) => {  
+  
+      qDiv.innerHTML += `  
+  
+        <label  
+          class="opt-label"  
+          id="opt_${idx}_${optIdx}"  
+          onclick="handleOptionSelect(${idx}, ${optIdx})"  
+        >  
+  
+          <input  
+            type="radio"  
+            name="q_${idx}"  
+            value="${optIdx}"  
+            style="display:none;"  
+          >  
+  
+          ${opt}  
+  
+        </label>  
+  
+      `;  
+  
+    });  
+  
+  
+    const feedbackDiv =  
+      document.createElement("div");  
+  
+    feedbackDiv.className =  
+      "feedback-msg";  
+  
+    feedbackDiv.id =  
+      `feedback_${idx}`;  
+  
+    qDiv.appendChild(feedbackDiv);  
+  
+    container.appendChild(qDiv);  
+  
+  });  
+  
+  
+  /*  
+   * =====================================================  
+   * اختيار الإجابة  
+   * =====================================================  
+   */  
+  
+  function handleOptionSelect(qIdx, selectedOptIdx) {  
+  
+    if (userAnswers[qIdx] !== undefined) {  
+      return;  
+    }  
+  
+  
+    userAnswers[qIdx] =  
+      selectedOptIdx;  
+  
+  
+    const correctOptIdx =  
+      quizData[qIdx].answer;  
+  
+  
+    const feedback =  
+      document.getElementById(  
+        `feedback_${qIdx}`  
+      );  
+  
+  
+    /*  
+     * تعطيل باقي الخيارات  
+     */  
+  
+    quizData[qIdx].options.forEach(  
+      (_, optIdx) => {  
+  
+        const label =  
+          document.getElementById(  
+            `opt_${qIdx}_${optIdx}`  
+          );  
+  
+        label.classList.add("disabled");  
+  
+      }  
+    );  
+  
+  
+    const selectedLabel =  
+      document.getElementById(  
+        `opt_${qIdx}_${selectedOptIdx}`  
+      );  
+  
+  
+    const correctLabel =  
+      document.getElementById(  
+        `opt_${qIdx}_${correctOptIdx}`  
+      );  
+  
+  
+    /*  
+     * إذا كانت الإجابة صحيحة  
+     */  
+  
+    if (selectedOptIdx === correctOptIdx) {  
+  
+      selectedLabel.classList.add("correct");  
+  
+      feedback.style.color = "#15803d";  
+  
+      feedback.innerHTML =  
+        "✓ إجابة صحيحة!";  
+  
+    }  
+  
+    /*  
+     * إذا كانت الإجابة خاطئة  
+     */  
+  
+    else {  
+  
+      selectedLabel.classList.add("wrong");  
+  
+      correctLabel.classList.add("correct");  
+  
+      feedback.style.color = "#b91c1c";  
+  
+      feedback.innerHTML =  
+        "✗ إجابة غير صحيحة! الإجابة الصحيحة محددة بالأخضر.";  
+  
+    }  
+  
+  }  
+  
+  
+  /*  
+   * =====================================================  
+   * إرسال الاختبار  
+   * =====================================================  
+   */  
+  
+  async function submitExam() {  
+  
+    const nameInput =  
+      document.getElementById("studentName");  
+  
+  
+    const name =  
+      nameInput.value.trim();  
+  
+  
+    if (!name) {  
+  
+      alert(  
+        "يرجى كتابة اسمك أولاً في الخانة المخصصة بالأعلى!"  
+      );  
+  
+      nameInput.focus();  
+  
+      return;  
+    }  
+  
+  
+    const answeredCount =  
+      Object.keys(userAnswers).length;  
+  
+  
+    if (answeredCount < quizData.length) {  
+  
+      const confirmSubmit =  
+        confirm(  
+          `لقد أجبت على ${answeredCount} من أصل 50 سؤالاً فقط. هل تريد التسليم فعلاً؟`  
+        );  
+  
+  
+      if (!confirmSubmit) {  
+        return;  
+      }  
+  
+    }  
+  
+  
+    /*  
+     * حساب الدرجة  
+     */  
+  
+    let score = 0;  
+  
+  
+    quizData.forEach((item, idx) => {  
+  
+      if (  
+        userAnswers[idx] === item.answer  
+      ) {  
+  
+        score++;  
+  
+      }  
+  
+    });  
+  
+  
+    /*  
+     * تعطيل زر الإرسال  
+     */  
+  
+    const submitBtn =  
+      document.getElementById("submitBtn");  
+  
+  
+    submitBtn.disabled = true;  
+  
+    submitBtn.innerText =  
+      "جارٍ إرسال النتيجة والتسليم...";  
+  
+  
+    /*  
+     * تجهيز رسالة Telegram  
+     */  
+  
+    const text =  
+      `🔔 تسليم اختبار باثولوجي (50 سؤال)!  
+  
+👤 اسم الطالب: ${name}  
+  
+📊 النتيجة: ${score} من ${quizData.length}  
+  
+📈 النسبة: ${((score / quizData.length) * 100).toFixed(1)}%  
+  
+⏰ الوقت: ${new Date().toLocaleTimeString("ar-YE")}`;  
+  
+  
+    /*  
+     * إرسال النتيجة  
+     */  
+  
+    if (  
+      BOT_TOKEN &&  
+      !BOT_TOKEN.includes("ضع_التوكن")  
+    ) {  
+  
+      const telegramUrl =  
+        `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage` +  
+        `?chat_id=${CHAT_ID}` +  
+        `&text=${encodeURIComponent(text)}`;  
+  
+  
+      try {  
+  
+        await fetch(telegramUrl);  
+  
+      }  
+  
+      catch (err) {  
+  
+        console.error(  
+          "Telegram Error:",  
+          err  
+        );  
+  
+      }  
+  
+    }  
+  
+  
+    /*  
+     * إظهار النتيجة للطالب  
+     */  
+  
+    document.getElementById(  
+      "quizForm"  
+    ).style.display = "none";  
+  
+  
+    const resBox =  
+      document.getElementById("resultBox");  
+  
+  
+    resBox.style.display = "block";  
+  
+  
+    resBox.innerHTML = `  
+  
+      تم تسليم إجابتك بنجاح يا  
+      <b>${name}</b>.  
+  
+      <br><br>  
+  
+      درجتك النهائية:  
+      <b>${score} من ${quizData.length}</b>  
+  
+      <br><br>  
+  
+      النسبة:  
+      <b>${((score / quizData.length) * 100).toFixed(1)}%</b>  
+  
+    `;  
+  
+  }  
+  
+</script>  </body>  
+</html>  هل كود الان كامل
+و تم تعديل المشكله
