@@ -1,1763 +1,1344 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>General Pathology Exam</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#0f172a">
+<title>General Pathology Quiz</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
+html,body{
+  margin:0;
+  padding:0;
+  min-height:100%;
+  font-family:Arial,"Tajawal",sans-serif;
+  background:#f1f5f9;
+  color:#0f172a;
 }
 
-body {
-    padding: 10px;
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-    background: #f1f5f9;
-    color: #0f172a;
-
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -webkit-touch-callout: none;
-}
-
-/* =========================
-   CONTAINER
-========================= */
-
-.container {
-    width: 100%;
-    max-width: 760px;
-    margin: 10px auto;
-    background: #fff;
-    border-radius: 18px;
-    padding: 20px;
-
-    box-shadow:
-        0 8px 30px rgba(15, 23, 42, 0.08);
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-.header h1 {
-    margin: 0;
-    color: #1e3a8a;
-    font-size: 24px;
-}
-
-.header p {
-    margin: 8px 0 0;
-    color: #64748b;
-    font-size: 14px;
-}
-
-/* =========================
-   START SCREEN
-========================= */
-
-#startScreen {
-    display: block;
-}
-
-.input-group {
-    margin: 25px 0;
-}
-
-.input-group label {
-    display: block;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #334155;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 14px;
-
-    border: 1.5px solid #cbd5e1;
-    border-radius: 10px;
-
-    font-size: 16px;
-    outline: none;
-
-    user-select: text;
-    -webkit-user-select: text;
-}
-
-.input-group input:focus {
-    border-color: #2563eb;
-}
-
-/* =========================
-   EXAM INFO
-========================= */
-
-.exam-info {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.info-box {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 13px 8px;
-    text-align: center;
-}
-
-.info-box strong {
-    display: block;
-    font-size: 18px;
-    color: #1e3a8a;
+body{
+  user-select:none;
+  -webkit-user-select:none;
 }
 
-.info-box span {
-    font-size: 12px;
-    color: #64748b;
+button,input{
+  font:inherit;
 }
 
-/* =========================
-   BUTTONS
-========================= */
-
-.primary-btn,
-.secondary-btn,
-.translation-btn {
-    width: 100%;
-    border: none;
-    border-radius: 11px;
-    padding: 14px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
+button{
+  cursor:pointer;
 }
 
-.primary-btn {
-    background: #2563eb;
-    color: #fff;
+.app{
+  width:100%;
+  max-width:760px;
+  margin:auto;
+  min-height:100vh;
+  padding:16px;
 }
 
-.primary-btn:active,
-.secondary-btn:active,
-.translation-btn:active {
-    transform: scale(0.98);
+.card{
+  background:#fff;
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 10px 35px rgba(15,23,42,.08);
 }
 
-.secondary-btn {
-    background: #e2e8f0;
-    color: #0f172a;
-    margin-top: 10px;
+.hidden{
+  display:none!important;
 }
 
-.translation-btn {
-    background: #eff6ff;
-    color: #1d4ed8;
-    border: 1px solid #bfdbfe;
-    margin-top: 10px;
-    font-size: 14px;
+/* START */
+.logo{
+  width:76px;
+  height:76px;
+  border-radius:22px;
+  background:#0f172a;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  font-weight:900;
+  margin:5px auto 18px;
 }
-
-/* =========================
-   EXAM SCREEN
-========================= */
 
-#examScreen {
-    display: none;
+h1{
+  text-align:center;
+  margin:0 0 8px;
+  font-size:27px;
 }
 
-.exam-top {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    background: #fff;
-    padding-bottom: 15px;
+.subtitle{
+  text-align:center;
+  color:#64748b;
+  margin-bottom:25px;
 }
 
-.top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
+.rules{
+  display:grid;
+  gap:10px;
+  margin:20px 0;
 }
 
-.progress-text {
-    font-weight: 700;
-    color: #334155;
-    font-size: 14px;
+.rule{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+  padding:12px 14px;
+  font-size:14px;
 }
 
-.timer {
-    background: #eff6ff;
-    color: #1d4ed8;
-    border-radius: 10px;
-    padding: 9px 14px;
-    font-weight: 900;
-    direction: ltr;
-    min-width: 75px;
-    text-align: center;
-    font-size: 18px;
+.name-input{
+  width:100%;
+  border:2px solid #e2e8f0;
+  border-radius:14px;
+  padding:14px;
+  outline:none;
+  margin-bottom:12px;
+  text-align:right;
 }
 
-.timer.warning {
-    background: #fef3c7;
-    color: #b45309;
+.name-input:focus{
+  border-color:#2563eb;
 }
 
-.timer.danger {
-    background: #fee2e2;
-    color: #b91c1c;
-
-    animation:
-        timerPulse 0.8s infinite alternate;
+.primary{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  padding:15px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:800;
+  font-size:17px;
 }
 
-@keyframes timerPulse {
-    from {
-        transform: scale(1);
-    }
-
-    to {
-        transform: scale(1.05);
-    }
+.primary:active{
+  transform:scale(.98);
 }
-
-/* =========================
-   PROGRESS BAR
-========================= */
 
-.progress-container {
-    width: 100%;
-    height: 9px;
-    background: #e2e8f0;
-    border-radius: 20px;
-    overflow: hidden;
+/* QUIZ */
+.quiz-header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#f1f5f9;
+  padding-bottom:12px;
 }
 
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: #2563eb;
-    transition: width 0.3s ease;
+.topbar{
+  background:#0f172a;
+  color:white;
+  border-radius:18px;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
 
-/* =========================
-   QUESTION
-========================= */
-
-.question-card {
-    margin-top: 20px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 15px;
-    padding: 20px;
+.counter{
+  font-weight:800;
 }
 
-.question-number {
-    color: #2563eb;
-    font-weight: 800;
-    font-size: 14px;
-    margin-bottom: 12px;
+.timer{
+  min-width:88px;
+  text-align:center;
+  background:#fff;
+  color:#0f172a;
+  border-radius:12px;
+  padding:8px 12px;
+  font-weight:900;
 }
-
-.question-text {
-    direction: ltr;
-    text-align: left;
-
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.6;
 
-    color: #0f172a;
-    margin-bottom: 12px;
-
-    user-select: none;
-    -webkit-user-select: none;
+.timer.warning{
+  color:#b91c1c;
+  background:#fee2e2;
 }
-
-/* =========================
-   TRANSLATION
-========================= */
-
-.translation-box {
-    display: none;
 
-    direction: rtl;
-    text-align: right;
-
-    background: #ecfeff;
-    border: 1px solid #a5f3fc;
-
-    color: #164e63;
-
-    border-radius: 10px;
-    padding: 12px;
-    margin: 10px 0 18px;
-
-    font-size: 14px;
-    line-height: 1.7;
+.progress{
+  height:7px;
+  background:#e2e8f0;
+  border-radius:99px;
+  overflow:hidden;
+  margin-top:10px;
 }
-
-/* =========================
-   OPTIONS
-========================= */
 
-.options {
-    direction: ltr;
+.progress-bar{
+  height:100%;
+  background:#2563eb;
+  width:0%;
+  transition:width .2s ease;
 }
-
-.option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    width: 100%;
-
-    background: #fff;
-
-    border: 1.5px solid #cbd5e1;
-    border-radius: 11px;
-
-    padding: 14px;
-    margin-bottom: 11px;
-
-    cursor: pointer;
 
-    text-align: left;
-
-    font-size: 15px;
-    line-height: 1.5;
-
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-
-    transition: 0.15s ease;
+.question-card{
+  margin-top:5px;
 }
 
-.option:active {
-    transform: scale(0.99);
+.question-number{
+  color:#2563eb;
+  font-weight:800;
+  margin-bottom:12px;
 }
 
-.option.selected {
-    border-color: #2563eb;
-    background: #dbeafe;
+.question-text{
+  font-size:20px;
+  line-height:1.65;
+  font-weight:800;
+  margin-bottom:10px;
 }
 
-.option.correct {
-    border-color: #16a34a;
-    background: #dcfce7;
+.translation{
+  background:#eff6ff;
+  border-right:4px solid #2563eb;
+  padding:12px;
+  border-radius:12px;
+  line-height:1.7;
+  color:#334155;
+  margin-bottom:18px;
 }
 
-.option.wrong {
-    border-color: #dc2626;
-    background: #fee2e2;
+.translation-toggle{
+  border:0;
+  background:#e0f2fe;
+  color:#0369a1;
+  padding:9px 13px;
+  border-radius:10px;
+  font-weight:700;
+  margin-bottom:15px;
 }
-
-.option-letter {
-    flex-shrink: 0;
-
-    width: 32px;
-    height: 32px;
-
-    border-radius: 50%;
 
-    background: #e2e8f0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-weight: 800;
-    color: #334155;
+.options{
+  display:grid;
+  gap:11px;
 }
 
-.option.selected .option-letter {
-    background: #2563eb;
-    color: #fff;
+.option{
+  width:100%;
+  text-align:right;
+  border:2px solid #e2e8f0;
+  background:#fff;
+  border-radius:15px;
+  padding:15px;
+  line-height:1.55;
+  transition:.15s;
 }
 
-.option.correct .option-letter {
-    background: #16a34a;
-    color: #fff;
+.option:active{
+  transform:scale(.99);
 }
 
-.option.wrong .option-letter {
-    background: #dc2626;
-    color: #fff;
+.option.selected{
+  border-color:#2563eb;
+  background:#eff6ff;
 }
-
-/* =========================
-   STATUS
-========================= */
 
-.question-status {
-    text-align: center;
-    color: #64748b;
-    font-size: 13px;
-    margin-top: 14px;
-    min-height: 20px;
+.option.correct{
+  border-color:#16a34a;
+  background:#dcfce7;
 }
 
-.timeout-message,
-.correct-message,
-.wrong-message {
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 10px;
-    font-weight: 700;
-    line-height: 1.6;
+.option.wrong{
+  border-color:#dc2626;
+  background:#fee2e2;
 }
 
-.timeout-message {
-    background: #fef3c7;
-    color: #92400e;
+.option.disabled{
+  pointer-events:none;
 }
 
-.correct-message {
-    background: #dcfce7;
-    color: #166534;
+.next-area{
+  margin-top:18px;
 }
 
-.wrong-message {
-    background: #fee2e2;
-    color: #991b1b;
+.next-btn{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  padding:14px;
+  background:#0f172a;
+  color:#fff;
+  font-weight:800;
 }
 
-/* =========================
-   RESULT
-========================= */
-
-#resultScreen {
-    display: none;
-    text-align: center;
+.timeout{
+  margin-top:14px;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#9a3412;
+  border-radius:13px;
+  padding:12px;
+  text-align:center;
+  font-weight:700;
 }
 
-.result-icon {
-    font-size: 55px;
-    margin-bottom: 10px;
+/* RESULT */
+.result{
+  text-align:center;
 }
 
-.result-title {
-    color: #065f46;
-    font-size: 24px;
-    font-weight: 800;
+.score-circle{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:#eff6ff;
+  border:10px solid #2563eb;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  margin:20px auto;
 }
-
-.score-circle {
-    width: 150px;
-    height: 150px;
-
-    border-radius: 50%;
 
-    margin: 25px auto;
-
-    background: #ecfdf5;
-    border: 8px solid #10b981;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.score{
+  font-size:36px;
+  font-weight:900;
 }
 
-.score-number {
-    font-size: 30px;
-    font-weight: 900;
-    color: #065f46;
+.score-label{
+  color:#64748b;
+  font-size:13px;
 }
 
-.score-percent {
-    font-size: 14px;
-    color: #047857;
+.result-name{
+  font-size:20px;
+  font-weight:800;
+  margin:10px 0;
 }
 
-.result-evaluation {
-    font-size: 18px;
-    font-weight: 800;
-    margin: 15px 0;
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin:20px 0;
 }
 
-.result-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 20px 0;
+.stat{
+  background:#f8fafc;
+  border-radius:13px;
+  padding:13px 5px;
 }
 
-.result-item {
-    padding: 15px 8px;
-    border-radius: 12px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+.stat strong{
+  display:block;
+  font-size:20px;
 }
 
-.result-item strong {
-    display: block;
-    font-size: 21px;
+.stat span{
+  font-size:12px;
+  color:#64748b;
 }
 
-.result-item span {
-    font-size: 12px;
-    color: #64748b;
+.restart{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  padding:15px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:800;
+  font-size:16px;
 }
-
-.duration-box {
-    background: #eff6ff;
-    border: 1px solid #bfdbfe;
-
-    color: #1e3a8a;
-
-    border-radius: 12px;
 
-    padding: 13px;
-    margin: 15px 0;
-
-    font-weight: 700;
+.status{
+  margin-top:12px;
+  font-size:13px;
+  color:#64748b;
 }
-
-.focus-box {
-    background: #fff7ed;
-    border: 1px solid #fed7aa;
-
-    color: #9a3412;
 
-    border-radius: 12px;
-
-    padding: 13px;
-    margin: 15px 0;
-
-    font-size: 14px;
+.privacy-mask{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#0f172a;
+  color:#fff;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
 }
-
-/* =========================
-   PRIVACY MASK
-========================= */
 
-#privacyMask {
-    display: none;
-
-    position: fixed;
-    inset: 0;
-
-    z-index: 9999;
-
-    background: #0f172a;
-    color: #fff;
-
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    padding: 30px;
-
-    font-size: 18px;
-    font-weight: 700;
+.privacy-mask.show{
+  display:flex;
 }
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-    body {
-        padding: 7px;
-    }
-
-    .container {
-        margin: 4px auto;
-        padding: 15px;
-        border-radius: 14px;
-    }
-
-    .header h1 {
-        font-size: 20px;
-    }
 
-    .header p {
-        font-size: 13px;
-    }
+@media(max-width:480px){
+  .app{
+    padding:10px;
+  }
 
-    .question-card {
-        padding: 15px;
-    }
+  .card{
+    padding:16px;
+    border-radius:18px;
+  }
 
-    .question-text {
-        font-size: 16px;
-    }
+  h1{
+    font-size:23px;
+  }
 
-    .option {
-        font-size: 14px;
-        padding: 12px;
-    }
+  .question-text{
+    font-size:18px;
+  }
 
-    .timer {
-        font-size: 16px;
-        min-width: 65px;
-        padding: 8px 10px;
-    }
+  .option{
+    padding:13px;
+    font-size:15px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div id="privacyMask">
-    🔒 يرجى العودة إلى صفحة الاختبار للمتابعة
-</div>
+<div class="app">
 
-<div class="container">
+  <!-- START -->
+  <section id="startScreen" class="card">
 
-    <!-- HEADER -->
+    <div class="logo">GP</div>
 
-    <div class="header">
+    <h1>General Pathology Quiz</h1>
+    <div class="subtitle">اختبار علم الأمراض العام</div>
 
-        <h1>
-            اختبار علم الأمراض العام
-        </h1>
+    <div class="rules">
+      <div class="rule">📚 عدد الأسئلة: <b>43 سؤالًا</b></div>
+      <div class="rule">⏱️ الوقت: <b>دقيقة واحدة لكل سؤال</b></div>
+      <div class="rule">🔀 الأسئلة والاختيارات عشوائية</div>
+      <div class="rule">🌐 الترجمة متاحة اختياريًا</div>
+      <div class="rule">⏰ انتهاء الوقت = إجابة خاطئة ثم إظهار الصحيح والانتقال تلقائيًا</div>
+      <div class="rule">💾 يتم حفظ التقدم تلقائيًا</div>
+    </div>
 
-        <p>
-            General Pathology | كلية طب الأسنان
-        </p>
+    <input
+      id="studentName"
+      class="name-input"
+      type="text"
+      maxlength="80"
+      placeholder="اكتب اسم الطالب"
+      autocomplete="off"
+    >
+
+    <button id="startBtn" class="primary">
+      بدء الاختبار 🚀
+    </button>
+
+  </section>
+
+
+  <!-- QUIZ -->
+  <section id="quizScreen" class="hidden">
+
+    <div class="quiz-header">
+
+      <div class="topbar">
+        <div id="counter" class="counter">
+          السؤال 1 من 43
+        </div>
+
+        <div id="timer" class="timer">
+          01:00
+        </div>
+      </div>
+
+      <div class="progress">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
 
     </div>
 
+    <div class="card question-card">
 
-    <!-- START SCREEN -->
+      <div id="questionNumber" class="question-number"></div>
 
-    <section id="startScreen">
+      <div id="questionText" class="question-text"></div>
 
-        <div class="exam-info">
+      <button
+        id="translationToggle"
+        class="translation-toggle"
+        type="button"
+      >
+        🌐 إظهار الترجمة
+      </button>
 
-            <div class="info-box">
+      <div
+        id="translation"
+        class="translation hidden"
+      ></div>
 
-                <strong id="totalQuestionsInfo">
-                    43
-                </strong>
+      <div id="options" class="options"></div>
 
-                <span>
-                    سؤال
-                </span>
+      <div id="timeoutMessage" class="timeout hidden">
+        ⏰ انتهى الوقت — الإجابة تُحسب خطأ
+      </div>
 
-            </div>
-
-            <div class="info-box">
-
-                <strong>
-                    15s
-                </strong>
-
-                <span>
-                    لكل سؤال
-                </span>
-
-            </div>
-
-            <div class="info-box">
-
-                <strong>
-                    100%
-                </strong>
-
-                <span>
-                    اختبار
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="input-group">
-
-            <label for="studentName">
-                اسم الطالب الثلاثي أو الرباعي
-            </label>
-
-            <input
-                type="text"
-                id="studentName"
-                placeholder="اكتب اسمك هنا..."
-                autocomplete="name"
-            >
-
-        </div>
-
-
+      <div class="next-area">
         <button
-            class="primary-btn"
-            id="startButton"
+          id="nextBtn"
+          class="next-btn hidden"
+          type="button"
         >
-            🚀 بدء الاختبار
+          السؤال التالي →
         </button>
+      </div>
 
-    </section>
+    </div>
 
+  </section>
 
-    <!-- EXAM SCREEN -->
 
-    <section id="examScreen">
+  <!-- RESULT -->
+  <section id="resultScreen" class="card result hidden">
 
-        <div class="exam-top">
+    <div class="logo">✓</div>
 
-            <div class="top-row">
+    <h1>انتهى الاختبار 🎉</h1>
 
-                <div
-                    class="progress-text"
-                    id="progressText"
-                >
-                    السؤال 1 من 43
-                </div>
+    <div id="resultName" class="result-name"></div>
 
-                <div
-                    class="timer"
-                    id="timer"
-                >
-                    15
-                </div>
+    <div class="score-circle">
+      <div id="score" class="score">0/43</div>
+      <div class="score-label">النتيجة</div>
+    </div>
 
-            </div>
+    <div id="percentage"></div>
 
+    <div class="stats">
+      <div class="stat">
+        <strong id="correctCount">0</strong>
+        <span>صحيح</span>
+      </div>
 
-            <div class="progress-container">
+      <div class="stat">
+        <strong id="wrongCount">0</strong>
+        <span>خطأ</span>
+      </div>
 
-                <div
-                    class="progress-bar"
-                    id="progressBar"
-                ></div>
+      <div class="stat">
+        <strong id="timeoutCount">0</strong>
+        <span>انتهى الوقت</span>
+      </div>
+    </div>
 
-            </div>
+    <button
+      id="restartBtn"
+      class="restart"
+      type="button"
+    >
+      🔄 إعادة الاختبار
+    </button>
 
-        </div>
+    <div id="sendStatus" class="status"></div>
 
+  </section>
 
-        <div class="question-card">
+</div>
 
-            <div
-                class="question-number"
-                id="questionNumber"
-            >
-                السؤال 1
-            </div>
-
-
-            <div
-                class="question-text"
-                id="questionText"
-            ></div>
-
-
-            <button
-                class="translation-btn"
-                id="translationBtn"
-            >
-                🌐 ترجمة السؤال
-            </button>
-
-
-            <div
-                class="translation-box"
-                id="translationBox"
-            ></div>
-
-
-            <div
-                class="options"
-                id="optionsContainer"
-            ></div>
-
-
-            <div
-                class="question-status"
-                id="questionStatus"
-            >
-                ⏱️ لديك 15 ثانية للإجابة
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- RESULT SCREEN -->
-
-    <section id="resultScreen">
-
-        <div class="result-icon">
-            🎓
-        </div>
-
-        <div class="result-title">
-            تم إنهاء الاختبار
-        </div>
-
-        <p id="studentResultName"></p>
-
-
-        <div class="score-circle">
-
-            <div
-                class="score-number"
-                id="finalScore"
-            >
-                0 / 43
-            </div>
-
-            <div
-                class="score-percent"
-                id="finalPercent"
-            >
-                0%
-            </div>
-
-        </div>
-
-
-        <div
-            class="result-evaluation"
-            id="resultEvaluation"
-        ></div>
-
-
-        <div class="result-grid">
-
-            <div class="result-item">
-
-                <strong id="correctCount">
-                    0
-                </strong>
-
-                <span>
-                    صحيح
-                </span>
-
-            </div>
-
-
-            <div class="result-item">
-
-                <strong id="wrongCount">
-                    0
-                </strong>
-
-                <span>
-                    خطأ
-                </span>
-
-            </div>
-
-
-            <div class="result-item">
-
-                <strong id="timeoutCount">
-                    0
-                </strong>
-
-                <span>
-                    انتهى الوقت
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="duration-box"
-            id="durationBox"
-        >
-            ⏱️ الوقت المستغرق: 00:00
-        </div>
-
-
-        <div
-            class="focus-box"
-            id="focusBox"
-        >
-            ⚠️ مغادرة صفحة الاختبار: 0
-        </div>
-
-
-        <button
-            class="secondary-btn"
-            id="restartButton"
-        >
-            🔄 إعادة الاختبار
-        </button>
-
-    </section>
-
+<div id="privacyMask" class="privacy-mask">
+  <div>
+    <h2>🔒 الشاشة مخفية مؤقتًا</h2>
+    <p>العودة إلى الاختبار لاستكماله.</p>
+  </div>
 </div>
 
 
 <script>
-
-/* =========================================================
-   BACKEND
-========================================================= */
-
-const BACKEND_URL =
-"https://script.google.com/macros/s/AKfycbzUQLJN40vyblri1MGbY6ZjvsOYUhGeC12HHl64X2sS8piWUmjx8fq1eH9tYgmUIg_Shw/exec";
-
-
-/* =========================================================
-   EXAM SETTINGS
-========================================================= */
-
-/*
-   الوقت الثابت لكل سؤال:
-   15 ثانية
-*/
-
-const QUESTION_TIME = 15;
-
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-let questionTimer = null;
-
-let questionTimeLeft = QUESTION_TIME;
-
-let currentQuestion = 0;
-
-let examQuestions = [];
-
-let userAnswers = {};
-
-let timeoutQuestions = {};
-
-let studentName = "";
-
-let examFinished = false;
-
-let examStartTime = null;
-
-let examEndTime = null;
-
-let focusLosses = 0;
-
-let questionLocked = false;
-
+"use strict";
 
 /* =========================================================
    QUESTIONS
-   عدد الأسئلة = 43
-   المحذوفة:
-   33
-   34
-   46
-   47
-   48
-   49
-   50
 ========================================================= */
 
 const quizData = [
 
 {
-    q: "The fundamental difference between simple atrophy and numerical atrophy is:",
-    translation: "ما الفرق الأساسي بين الضمور البسيط والضمور العددي؟",
-    options: [
-        "Physiologic etiology vs pathologic etiology",
-        "Loss of cell size only vs loss of cell size and number via apoptosis",
-        "Reversible vs irreversible injury",
-        "Cytoplasmic swelling vs fragmentation"
-    ],
-    answer: 1
+q:"The fundamental difference between simple atrophy and numerical atrophy is:",
+t:"ما الفرق الأساسي بين الضمور البسيط والضمور العددي؟",
+o:[
+"Physiologic etiology vs pathologic etiology",
+"Loss of cell size only vs loss of cell size and number via apoptosis",
+"Reversible vs irreversible injury",
+"Cytoplasmic swelling vs fragmentation"
+],a:1
 },
 
 {
-    q: "Which cellular adaptation is characterized by an increase in the size of parenchymal cells resulting in organ enlargement?",
-    translation: "أي تكيف خلوي يتميز بزيادة حجم الخلايا البرنشيمية مما يؤدي إلى تضخم العضو؟",
-    options: [
-        "Hyperplasia",
-        "Metaplasia",
-        "Hypertrophy",
-        "Atrophy"
-    ],
-    answer: 2
+q:"Which cellular adaptation is characterized by an increase in the size of parenchymal cells resulting in organ enlargement?",
+t:"أي تكيف خلوي يتميز بزيادة حجم الخلايا البرنشيمية مما يؤدي إلى تضخم العضو؟",
+o:[
+"Hyperplasia",
+"Metaplasia",
+"Hypertrophy",
+"Atrophy"
+],a:2
 },
 
 {
-    q: "Left ventricular hypertrophy in systemic hypertension is classified as:",
-    translation: "يُصنّف تضخم البطين الأيسر في ارتفاع ضغط الدم الجهازي على أنه:",
-    options: [
-        "Compensatory hypertrophy due to increased workload",
-        "Physiologic hyperplasia",
-        "Pathologic metaplasia",
-        "Disuse atrophy"
-    ],
-    answer: 0
+q:"Left ventricular hypertrophy in systemic hypertension is classified as:",
+t:"يُصنّف تضخم البطين الأيسر في ارتفاع ضغط الدم الجهازي على أنه:",
+o:[
+"Compensatory hypertrophy due to increased workload",
+"Physiologic hyperplasia",
+"Pathologic metaplasia",
+"Disuse atrophy"
+],a:0
 },
 
 {
-    q: "Hyperplasia can occur alongside hypertrophy in various tissues EXCEPT in:",
-    translation: "يمكن أن يحدث فرط التنسج بالتزامن مع التضخم في أنسجة مختلفة ما عدا:",
-    options: [
-        "Uterine smooth muscle",
-        "Breast glandular tissue",
-        "Liver parenchyma",
-        "Cardiac and skeletal muscles"
-    ],
-    answer: 3
+q:"Hyperplasia can occur alongside hypertrophy in various tissues EXCEPT in:",
+t:"يمكن أن يحدث فرط التنسج بالتزامن مع التضخم في أنسجة مختلفة ما عدا:",
+o:[
+"Uterine smooth muscle",
+"Breast glandular tissue",
+"Liver parenchyma",
+"Cardiac and skeletal muscles"
+],a:3
 },
 
 {
-    q: "Cigarette smoking classically induces which adaptive epithelial change in the bronchi?",
-    translation: "ما التغير التكيفي الظهاري الذي يسببه تدخين السجائر بشكل كلاسيكي في القصبات؟",
-    options: [
-        "Glandular hyperplasia",
-        "Squamous metaplasia",
-        "Simple atrophy",
-        "Dysplastic hypertrophy"
-    ],
-    answer: 1
+q:"Cigarette smoking classically induces which adaptive epithelial change in the bronchi?",
+t:"ما التغير التكيفي الظهاري الذي يسببه تدخين السجائر بشكل كلاسيكي في القصبات؟",
+o:[
+"Glandular hyperplasia",
+"Squamous metaplasia",
+"Simple atrophy",
+"Dysplastic hypertrophy"
+],a:1
 },
 
 {
-    q: "The hallmark reversible changes visible on light microscopy following cellular injury are:",
-    translation: "ما التغيرات العكوسة المميزة التي يمكن رؤيتها بالمجهر الضوئي بعد إصابة الخلية؟",
-    options: [
-        "Pyknosis and karyolysis",
-        "Caseous necrosis and calcification",
-        "Hydropic change and fatty change",
-        "Fibrinoid degeneration"
-    ],
-    answer: 2
+q:"The hallmark reversible changes visible on light microscopy following cellular injury are:",
+t:"ما التغيرات العكوسة المميزة التي يمكن رؤيتها بالمجهر الضوئي بعد إصابة الخلية؟",
+o:[
+"Pyknosis and karyolysis",
+"Caseous necrosis and calcification",
+"Hydropic change and fatty change",
+"Fibrinoid degeneration"
+],a:2
 },
 
 {
-    q: "Which type of necrosis characteristically maintains the structural cellular architecture ('ghost cells')?",
-    translation: "أي نوع من النخر يحافظ بشكل مميز على البنية المعمارية للخلايا، مكوّنًا ما يسمى بالخلايا الشبحية؟",
-    options: [
-        "Liquefactive necrosis",
-        "Coagulative necrosis",
-        "Caseous necrosis",
-        "Fat necrosis"
-    ],
-    answer: 1
+q:"Which type of necrosis characteristically maintains the structural cellular architecture ('ghost cells')?",
+t:"أي نوع من النخر يحافظ بشكل مميز على البنية المعمارية للخلايا، مكوّنًا ما يسمى بالخلايا الشبحية؟",
+o:[
+"Liquefactive necrosis",
+"Coagulative necrosis",
+"Caseous necrosis",
+"Fat necrosis"
+],a:1
 },
 
 {
-    q: "Ischemic necrosis occurring in the brain classically manifests as:",
-    translation: "النخر الإقفاري الذي يحدث في الدماغ يظهر بشكل كلاسيكي على هيئة:",
-    options: [
-        "Coagulative necrosis",
-        "Caseous necrosis",
-        "Fibrinoid necrosis",
-        "Liquefactive necrosis"
-    ],
-    answer: 3
+q:"Ischemic necrosis occurring in the brain classically manifests as:",
+t:"النخر الإقفاري الذي يحدث في الدماغ يظهر بشكل كلاسيكي على هيئة:",
+o:[
+"Coagulative necrosis",
+"Caseous necrosis",
+"Fibrinoid necrosis",
+"Liquefactive necrosis"
+],a:3
 },
 
 {
-    q: "Langhans multinucleated giant cells characteristically feature nuclei arranged in:",
-    translation: "تتميز الخلايا العملاقة متعددة الأنوية من نوع Langhans بترتيب الأنوية في:",
-    options: [
-        "A peripheral horseshoe pattern",
-        "A random scatter throughout the cytoplasm",
-        "Two parallel linear rows",
-        "A single centrally clumped mass"
-    ],
-    answer: 0
+q:"Langhans multinucleated giant cells characteristically feature nuclei arranged in:",
+t:"تتميز الخلايا العملاقة متعددة الأنوية من نوع Langhans بترتيب الأنوية في:",
+o:[
+"A peripheral horseshoe pattern",
+"A random scatter throughout the cytoplasm",
+"Two parallel linear rows",
+"A single centrally clumped mass"
+],a:0
 },
 
 {
-    q: "In contrast to foreign body giant cells, Langhans giant cells are typically diagnostic of:",
-    translation: "بخلاف الخلايا العملاقة من نوع الجسم الغريب، ترتبط خلايا Langhans العملاقة بشكل نموذجي بـ:",
-    options: [
-        "Silicosis",
-        "Tuberculosis",
-        "Asbestosis",
-        "Suture reactions"
-    ],
-    answer: 1
+q:"In contrast to foreign body giant cells, Langhans giant cells are typically diagnostic of:",
+t:"بخلاف الخلايا العملاقة من نوع الجسم الغريب، ترتبط خلايا Langhans العملاقة بشكل نموذجي بـ:",
+o:[
+"Silicosis",
+"Tuberculosis",
+"Asbestosis",
+"Suture reactions"
+],a:1
 },
 
 {
-    q: "The predominant leukocyte present during the initial 24 hours of acute inflammation is the:",
-    translation: "ما الكريات البيضاء السائدة خلال أول 24 ساعة من الالتهاب الحاد؟",
-    options: [
-        "Macrophage",
-        "Lymphocyte",
-        "Neutrophil",
-        "Plasma cell"
-    ],
-    answer: 2
+q:"The predominant leukocyte present during the initial 24 hours of acute inflammation is the:",
+t:"ما الكريات البيضاء السائدة خلال أول 24 ساعة من الالتهاب الحاد؟",
+o:[
+"Macrophage",
+"Lymphocyte",
+"Neutrophil",
+"Plasma cell"
+],a:2
 },
 
 {
-    q: "Leukocyte rolling along endothelial surfaces is primarily mediated by:",
-    translation: "يتم توسط تدحرج الكريات البيضاء على سطح الخلايا البطانية بشكل أساسي بواسطة:",
-    options: [
-        "Selectins",
-        "Integrins",
-        "PECAM-1 (CD31)",
-        "Histamine"
-    ],
-    answer: 0
+q:"Leukocyte rolling along endothelial surfaces is primarily mediated by:",
+t:"يتم توسط تدحرج الكريات البيضاء على سطح الخلايا البطانية بشكل أساسي بواسطة:",
+o:[
+"Selectins",
+"Integrins",
+"PECAM-1 (CD31)",
+"Histamine"
+],a:0
 },
 
 {
-    q: "Firm adhesion of leukocytes to endothelial cells requires binding mediated by:",
-    translation: "يتطلب الالتصاق المحكم للكريات البيضاء بالخلايا البطانية ارتباطًا يتم بواسطة:",
-    options: [
-        "Selectins",
-        "Integrins (ICAM-1 interactions)",
-        "Prostaglandins",
-        "Bradykinin"
-    ],
-    answer: 1
+q:"Firm adhesion of leukocytes to endothelial cells requires binding mediated by:",
+t:"يتطلب الالتصاق المحكم للكريات البيضاء بالخلايا البطانية ارتباطًا يتم بواسطة:",
+o:[
+"Selectins",
+"Integrins (ICAM-1 interactions)",
+"Prostaglandins",
+"Bradykinin"
+],a:1
 },
 
 {
-    q: "Which cytokine is recognized as the most potent activator of macrophages in chronic inflammation?",
-    translation: "أي سايتوكين يُعد أقوى منشط للخلايا البلعمية في الالتهاب المزمن؟",
-    options: [
-        "Interleukin-1 (IL-1)",
-        "Tumor necrosis factor-alpha",
-        "Histamine",
-        "Interferon-gamma (IFN-γ)"
-    ],
-    answer: 3
+q:"Which cytokine is recognized as the most potent activator of macrophages in chronic inflammation?",
+t:"أي سايتوكين يُعد أقوى منشط للخلايا البلعمية في الالتهاب المزمن؟",
+o:[
+"Interleukin-1 (IL-1)",
+"Tumor necrosis factor-alpha",
+"Histamine",
+"Interferon-gamma (IFN-γ)"
+],a:3
 },
 
 {
-    q: "The elevated Erythrocyte Sedimentation Rate (ESR) seen in the acute-phase response is driven by increased hepatic synthesis of:",
-    translation: "ارتفاع سرعة ترسيب كريات الدم الحمراء ESR في استجابة الطور الحاد ينتج عن زيادة تصنيع الكبد لـ:",
-    options: [
-        "Albumin",
-        "Fibrinogen",
-        "Transferrin",
-        "Superoxide dismutase"
-    ],
-    answer: 1
+q:"The elevated Erythrocyte Sedimentation Rate (ESR) seen in the acute-phase response is driven by increased hepatic synthesis of:",
+t:"ارتفاع سرعة ترسيب كريات الدم الحمراء ESR في استجابة الطور الحاد ينتج عن زيادة تصنيع الكبد لـ:",
+o:[
+"Albumin",
+"Fibrinogen",
+"Transferrin",
+"Superoxide dismutase"
+],a:1
 },
 
 {
-    q: "Cells that continuously divide throughout life to replace lost cells (e.g., surface epithelia) are classified as:",
-    translation: "الخلايا التي تنقسم باستمرار طوال الحياة لتعويض الخلايا المفقودة، مثل الظهارات السطحية، تُصنف على أنها:",
-    options: [
-        "Labile cells",
-        "Stable cells",
-        "Permanent cells",
-        "Quiescent cells"
-    ],
-    answer: 0
+q:"Cells that continuously divide throughout life to replace lost cells (e.g., surface epithelia) are classified as:",
+t:"الخلايا التي تنقسم باستمرار طوال الحياة لتعويض الخلايا المفقودة، مثل الظهارات السطحية، تُصنف على أنها:",
+o:[
+"Labile cells",
+"Stable cells",
+"Permanent cells",
+"Quiescent cells"
+],a:0
 },
 
 {
-    q: "Cardiac myocytes and neurons are incapable of postnatal division and are classified as:",
-    translation: "الخلايا العضلية القلبية والخلايا العصبية غير قادرة على الانقسام بعد الولادة، وتُصنف على أنها:",
-    options: [
-        "Stable cells",
-        "Labile cells",
-        "Permanent cells",
-        "Stem cells"
-    ],
-    answer: 2
+q:"Cardiac myocytes and neurons are incapable of postnatal division and are classified as:",
+t:"الخلايا العضلية القلبية والخلايا العصبية غير قادرة على الانقسام بعد الولادة، وتُصنف على أنها:",
+o:[
+"Stable cells",
+"Labile cells",
+"Permanent cells",
+"Stem cells"
+],a:2
 },
 
 {
-    q: "Histologically, granulation tissue is composed of:",
-    translation: "نسيج التحبيب يتكون نسيجيًا من:",
-    options: [
-        "Dense mature collagen with complete absence of vessels",
-        "Newly formed vessels (angiogenesis), fibroblasts, and inflammatory cells",
-        "Amorphous caseous debris",
-        "Purely squamous keratinized layers"
-    ],
-    answer: 1
+q:"Histologically, granulation tissue is composed of:",
+t:"نسيج التحبيب يتكون نسيجيًا من:",
+o:[
+"Dense mature collagen with complete absence of vessels",
+"Newly formed vessels (angiogenesis), fibroblasts, and inflammatory cells",
+"Amorphous caseous debris",
+"Purely squamous keratinized layers"
+],a:1
 },
 
 {
-    q: "The cellular element responsible for wound contraction during tissue repair is the:",
-    translation: "العنصر الخلوي المسؤول عن انكماش الجرح أثناء إصلاح الأنسجة هو:",
-    options: [
-        "Myofibroblast",
-        "Endothelial cell",
-        "Neutrophil",
-        "Keratinocyte"
-    ],
-    answer: 0
+q:"The cellular element responsible for wound contraction during tissue repair is the:",
+t:"العنصر الخلوي المسؤول عن انكماش الجرح أثناء إصلاح الأنسجة هو:",
+o:[
+"Myofibroblast",
+"Endothelial cell",
+"Neutrophil",
+"Keratinocyte"
+],a:0
 },
 
 {
-    q: "A complication of wound healing characterized by excessive collagen accumulation protruding beyond original wound margins is:",
-    translation: "ما مضاعفة التئام الجروح التي تتميز بتراكم مفرط للكولاجين يمتد خارج حدود الجرح الأصلية؟",
-    options: [
-        "Hypertrophic scar",
-        "Contracture",
-        "Keloid",
-        "Ulcer"
-    ],
-    answer: 2
+q:"A complication of wound healing characterized by excessive collagen accumulation protruding beyond original wound margins is:",
+t:"ما مضاعفة التئام الجروح التي تتميز بتراكم مفرط للكولاجين يمتد خارج حدود الجرح الأصلية؟",
+o:[
+"Hypertrophic scar",
+"Contracture",
+"Keloid",
+"Ulcer"
+],a:2
 },
 
 {
-    q: "Irreversible nuclear condensation characterized by shrinkage and increased basophilia is known as:",
-    translation: "تكثف النواة غير العكوس الذي يتميز بانكماش النواة وزيادة قاعديتها يُعرف باسم:",
-    options: [
-        "Karyorrhexis",
-        "Pyknosis",
-        "Karyolysis",
-        "Autophagy"
-    ],
-    answer: 1
+q:"Irreversible nuclear condensation characterized by shrinkage and increased basophilia is known as:",
+t:"تكثف النواة غير العكوس الذي يتميز بانكماش النواة وزيادة قاعديتها يُعرف باسم:",
+o:[
+"Karyorrhexis",
+"Pyknosis",
+"Karyolysis",
+"Autophagy"
+],a:1
 },
 
 {
-    q: "The fragmentation of a pyknotic nucleus during cell death is defined as:",
-    translation: "تفتت النواة المتكثفة أثناء موت الخلية يُعرّف بأنه:",
-    options: [
-        "Karyolysis",
-        "Apoptosis",
-        "Heterophagy",
-        "Karyorrhexis"
-    ],
-    answer: 3
+q:"The fragmentation of a pyknotic nucleus during cell death is defined as:",
+t:"تفتت النواة المتكثفة أثناء موت الخلية يُعرّف بأنه:",
+o:[
+"Karyolysis",
+"Apoptosis",
+"Heterophagy",
+"Karyorrhexis"
+],a:3
 },
 
 {
-    q: "Enzymatic fat necrosis, classically observed in acute pancreatitis, results in chalky white deposits via:",
-    translation: "النخر الدهني الإنزيمي، الذي يُشاهد بشكل كلاسيكي في التهاب البنكرياس الحاد، يؤدي إلى ترسبات بيضاء طباشيرية عن طريق:",
-    options: [
-        "Caseation necrosis",
-        "Saponification with calcium",
-        "Lipofuscin deposition",
-        "Hyaline accumulation"
-    ],
-    answer: 1
+q:"Enzymatic fat necrosis, classically observed in acute pancreatitis, results in chalky white deposits via:",
+t:"النخر الدهني الإنزيمي، الذي يُشاهد بشكل كلاسيكي في التهاب البنكرياس الحاد، يؤدي إلى ترسبات بيضاء طباشيرية عن طريق:",
+o:[
+"Caseation necrosis",
+"Saponification with calcium",
+"Lipofuscin deposition",
+"Hyaline accumulation"
+],a:1
 },
 
 {
-    q: "Fibrinoid necrosis is most commonly encountered in which of the following conditions?",
-    translation: "في أي من الحالات التالية يُشاهد النخر الليفيني بشكل أكثر شيوعًا؟",
-    options: [
-        "Myocardial infarction",
-        "Bacterial abscesses",
-        "Immune complex-mediated vasculitis",
-        "Tuberculous lymphadenitis"
-    ],
-    answer: 2
+q:"Fibrinoid necrosis is most commonly encountered in which of the following conditions?",
+t:"في أي من الحالات التالية يُشاهد النخر الليفيني بشكل أكثر شيوعًا؟",
+o:[
+"Myocardial infarction",
+"Bacterial abscesses",
+"Immune complex-mediated vasculitis",
+"Tuberculous lymphadenitis"
+],a:2
 },
 
 {
-    q: "Which pathway of apoptosis is initiated by the release of Cytochrome c from mitochondria?",
-    translation: "أي مسار من مسارات الاستماتة يبدأ بتحرير Cytochrome c من الميتوكوندريا؟",
-    options: [
-        "Intrinsic (mitochondrial) pathway",
-        "Extrinsic (death receptor) pathway",
-        "Perforin-granzyme pathway",
-        "Necroptotic pathway"
-    ],
-    answer: 0
+q:"Which pathway of apoptosis is initiated by the release of Cytochrome c from mitochondria?",
+t:"أي مسار من مسارات الاستماتة يبدأ بتحرير Cytochrome c من الميتوكوندريا؟",
+o:[
+"Intrinsic (mitochondrial) pathway",
+"Extrinsic (death receptor) pathway",
+"Perforin-granzyme pathway",
+"Necroptotic pathway"
+],a:0
 },
 
 {
-    q: "The extrinsic pathway of apoptosis is triggered via the activation of:",
-    translation: "يتم تحفيز المسار الخارجي للاستماتة من خلال تنشيط:",
-    options: [
-        "Bcl-2 overexpression",
-        "Fas (CD95) and TNF receptor 1",
-        "Caspase-9 directly",
-        "C-reactive protein"
-    ],
-    answer: 1
+q:"The extrinsic pathway of apoptosis is triggered via the activation of:",
+t:"يتم تحفيز المسار الخارجي للاستماتة من خلال تنشيط:",
+o:[
+"Bcl-2 overexpression",
+"Fas (CD95) and TNF receptor 1",
+"Caspase-9 directly",
+"C-reactive protein"
+],a:1
 },
 
 {
-    q: "Which of the following is considered an anti-apoptotic protein?",
-    translation: "أي مما يلي يُعد بروتينًا مضادًا للاستماتة؟",
-    options: [
-        "Bax",
-        "Bak",
-        "Bcl-2",
-        "Bid"
-    ],
-    answer: 2
+q:"Which of the following is considered an anti-apoptotic protein?",
+t:"أي مما يلي يُعد بروتينًا مضادًا للاستماتة؟",
+o:[
+"Bax",
+"Bak",
+"Bcl-2",
+"Bid"
+],a:2
 },
 
 {
-    q: "'Brown atrophy' of the heart in aging or malnourished patients is caused by cytoplasmic accumulation of:",
-    translation: "الضمور البني للقلب في الشيخوخة أو سوء التغذية ينتج عن تراكم:",
-    options: [
-        "Hemosiderin",
-        "Lipofuscin",
-        "Melanin",
-        "Glycogen"
-    ],
-    answer: 1
+q:"'Brown atrophy' of the heart in aging or malnourished patients is caused by cytoplasmic accumulation of:",
+t:"الضمور البني للقلب في الشيخوخة أو سوء التغذية ينتج عن تراكم:",
+o:[
+"Hemosiderin",
+"Lipofuscin",
+"Melanin",
+"Glycogen"
+],a:1
 },
 
 {
-    q: "Dystrophic calcification occurs under which of the following biochemical conditions?",
-    translation: "يحدث التكلس الحثلي تحت أي من الظروف الكيميائية الحيوية التالية؟",
-    options: [
-        "Elevated serum calcium levels in normal tissues",
-        "Systemic hyperparathyroidism",
-        "Normal serum calcium levels in necrotic or degenerating tissues",
-        "Hypervitaminosis D"
-    ],
-    answer: 2
+q:"Dystrophic calcification occurs under which of the following biochemical conditions?",
+t:"يحدث التكلس الحثلي تحت أي من الظروف الكيميائية الحيوية التالية؟",
+o:[
+"Elevated serum calcium levels in normal tissues",
+"Systemic hyperparathyroidism",
+"Normal serum calcium levels in necrotic or degenerating tissues",
+"Hypervitaminosis D"
+],a:2
 },
 
 {
-    q: "Metastatic calcification is primarily driven by:",
-    translation: "ينتج التكلس المنتشر بشكل أساسي عن:",
-    options: [
-        "Systemic hypercalcemia",
-        "Localized tissue necrosis",
-        "Decreased serum phosphate",
-        "Atherosclerotic plaques only"
-    ],
-    answer: 0
+q:"Metastatic calcification is primarily driven by:",
+t:"ينتج التكلس المنتشر بشكل أساسي عن:",
+o:[
+"Systemic hypercalcemia",
+"Localized tissue necrosis",
+"Decreased serum phosphate",
+"Atherosclerotic plaques only"
+],a:0
 },
 
 {
-    q: "The primary chemical mediator responsible for the immediate transient phase of vascular permeability in acute inflammation is:",
-    translation: "الوسيط الكيميائي الأساسي المسؤول عن المرحلة الفورية العابرة من نفاذية الأوعية الدموية في الالتهاب الحاد هو:",
-    options: [
-        "Leukotriene B4",
-        "Histamine",
-        "Transforming growth factor-beta",
-        "Platelet-derived growth factor"
-    ],
-    answer: 1
+q:"The primary chemical mediator responsible for the immediate transient phase of vascular permeability in acute inflammation is:",
+t:"الوسيط الكيميائي الأساسي المسؤول عن المرحلة الفورية العابرة من نفاذية الأوعية الدموية في الالتهاب الحاد هو:",
+o:[
+"Leukotriene B4",
+"Histamine",
+"Transforming growth factor-beta",
+"Platelet-derived growth factor"
+],a:1
 },
 
 {
-    q: "The transmigration of leukocytes across the vascular basement membrane is termed:",
-    translation: "عبور الكريات البيضاء عبر الغشاء القاعدي الوعائي يُسمى:",
-    options: [
-        "Chemotaxis",
-        "Margination",
-        "Opsonization",
-        "Diapedesis"
-    ],
-    answer: 3
+q:"The transmigration of leukocytes across the vascular basement membrane is termed:",
+t:"عبور الكريات البيضاء عبر الغشاء القاعدي الوعائي يُسمى:",
+o:[
+"Chemotaxis",
+"Margination",
+"Opsonization",
+"Diapedesis"
+],a:3
 },
 
 {
-    q: "The fifth clinical sign of acute inflammation, 'Functio laesa' (loss of function), was added by:",
-    translation: "من أضاف العلامة السريرية الخامسة للالتهاب الحاد Functio laesa، أي فقدان الوظيفة؟",
-    options: [
-        "John Hunter",
-        "Julius Cohnheim",
-        "Rudolf Virchow",
-        "Elie Metchnikoff"
-    ],
-    answer: 2
+q:"The fifth clinical sign of acute inflammation, 'Functio laesa' (loss of function), was added by:",
+t:"من أضاف العلامة السريرية الخامسة للالتهاب الحاد Functio laesa، أي فقدان الوظيفة؟",
+o:[
+"John Hunter",
+"Julius Cohnheim",
+"Rudolf Virchow",
+"Elie Metchnikoff"
+],a:2
 },
 
 {
-    q: "A localized collection of purulent exudate (pus) within an organ or confined tissue space is termed:",
-    translation: "التجمع الموضعي للإفراز القيحي داخل عضو أو مساحة نسيجية محددة يسمى:",
-    options: [
-        "Abscess",
-        "Ulcer",
-        "Phlegmon",
-        "Seroma"
-    ],
-    answer: 0
+q:"A localized collection of purulent exudate (pus) within an organ or confined tissue space is termed:",
+t:"التجمع الموضعي للإفراز القيحي داخل عضو أو مساحة نسيجية محددة يسمى:",
+o:[
+"Abscess",
+"Ulcer",
+"Phlegmon",
+"Seroma"
+],a:0
 },
 
 {
-    q: "Granulomatous inflammation is a distinctive histologic pattern of:",
-    translation: "الالتهاب الحبيبي هو نمط نسيجي مميز لـ:",
-    options: [
-        "Acute suppurative inflammation",
-        "Chronic inflammation characterized by aggregated epithelioid macrophages",
-        "Serous inflammation seen in burns",
-        "Purely non-immune hypersensitivity"
-    ],
-    answer: 1
+q:"Granulomatous inflammation is a distinctive histologic pattern of:",
+t:"الالتهاب الحبيبي هو نمط نسيجي مميز لـ:",
+o:[
+"Acute suppurative inflammation",
+"Chronic inflammation characterized by aggregated epithelioid macrophages",
+"Serous inflammation seen in burns",
+"Purely non-immune hypersensitivity"
+],a:1
 },
 
 {
-    q: "Non-caseating granulomas are characteristically identified in which systemic granulomatous disorder?",
-    translation: "في أي اضطراب حبيبي جهازي تُشاهد الحبيبات غير المتجبنة بشكل مميز؟",
-    options: [
-        "Tuberculosis",
-        "Histoplasmosis",
-        "Sarcoidosis",
-        "Coccidioidomycosis"
-    ],
-    answer: 2
+q:"Non-caseating granulomas are characteristically identified in which systemic granulomatous disorder?",
+t:"في أي اضطراب حبيبي جهازي تُشاهد الحبيبات غير المتجبنة بشكل مميز؟",
+o:[
+"Tuberculosis",
+"Histoplasmosis",
+"Sarcoidosis",
+"Coccidioidomycosis"
+],a:2
 },
 
 {
-    q: "Which key growth factor is central to collagen synthesis, fibroblast migration, and terminating chronic inflammation?",
-    translation: "أي عامل نمو مهم له دور أساسي في تصنيع الكولاجين وهجرة الخلايا الليفية وإنهاء الالتهاب المزمن؟",
-    options: [
-        "Histamine",
-        "TGF-beta",
-        "TNF-alpha",
-        "Interleukin-8"
-    ],
-    answer: 1
+q:"Which key growth factor is central to collagen synthesis, fibroblast migration, and terminating chronic inflammation?",
+t:"أي عامل نمو مهم له دور أساسي في تصنيع الكولاجين وهجرة الخلايا الليفية وإنهاء الالتهاب المزمن؟",
+o:[
+"Histamine",
+"TGF-beta",
+"TNF-alpha",
+"Interleukin-8"
+],a:1
 },
 
 {
-    q: "Healing by primary intention differs from secondary intention because primary intention exhibits:",
-    translation: "يختلف الالتئام بالنية الأولى عن النية الثانية لأن الالتئام بالنية الأولى يتميز بـ:",
-    options: [
-        "Extensive tissue defects requiring abundant granulation tissue",
-        "Clean, closely approximated margins with minimal tissue loss and scar",
-        "Prominent wound contraction by myofibroblasts",
-        "Higher rates of ulceration and delayed re-epithelialization"
-    ],
-    answer: 1
+q:"Healing by primary intention differs from secondary intention because primary intention exhibits:",
+t:"يختلف الالتئام بالنية الأولى عن النية الثانية لأن الالتئام بالنية الأولى يتميز بـ:",
+o:[
+"Extensive tissue defects requiring abundant granulation tissue",
+"Clean, closely approximated margins with minimal tissue loss and scar",
+"Prominent wound contraction by myofibroblasts",
+"Higher rates of ulceration and delayed re-epithelialization"
+],a:1
 },
 
 {
-    q: "An essential dietary cofactor required for the post-translational hydroxylation of proline and lysine in collagen synthesis is:",
-    translation: "ما العامل الغذائي المساعد الضروري لهيدروكسلة البرولين واللايسين بعد الترجمة أثناء تصنيع الكولاجين؟",
-    options: [
-        "Vitamin C",
-        "Vitamin D",
-        "Vitamin A",
-        "Vitamin K"
-    ],
-    answer: 0
+q:"An essential dietary cofactor required for the post-translational hydroxylation of proline and lysine in collagen synthesis is:",
+t:"ما العامل الغذائي المساعد الضروري لهيدروكسلة البرولين واللايسين بعد الترجمة أثناء تصنيع الكولاجين؟",
+o:[
+"Vitamin C",
+"Vitamin D",
+"Vitamin A",
+"Vitamin K"
+],a:0
 },
 
 {
-    q: "Trace element essential for collagen cross-linking via lysyl oxidase is:",
-    translation: "ما العنصر النزري الضروري للربط المتقاطع للكولاجين بواسطة إنزيم lysyl oxidase؟",
-    options: [
-        "Iron",
-        "Zinc",
-        "Copper",
-        "Magnesium"
-    ],
-    answer: 2
+q:"Trace element essential for collagen cross-linking via lysyl oxidase is:",
+t:"ما العنصر النزري الضروري للربط المتقاطع للكولاجين بواسطة إنزيم lysyl oxidase؟",
+o:[
+"Iron",
+"Zinc",
+"Copper",
+"Magnesium"
+],a:2
 },
 
 {
-    q: "Edema fluid with low protein content, low specific gravity (<1.012), and caused by altered hemodynamic forces is a:",
-    translation: "سائل الوذمة منخفض البروتين ومنخفض الكثافة النوعية (<1.012) والناجم عن تغيرات في القوى الديناميكية الدموية يسمى:",
-    options: [
-        "Exudate",
-        "Transudate",
-        "Purulent fluid",
-        "Fibrinous effusion"
-    ],
-    answer: 1
+q:"Edema fluid with low protein content, low specific gravity (<1.012), and caused by altered hemodynamic forces is a:",
+t:"سائل الوذمة منخفض البروتين ومنخفض الكثافة النوعية (<1.012) والناجم عن تغيرات في القوى الديناميكية الدموية يسمى:",
+o:[
+"Exudate",
+"Transudate",
+"Purulent fluid",
+"Fibrinous effusion"
+],a:1
 },
 
 {
-    q: "An inflammatory edema fluid characterized by high protein content and cellular debris is termed:",
-    translation: "سائل الوذمة الالتهابي الذي يتميز بارتفاع محتوى البروتين ووجود الحطام الخلوي يسمى:",
-    options: [
-        "Transudate",
-        "Exudate",
-        "Lymph fluid",
-        "Interstitial filtrate"
-    ],
-    answer: 1
+q:"An inflammatory edema fluid characterized by high protein content and cellular debris is termed:",
+t:"سائل الوذمة الالتهابي الذي يتميز بارتفاع محتوى البروتين ووجود الحطام الخلوي يسمى:",
+o:[
+"Transudate",
+"Exudate",
+"Lymph fluid",
+"Interstitial filtrate"
+],a:1
 },
 
 {
-    q: "The classic triad of Virchow contributing to pathologic intravascular thrombosis includes:",
-    translation: "الثلاثية الكلاسيكية لفيرشو التي تساهم في حدوث الخثار داخل الأوعية تشمل:",
-    options: [
-        "Hypertension, hyperlipidemia, and diabetes",
-        "Infection, fever, and leukocytosis",
-        "Endothelial injury, stasis/turbulent flow, and hypercoagulability",
-        "Vasoconstriction, vasodilation, and vascular stasis"
-    ],
-    answer: 2
-}];
+q:"The classic triad of Virchow contributing to pathologic intravascular thrombosis includes:",
+t:"الثلاثية الكلاسيكية لفيرشو التي تساهم في حدوث الخثار داخل الأوعية تشمل:",
+o:[
+"Hypertension, hyperlipidemia, and diabetes",
+"Infection, fever, and leukocytosis",
+"Endothelial injury, stasis/turbulent flow, and hypercoagulability",
+"Vasoconstriction, vasodilation, and vascular stasis"
+],a:2
+}
+
+];
 
 
 /* =========================================================
-   START EXAM
+   STATE
 ========================================================= */
 
-function startExam() {
+const TOTAL = quizData.length;
+const QUESTION_TIME = 60 * 1000;
+const STORAGE_KEY = "general_pathology_quiz_v2";
 
-    const input =
-        document.getElementById("studentName");
+let questions = [];
+let currentIndex = 0;
+let studentName = "";
+let correctAnswers = 0;
+let wrongAnswers = 0;
+let timeoutAnswers = 0;
 
-    studentName =
-        input.value.trim();
+let answered = false;
+let questionDeadline = null;
 
-    if (!studentName) {
+let questionTimer = null;
+let transitionTimer = null;
 
-        alert(
-            "يرجى كتابة اسم الطالب أولاً."
-        );
 
-        input.focus();
+/* =========================================================
+   DOM
+========================================================= */
 
-        return;
-    }
+const startScreen = document.getElementById("startScreen");
+const quizScreen = document.getElementById("quizScreen");
+const resultScreen = document.getElementById("resultScreen");
 
-    examQuestions =
-        shuffleQuestions();
+const studentNameInput = document.getElementById("studentName");
+const startBtn = document.getElementById("startBtn");
 
-    currentQuestion = 0;
+const counter = document.getElementById("counter");
+const timer = document.getElementById("timer");
+const progressBar = document.getElementById("progressBar");
 
-    userAnswers = {};
+const questionNumber = document.getElementById("questionNumber");
+const questionText = document.getElementById("questionText");
+const translation = document.getElementById("translation");
+const translationToggle = document.getElementById("translationToggle");
 
-    timeoutQuestions = {};
+const optionsBox = document.getElementById("options");
 
-    focusLosses = 0;
+const timeoutMessage = document.getElementById("timeoutMessage");
+const nextBtn = document.getElementById("nextBtn");
 
-    examFinished = false;
+const resultName = document.getElementById("resultName");
+const score = document.getElementById("score");
+const percentage = document.getElementById("percentage");
 
-    questionLocked = false;
+const correctCount = document.getElementById("correctCount");
+const wrongCount = document.getElementById("wrongCount");
+const timeoutCount = document.getElementById("timeoutCount");
 
-    examStartTime = Date.now();
+const restartBtn = document.getElementById("restartBtn");
+const sendStatus = document.getElementById("sendStatus");
 
-    localStorage.removeItem(
-        "pathologyQuizProgress"
+const privacyMask = document.getElementById("privacyMask");
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function shuffle(array){
+  const arr = [...array];
+
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+
+  return arr;
+}
+
+
+function formatTime(ms){
+  ms = Math.max(0, ms);
+
+  const seconds = Math.ceil(ms / 1000);
+
+  const m = Math.floor(seconds / 60)
+    .toString()
+    .padStart(2,"0");
+
+  const s = (seconds % 60)
+    .toString()
+    .padStart(2,"0");
+
+  return `${m}:${s}`;
+}
+
+
+function stopTimers(){
+  if(questionTimer){
+    clearInterval(questionTimer);
+    questionTimer = null;
+  }
+
+  if(transitionTimer){
+    clearTimeout(transitionTimer);
+    transitionTimer = null;
+  }
+}
+
+
+function showScreen(screen){
+  startScreen.classList.add("hidden");
+  quizScreen.classList.add("hidden");
+  resultScreen.classList.add("hidden");
+
+  screen.classList.remove("hidden");
+}
+
+
+/* =========================================================
+   RANDOMIZE
+========================================================= */
+
+function buildQuestions(){
+
+  questions = quizData.map(item => {
+
+    const correctText = item.o[item.a];
+
+    const options = shuffle(item.o);
+
+    return {
+      q:item.q,
+      t:item.t,
+      o:options,
+      a:options.indexOf(correctText)
+    };
+
+  });
+
+}
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+function saveProgress(){
+
+  try{
+
+    const data = {
+      questions,
+      currentIndex,
+      studentName,
+      correctAnswers,
+      wrongAnswers,
+      timeoutAnswers,
+      questionDeadline
+    };
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(data)
     );
 
-    document.getElementById(
-        "startScreen"
-    ).style.display = "none";
+  }catch(e){
+    console.warn("Could not save progress",e);
+  }
+}
 
-    document.getElementById(
-        "examScreen"
-    ).style.display = "block";
 
-    renderQuestion();
+function loadProgress(){
 
-    saveProgress();
+  try{
+
+    const raw = localStorage.getItem(STORAGE_KEY);
+
+    if(!raw) return false;
+
+    const data = JSON.parse(raw);
+
+    if(
+      !data ||
+      !Array.isArray(data.questions) ||
+      data.questions.length !== TOTAL
+    ){
+      return false;
+    }
+
+    questions = data.questions;
+    currentIndex = Number(data.currentIndex) || 0;
+    studentName = data.studentName || "";
+
+    correctAnswers = Number(data.correctAnswers) || 0;
+    wrongAnswers = Number(data.wrongAnswers) || 0;
+    timeoutAnswers = Number(data.timeoutAnswers) || 0;
+
+    questionDeadline =
+      data.questionDeadline || null;
+
+    return true;
+
+  }catch(e){
+
+    console.warn("Could not load progress",e);
+    return false;
+
+  }
+
+}
+
+
+function clearProgress(){
+
+  try{
+    localStorage.removeItem(STORAGE_KEY);
+  }catch(e){}
+
 }
 
 
 /* =========================================================
-   SHUFFLE QUESTIONS + OPTIONS
+   START
 ========================================================= */
 
-function shuffleQuestions() {
+function startExam(){
 
-    const copied =
-        quizData.map(item => {
+  studentName =
+    studentNameInput.value.trim() ||
+    "طالب بدون اسم";
 
-            const optionsWithAnswers =
-                item.options.map(
-                    (text, index) => ({
-                        text: text,
-                        originalIndex: index
-                    })
-                );
+  correctAnswers = 0;
+  wrongAnswers = 0;
+  timeoutAnswers = 0;
+  currentIndex = 0;
 
-            const shuffledOptions =
-                shuffleArray(
-                    optionsWithAnswers
-                );
+  buildQuestions();
 
-            return {
+  showScreen(quizScreen);
 
-                q: item.q,
+  renderQuestion();
 
-                translation:
-                    item.translation,
-
-                options:
-                    shuffledOptions.map(
-                        option =>
-                            option.text
-                    ),
-
-                answer:
-                    shuffledOptions.findIndex(
-                        option =>
-                            option.originalIndex ===
-                            item.answer
-                    )
-            };
-        });
-
-    return shuffleArray(copied);
+  saveProgress();
 }
 
 
-function shuffleArray(array) {
-
-    const arr = [...array];
-
-    for (
-        let i = arr.length - 1;
-        i > 0;
-        i--
-    ) {
-
-        const j =
-            Math.floor(
-                Math.random() *
-                (i + 1)
-            );
-
-        [
-            arr[i],
-            arr[j]
-        ] =
-        [
-            arr[j],
-            arr[i]
-        ];
-    }
-
-    return arr;
-}
+startBtn.addEventListener("click",startExam);
 
 
 /* =========================================================
    RENDER QUESTION
 ========================================================= */
 
-function renderQuestion() {
+function renderQuestion(){
 
-    clearQuestionTimer();
+  stopTimers();
 
-    questionLocked = false;
+  answered = false;
 
-    const question =
-        examQuestions[currentQuestion];
+  timeoutMessage.classList.add("hidden");
+  nextBtn.classList.add("hidden");
 
-    if (!question) {
-        return;
-    }
+  translation.classList.add("hidden");
+  translationToggle.textContent =
+    "🌐 إظهار الترجمة";
 
-    const total =
-        examQuestions.length;
+  const item = questions[currentIndex];
 
+  questionNumber.textContent =
+    `السؤال ${currentIndex + 1} من ${TOTAL}`;
 
-    document.getElementById(
-        "questionNumber"
-    ).innerText =
-        `السؤال ${currentQuestion + 1}`;
+  counter.textContent =
+    `السؤال ${currentIndex + 1} من ${TOTAL}`;
 
+  questionText.textContent = item.q;
 
-    document.getElementById(
-        "progressText"
-    ).innerText =
-        `السؤال ${currentQuestion + 1} من ${total}`;
+  translation.textContent = item.t;
 
+  progressBar.style.width =
+    `${((currentIndex + 1) / TOTAL) * 100}%`;
 
-    document.getElementById(
-        "questionText"
-    ).innerText =
-        question.q;
+  optionsBox.innerHTML = "";
 
+  item.o.forEach((optionText,index)=>{
 
-    const translationBox =
-        document.getElementById(
-            "translationBox"
-        );
+    const option = document.createElement("button");
 
-    translationBox.innerText =
-        question.translation;
+    option.type = "button";
+    option.className = "option";
 
-    translationBox.style.display =
-        "none";
+    option.textContent =
+      `${String.fromCharCode(65 + index)}. ${optionText}`;
 
-
-    document.getElementById(
-        "translationBtn"
-    ).innerText =
-        "🌐 ترجمة السؤال";
-
-
-    const progress =
-        (
-            (currentQuestion + 1) /
-            total
-        ) * 100;
-
-
-    document.getElementById(
-        "progressBar"
-    ).style.width =
-        progress + "%";
-
-
-    const optionsContainer =
-        document.getElementById(
-            "optionsContainer"
-        );
-
-    optionsContainer.innerHTML =
-        "";
-
-
-    const letters =
-        ["A", "B", "C", "D"];
-
-
-    question.options.forEach(
-        (option, index) => {
-
-            const button =
-                document.createElement("div");
-
-            button.className =
-                "option";
-
-            button.innerHTML = `
-                <span class="option-letter">
-                    ${letters[index]}
-                </span>
-
-                <span>
-                    ${escapeHTML(option)}
-                </span>
-            `;
-
-            button.addEventListener(
-                "click",
-                () => selectAnswer(index)
-            );
-
-            optionsContainer.appendChild(
-                button
-            );
-        }
+    option.addEventListener(
+      "click",
+      ()=>selectAnswer(index)
     );
 
+    optionsBox.appendChild(option);
 
-    document.getElementById(
-        "questionStatus"
-    ).innerText =
-        "⏱️ لديك 15 ثانية للإجابة";
+  });
 
+  questionDeadline =
+    Date.now() + QUESTION_TIME;
 
-    startQuestionTimer();
+  startQuestionTimer();
+
+  saveProgress();
 }
 
 
@@ -1765,274 +1346,143 @@ function renderQuestion() {
    TRANSLATION
 ========================================================= */
 
-function toggleTranslation() {
+translationToggle.addEventListener(
+  "click",
+  ()=>{
 
-    const box =
-        document.getElementById(
-            "translationBox"
-        );
+    const hidden =
+      translation.classList.contains("hidden");
 
-    const button =
-        document.getElementById(
-            "translationBtn"
-        );
+    if(hidden){
 
+      translation.classList.remove("hidden");
 
-    if (
-        box.style.display === "none" ||
-        box.style.display === ""
-    ) {
+      translationToggle.textContent =
+        "🌐 إخفاء الترجمة";
 
-        box.style.display =
-            "block";
+    }else{
 
-        button.innerText =
-            "🔽 إخفاء الترجمة";
+      translation.classList.add("hidden");
 
-    } else {
+      translationToggle.textContent =
+        "🌐 إظهار الترجمة";
 
-        box.style.display =
-            "none";
-
-        button.innerText =
-            "🌐 ترجمة السؤال";
     }
+
+  }
+);
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+function startQuestionTimer(){
+
+  stopQuestionTimer();
+
+  if(!questionDeadline){
+    questionDeadline =
+      Date.now() + QUESTION_TIME;
+  }
+
+  updateTimer();
+
+  questionTimer = setInterval(
+    updateTimer,
+    200
+  );
+}
+
+
+function stopQuestionTimer(){
+
+  if(questionTimer){
+    clearInterval(questionTimer);
+    questionTimer = null;
+  }
+
+}
+
+
+function updateTimer(){
+
+  if(answered){
+    return;
+  }
+
+  const remaining =
+    questionDeadline - Date.now();
+
+  if(remaining <= 0){
+
+    timer.textContent = "00:00";
+
+    timer.classList.add("warning");
+
+    stopQuestionTimer();
+
+    handleTimeout();
+
+    return;
+  }
+
+  timer.textContent =
+    formatTime(remaining);
+
+  if(remaining <= 10000){
+    timer.classList.add("warning");
+  }else{
+    timer.classList.remove("warning");
+  }
+
 }
 
 
 /* =========================================================
-   SELECT ANSWER
+   ANSWER
 ========================================================= */
 
-function selectAnswer(index) {
+function selectAnswer(index){
 
-    if (
-        examFinished ||
-        questionLocked
-    ) {
-        return;
-    }
+  if(answered) return;
 
-    questionLocked = true;
+  answered = true;
 
-    clearQuestionTimer();
+  stopQuestionTimer();
 
+  const item = questions[currentIndex];
 
-    userAnswers[currentQuestion] =
-        index;
+  const optionButtons =
+    [...optionsBox.querySelectorAll(".option")];
 
+  optionButtons.forEach(btn=>{
+    btn.classList.add("disabled");
+  });
 
-    const question =
-        examQuestions[currentQuestion];
+  if(index === item.a){
 
+    correctAnswers++;
 
-    const options =
-        document.querySelectorAll(
-            ".option"
-        );
+    optionButtons[index]
+      .classList.add("correct");
 
+  }else{
 
-    options.forEach(
-        (option, optionIndex) => {
+    wrongAnswers++;
 
-            option.style.pointerEvents =
-                "none";
+    optionButtons[index]
+      .classList.add("wrong");
 
-            if (
-                optionIndex ===
-                question.answer
-            ) {
+    optionButtons[item.a]
+      .classList.add("correct");
 
-                option.classList.add(
-                    "correct"
-                );
-            }
+  }
 
-            if (
-                optionIndex === index &&
-                index !== question.answer
-            ) {
+  saveProgress();
 
-                option.classList.add(
-                    "wrong"
-                );
-            }
-        }
-    );
+  showNextButton();
 
-
-    if (
-        index === question.answer
-    ) {
-
-        document.getElementById(
-            "questionStatus"
-        ).innerHTML = `
-            <div class="correct-message">
-                ✅ إجابة صحيحة
-            </div>
-        `;
-
-    } else {
-
-        document.getElementById(
-            "questionStatus"
-        ).innerHTML = `
-            <div class="wrong-message">
-                ❌ إجابة خاطئة
-                <br>
-                ✓ الإجابة الصحيحة:
-                ${escapeHTML(
-                    question.options[
-                        question.answer
-                    ]
-                )}
-            </div>
-        `;
-    }
-
-
-    saveProgress();
-
-
-    setTimeout(
-        () => {
-            goToNextQuestion();
-        },
-        700
-    );
-}
-
-
-/* =========================================================
-   NEXT QUESTION
-========================================================= */
-
-function goToNextQuestion() {
-
-    if (
-        currentQuestion <
-        examQuestions.length - 1
-    ) {
-
-        currentQuestion++;
-
-        renderQuestion();
-
-        saveProgress();
-
-    } else {
-
-        finishExam();
-    }
-}
-
-
-/* =========================================================
-   15-SECOND TIMER
-========================================================= */
-
-function startQuestionTimer() {
-
-    clearQuestionTimer();
-
-    questionTimeLeft =
-        QUESTION_TIME;
-
-    updateQuestionTimer();
-
-
-    questionTimer =
-        setInterval(
-            () => {
-
-                questionTimeLeft--;
-
-                updateQuestionTimer();
-
-
-                if (
-                    questionTimeLeft <= 0
-                ) {
-
-                    clearQuestionTimer();
-
-                    handleTimeout();
-                }
-
-            },
-            1000
-        );
-}
-
-
-/* =========================================================
-   UPDATE TIMER
-========================================================= */
-
-function updateQuestionTimer() {
-
-    const timer =
-        document.getElementById(
-            "timer"
-        );
-
-
-    timer.innerText =
-        String(
-            Math.max(
-                0,
-                questionTimeLeft
-            )
-        ).padStart(
-            2,
-            "0"
-        );
-
-
-    timer.classList.remove(
-        "warning",
-        "danger"
-    );
-
-
-    /*
-       تنبيه عند 5 ثوانٍ أو أقل
-    */
-
-    if (
-        questionTimeLeft <= 3
-    ) {
-
-        timer.classList.add(
-            "danger"
-        );
-
-    } else if (
-        questionTimeLeft <= 5
-    ) {
-
-        timer.classList.add(
-            "warning"
-        );
-    }
-}
-
-
-/* =========================================================
-   CLEAR TIMER
-========================================================= */
-
-function clearQuestionTimer() {
-
-    if (questionTimer !== null) {
-
-        clearInterval(
-            questionTimer
-        );
-
-        questionTimer = null;
-    }
 }
 
 
@@ -2040,388 +1490,143 @@ function clearQuestionTimer() {
    TIMEOUT
 ========================================================= */
 
-function handleTimeout() {
+function handleTimeout(){
 
-    if (
-        questionLocked ||
-        examFinished
-    ) {
-        return;
-    }
+  if(answered) return;
 
+  answered = true;
 
-    questionLocked = true;
+  timeoutAnswers++;
+  wrongAnswers++;
 
+  const item = questions[currentIndex];
 
-    const question =
-        examQuestions[currentQuestion];
+  const optionButtons =
+    [...optionsBox.querySelectorAll(".option")];
 
+  optionButtons.forEach(btn=>{
+    btn.classList.add("disabled");
+  });
 
-    timeoutQuestions[currentQuestion] =
-        true;
+  if(optionButtons[item.a]){
+    optionButtons[item.a]
+      .classList.add("correct");
+  }
 
+  timeoutMessage.classList.remove("hidden");
 
-    userAnswers[currentQuestion] =
-        null;
+  saveProgress();
 
+  /*
+    إظهار الإجابة الصحيحة للحظات ثم الانتقال
+  */
 
-    const options =
-        document.querySelectorAll(
-            ".option"
-        );
+  transitionTimer = setTimeout(
+    nextQuestion,
+    1200
+  );
 
-
-    options.forEach(
-        (option, index) => {
-
-            option.style.pointerEvents =
-                "none";
-
-
-            if (
-                index === question.answer
-            ) {
-
-                option.classList.add(
-                    "correct"
-                );
-            }
-        }
-    );
-
-
-    document.getElementById(
-        "questionStatus"
-    ).innerHTML = `
-        <div class="timeout-message">
-            ⏰ انتهى الوقت — تُحسب الإجابة خطأ
-            <br>
-            ✓ الإجابة الصحيحة:
-            ${escapeHTML(
-                question.options[
-                    question.answer
-                ]
-            )}
-        </div>
-    `;
-
-
-    saveProgress();
-
-
-    /*
-       عرض الإجابة الصحيحة لمدة قصيرة
-       ثم الانتقال تلقائيًا
-    */
-
-    setTimeout(
-        () => {
-            goToNextQuestion();
-        },
-        1200
-    );
 }
 
 
 /* =========================================================
-   FINISH EXAM
+   NEXT
 ========================================================= */
 
-async function finishExam() {
+function showNextButton(){
 
-    if (examFinished) {
-        return;
-    }
+  if(currentIndex >= TOTAL - 1){
 
+    nextBtn.textContent =
+      "إنهاء الاختبار ✓";
 
-    examFinished = true;
+  }else{
 
-    clearQuestionTimer();
+    nextBtn.textContent =
+      "السؤال التالي →";
 
+  }
 
-    examEndTime =
-        Date.now();
+  nextBtn.classList.remove("hidden");
+}
 
 
-    const total =
-        examQuestions.length;
+nextBtn.addEventListener(
+  "click",
+  nextQuestion
+);
 
 
-    let score = 0;
+function nextQuestion(){
 
-    let timeoutCount = 0;
+  if(!answered) return;
 
-    let wrong = 0;
+  if(transitionTimer){
+    clearTimeout(transitionTimer);
+    transitionTimer = null;
+  }
 
-    let unanswered = 0;
+  currentIndex++;
 
+  if(currentIndex >= TOTAL){
 
-    examQuestions.forEach(
-        (question, index) => {
+    finishExam();
+    return;
+  }
 
-            const selected =
-                userAnswers[index];
-
-
-            if (
-                timeoutQuestions[index]
-            ) {
-
-                timeoutCount++;
-
-                wrong++;
-
-                return;
-            }
-
-
-            if (
-                selected !== undefined &&
-                selected !== null
-            ) {
-
-                if (
-                    selected ===
-                    question.answer
-                ) {
-
-                    score++;
-
-                } else {
-
-                    wrong++;
-                }
-
-            } else {
-
-                unanswered++;
-
-                wrong++;
-            }
-        }
-    );
-
-
-    const percent =
-        Math.round(
-            (score / total) * 100
-        );
-
-
-    const durationSeconds =
-        Math.max(
-            0,
-            Math.round(
-                (
-                    examEndTime -
-                    examStartTime
-                ) / 1000
-            )
-        );
-
-
-    const durationText =
-        formatDuration(
-            durationSeconds
-        );
-
-
-    const evaluation =
-        getEvaluation(
-            percent
-        );
-
-
-    localStorage.removeItem(
-        "pathologyQuizProgress"
-    );
-
-
-    document.getElementById(
-        "examScreen"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "resultScreen"
-    ).style.display =
-        "block";
-
-
-    document.getElementById(
-        "studentResultName"
-    ).innerHTML = `
-        الطالب:
-        <strong>
-            ${escapeHTML(studentName)}
-        </strong>
-    `;
-
-
-    document.getElementById(
-        "finalScore"
-    ).innerText =
-        `${score} / ${total}`;
-
-
-    document.getElementById(
-        "finalPercent"
-    ).innerText =
-        `${percent}%`;
-
-
-    document.getElementById(
-        "correctCount"
-    ).innerText =
-        score;
-
-
-    document.getElementById(
-        "wrongCount"
-    ).innerText =
-        wrong;
-
-
-    document.getElementById(
-        "timeoutCount"
-    ).innerText =
-        timeoutCount;
-
-
-    document.getElementById(
-        "durationBox"
-    ).innerText =
-        `⏱️ الوقت المستغرق: ${durationText}`;
-
-
-    document.getElementById(
-        "focusBox"
-    ).innerText =
-        `⚠️ مغادرة صفحة الاختبار: ${focusLosses}`;
-
-
-    document.getElementById(
-        "resultEvaluation"
-    ).innerText =
-        evaluation;
-
-
-    await sendResult({
-
-        name:
-            studentName,
-
-        score:
-            score,
-
-        total:
-            total,
-
-        percent:
-            percent,
-
-        correct:
-            score,
-
-        wrong:
-            wrong,
-
-        unanswered:
-            unanswered,
-
-        timeout:
-            timeoutCount,
-
-        durationSeconds:
-            durationSeconds,
-
-        duration:
-            durationText,
-
-        submittedAt:
-            getArabicTime(),
-
-        testType:
-            "Final Quiz",
-
-        subject:
-            "General Pathology",
-
-        focusLosses:
-            focusLosses
-    });
+  renderQuestion();
 }
 
 
 /* =========================================================
-   EVALUATION
+   FINISH
 ========================================================= */
 
-function getEvaluation(percent) {
+function finishExam(){
 
-    if (percent >= 90) {
-        return "🏆 ممتاز جدًا";
-    }
+  stopTimers();
 
-    if (percent >= 80) {
-        return "⭐ ممتاز";
-    }
+  clearProgress();
 
-    if (percent >= 70) {
-        return "👍 جيد جدًا";
-    }
+  const finalScore =
+    correctAnswers;
 
-    if (percent >= 60) {
-        return "📚 جيد";
-    }
+  const percent =
+    Math.round((finalScore / TOTAL) * 100);
 
-    return "🔄 يحتاج إلى مراجعة";
-}
+  score.textContent =
+    `${finalScore}/${TOTAL}`;
 
+  percentage.textContent =
+    `${percent}%`;
 
-/* =========================================================
-   FORMAT DURATION
-========================================================= */
+  resultName.textContent =
+    studentName;
 
-function formatDuration(seconds) {
+  correctCount.textContent =
+    correctAnswers;
 
-    const minutes =
-        Math.floor(
-            seconds / 60
-        );
+  wrongCount.textContent =
+    wrongAnswers;
 
+  timeoutCount.textContent =
+    timeoutAnswers;
 
-    const remainingSeconds =
-        seconds % 60;
+  sendStatus.textContent =
+    "جاري حفظ النتيجة...";
 
+  showScreen(resultScreen);
 
-    return (
-        String(minutes).padStart(2, "0") +
-        ":" +
-        String(
-            remainingSeconds
-        ).padStart(2, "0")
-    );
-}
+  sendResult({
+    name:studentName,
+    score:finalScore,
+    total:TOTAL,
+    percentage:percent,
+    correct:correctAnswers,
+    wrong:wrongAnswers,
+    timeout:timeoutAnswers
+  });
 
-
-/* =========================================================
-   ARABIC TIME
-========================================================= */
-
-function getArabicTime() {
-
-    return new Date()
-        .toLocaleTimeString(
-            "ar-YE",
-            {
-                hour: "numeric",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: true
-            }
-        );
 }
 
 
@@ -2429,38 +1634,48 @@ function getArabicTime() {
    SEND RESULT
 ========================================================= */
 
-async function sendResult(data) {
+async function sendResult(result){
 
-    try {
+  /*
+    ضع رابط Google Apps Script هنا إذا كان مستخدمًا
+    لحفظ النتائج.
+  */
 
-        await fetch(
-            BACKEND_URL,
-            {
-                method: "POST",
+  const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbzUQLJN40vyblri1MGbY6ZjvsOYUhGeC12HHl64X2sS8piWUmjx8fq1eH9tYgmUIg_Shw/exec";
 
-                mode: "no-cors",
+  try{
 
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
+    const params = new URLSearchParams();
 
-                body:
-                    JSON.stringify(data)
-            }
-        );
+    params.append("name",result.name);
+    params.append("score",result.score);
+    params.append("total",result.total);
+    params.append("percentage",result.percentage);
+    params.append("correct",result.correct);
+    params.append("wrong",result.wrong);
+    params.append("timeout",result.timeout);
 
-        console.log(
-            "Result submitted successfully."
-        );
+    await fetch(
+      SCRIPT_URL + "?" + params.toString(),
+      {
+        method:"GET",
+        mode:"no-cors"
+      }
+    );
 
-    } catch (error) {
+    sendStatus.textContent =
+      "✅ تم إرسال النتيجة بنجاح";
 
-        console.error(
-            "Result submission error:",
-            error
-        );
-    }
+  }catch(error){
+
+    console.warn(error);
+
+    sendStatus.textContent =
+      "⚠️ تعذر تأكيد إرسال النتيجة، لكن تم حسابها على الجهاز.";
+
+  }
+
 }
 
 
@@ -2468,569 +1683,222 @@ async function sendResult(data) {
    RESTART
 ========================================================= */
 
-function restartExam() {
+restartBtn.addEventListener(
+  "click",
+  ()=>{
 
-    const confirmed =
-        confirm(
-            "هل تريد بدء اختبار جديد؟"
-        );
+    stopTimers();
+
+    clearProgress();
+
+    studentNameInput.value = "";
+
+    studentName = "";
+
+    correctAnswers = 0;
+    wrongAnswers = 0;
+    timeoutAnswers = 0;
+    currentIndex = 0;
+
+    questionDeadline = null;
+
+    showScreen(startScreen);
+
+  }
+);
 
 
-    if (!confirmed) {
-        return;
-    }
+/* =========================================================
+   RESUME
+========================================================= */
 
+function tryResume(){
 
-    clearQuestionTimer();
+  const restored =
+    loadProgress();
 
+  if(!restored) return;
 
-    localStorage.removeItem(
-        "pathologyQuizProgress"
-    );
+  if(
+    currentIndex >= TOTAL ||
+    !questions.length
+  ){
 
+    clearProgress();
+    return;
 
-    location.reload();
+  }
+
+  studentNameInput.value =
+    studentName;
+
+  /*
+    إذا انتهى الوقت أثناء إغلاق الصفحة،
+    يبدأ السؤال التالي بدل تجميد الاختبار.
+  */
+
+  if(
+    questionDeadline &&
+    Date.now() >= questionDeadline
+  ){
+
+    showScreen(quizScreen);
+
+    answered = false;
+
+    renderQuestion();
+
+    return;
+
+  }
+
+  showScreen(quizScreen);
+
+  renderQuestion();
+
+  /*
+    استعادة الوقت المتبقي
+  */
+
+  if(questionDeadline){
+
+    stopQuestionTimer();
+
+    startQuestionTimer();
+
+  }
+
 }
 
 
 /* =========================================================
-   SAVE PROGRESS
-========================================================= */
-
-function saveProgress() {
-
-    if (examFinished) {
-        return;
-    }
-
-
-    if (
-        examQuestions.length === 0
-    ) {
-        return;
-    }
-
-
-    const data = {
-
-        studentName:
-            studentName,
-
-        currentQuestion:
-            currentQuestion,
-
-        userAnswers:
-            userAnswers,
-
-        timeoutQuestions:
-            timeoutQuestions,
-
-        examQuestions:
-            examQuestions,
-
-        examStartTime:
-            examStartTime,
-
-        focusLosses:
-            focusLosses
-    };
-
-
-    try {
-
-        localStorage.setItem(
-            "pathologyQuizProgress",
-            JSON.stringify(data)
-        );
-
-    } catch (error) {
-
-        console.error(
-            "Could not save progress:",
-            error
-        );
-    }
-}
-
-
-/* =========================================================
-   RESUME SAVED EXAM
-========================================================= */
-
-function loadSavedProgress() {
-
-    try {
-
-        const saved =
-            localStorage.getItem(
-                "pathologyQuizProgress"
-            );
-
-
-        if (!saved) {
-            return false;
-        }
-
-
-        const data =
-            JSON.parse(saved);
-
-
-        if (
-            !data.studentName ||
-            !data.examQuestions ||
-            data.examQuestions.length === 0
-        ) {
-
-            return false;
-        }
-
-
-        const resume =
-            confirm(
-                `يوجد اختبار غير مكتمل للطالب:
-
-${data.studentName}
-
-هل تريد متابعة الاختبار؟`
-            );
-
-
-        if (!resume) {
-
-            localStorage.removeItem(
-                "pathologyQuizProgress"
-            );
-
-            return false;
-        }
-
-
-        studentName =
-            data.studentName;
-
-
-        currentQuestion =
-            data.currentQuestion || 0;
-
-
-        userAnswers =
-            data.userAnswers || {};
-
-
-        timeoutQuestions =
-            data.timeoutQuestions || {};
-
-
-        examQuestions =
-            data.examQuestions;
-
-
-        examStartTime =
-            data.examStartTime ||
-            Date.now();
-
-
-        focusLosses =
-            data.focusLosses || 0;
-
-
-        examFinished = false;
-
-
-        document.getElementById(
-            "studentName"
-        ).value =
-            studentName;
-
-
-        document.getElementById(
-            "startScreen"
-        ).style.display =
-            "none";
-
-
-        document.getElementById(
-            "examScreen"
-        ).style.display =
-            "block";
-
-
-        renderQuestion();
-
-
-        return true;
-
-    } catch (error) {
-
-        console.error(
-            "Resume error:",
-            error
-        );
-
-        localStorage.removeItem(
-            "pathologyQuizProgress"
-        );
-
-        return false;
-    }
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(text) {
-
-    const div =
-        document.createElement(
-            "div"
-        );
-
-    div.textContent =
-        text;
-
-    return div.innerHTML;
-}
-
-
-/* =========================================================
-   ANTI COPY / LONG PRESS
+   PAGE VISIBILITY
 ========================================================= */
 
 document.addEventListener(
-    "contextmenu",
-    function(event) {
+  "visibilitychange",
+  ()=>{
 
-        const examVisible =
-            document.getElementById(
-                "examScreen"
-            ).style.display !== "none";
+    if(document.hidden){
 
+      saveProgress();
 
-        if (examVisible) {
-            event.preventDefault();
-        }
     }
-);
 
-
-document.addEventListener(
-    "copy",
-    function(event) {
-
-        const examVisible =
-            document.getElementById(
-                "examScreen"
-            ).style.display !== "none";
-
-
-        if (examVisible) {
-            event.preventDefault();
-        }
-    }
-);
-
-
-document.addEventListener(
-    "cut",
-    function(event) {
-
-        const examVisible =
-            document.getElementById(
-                "examScreen"
-            ).style.display !== "none";
-
-
-        if (examVisible) {
-            event.preventDefault();
-        }
-    }
-);
-
-
-document.addEventListener(
-    "selectstart",
-    function(event) {
-
-        const examVisible =
-            document.getElementById(
-                "examScreen"
-            ).style.display !== "none";
-
-
-        if (examVisible) {
-            event.preventDefault();
-        }
-    }
-);
-
-
-document.addEventListener(
-    "dragstart",
-    function(event) {
-
-        const examVisible =
-            document.getElementById(
-                "examScreen"
-            ).style.display !== "none";
-
-
-        if (examVisible) {
-            event.preventDefault();
-        }
-    }
+  }
 );
 
 
 /* =========================================================
-   LONG PRESS
-========================================================= */
-
-document.addEventListener(
-    "touchstart",
-    function(event) {
-
-        const examVisible =
-            document.getElementById(
-                "examScreen"
-            ).style.display !== "none";
-
-
-        if (!examVisible) {
-            return;
-        }
-
-
-        const target =
-            event.target;
-
-
-        if (
-            target.closest(".question-text") ||
-            target.closest(".option") ||
-            target.closest(".translation-box")
-        ) {
-
-            event.preventDefault();
-        }
-
-    },
-    {
-        passive: false
-    }
-);
-
-
-/* =========================================================
-   KEYBOARD PROTECTION
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        const examVisible =
-            document.getElementById(
-                "examScreen"
-            ).style.display !== "none";
-
-
-        if (!examVisible) {
-            return;
-        }
-
-
-        const key =
-            event.key.toLowerCase();
-
-
-        /*
-           منع:
-           Ctrl+C
-           Ctrl+X
-           Ctrl+U
-           Ctrl+S
-           Ctrl+P
-        */
-
-        if (
-            (
-                event.ctrlKey ||
-                event.metaKey
-            ) &&
-            [
-                "c",
-                "x",
-                "u",
-                "s",
-                "p"
-            ].includes(key)
-        ) {
-
-            event.preventDefault();
-
-            return;
-        }
-
-
-        /*
-           منع F12
-        */
-
-        if (
-            key === "f12"
-        ) {
-
-            event.preventDefault();
-
-            return;
-        }
-    }
-);
-
-
-/* =========================================================
-   VISIBILITY / FOCUS LOSS
-========================================================= */
-
-document.addEventListener(
-    "visibilitychange",
-    function() {
-
-        const examVisible =
-            document.getElementById(
-                "examScreen"
-            ).style.display !== "none";
-
-
-        if (
-            examVisible &&
-            document.visibilityState === "hidden" &&
-            !examFinished
-        ) {
-
-            focusLosses++;
-
-            saveProgress();
-        }
-
-
-        const privacyMask =
-            document.getElementById(
-                "privacyMask"
-            );
-
-
-        if (
-            document.visibilityState === "hidden"
-        ) {
-
-            privacyMask.style.display =
-                "flex";
-
-        } else {
-
-            privacyMask.style.display =
-                "none";
-        }
-    }
-);
-
-
-/* =========================================================
-   BEFORE EXIT
+   BEFORE UNLOAD
 ========================================================= */
 
 window.addEventListener(
-    "beforeunload",
-    function(event) {
-
-        const examVisible =
-            document.getElementById(
-                "examScreen"
-            ).style.display !== "none";
-
-
-        if (
-            examVisible &&
-            !examFinished
-        ) {
-
-            saveProgress();
-
-            event.preventDefault();
-
-            event.returnValue = "";
-        }
-    }
+  "beforeunload",
+  ()=>{
+    saveProgress();
+  }
 );
 
 
 /* =========================================================
-   BUTTON EVENTS
+   ANTI COPY
+   لا يمنع screenshots بشكل مضمون.
+   ولا يستخدم touchstart حتى لا يعطل الضغط على الإجابات.
 ========================================================= */
 
 document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+  "copy",
+  e=>{
+    e.preventDefault();
+  }
+);
 
-        /*
-           تحديث عدد الأسئلة تلقائيًا
-        */
+document.addEventListener(
+  "cut",
+  e=>{
+    e.preventDefault();
+  }
+);
 
-        document.getElementById(
-            "totalQuestionsInfo"
-        ).innerText =
-            quizData.length;
+document.addEventListener(
+  "contextmenu",
+  e=>{
+    e.preventDefault();
+  }
+);
 
-
-        /*
-           زر بدء الاختبار
-        */
-
-        document.getElementById(
-            "startButton"
-        ).addEventListener(
-            "click",
-            startExam
-        );
-
-
-        /*
-           زر الترجمة
-        */
-
-        document.getElementById(
-            "translationBtn"
-        ).addEventListener(
-            "click",
-            toggleTranslation
-        );
+document.addEventListener(
+  "selectstart",
+  e=>{
+    e.preventDefault();
+  }
+);
 
 
-        /*
-           زر إعادة الاختبار
-        */
+/* =========================================================
+   KEYBOARD COPY SHORTCUTS
+========================================================= */
 
-        document.getElementById(
-            "restartButton"
-        ).addEventListener(
-            "click",
-            restartExam
-        );
+document.addEventListener(
+  "keydown",
+  e=>{
 
-
-        /*
-           محاولة استعادة الاختبار
-        */
-
-        loadSavedProgress();
+    if(
+      (e.ctrlKey || e.metaKey) &&
+      ["c","x","a","u","s"].includes(
+        e.key.toLowerCase()
+      )
+    ){
+      e.preventDefault();
     }
+
+  }
+);
+
+
+/* =========================================================
+   PRIVACY MASK
+========================================================= */
+
+document.addEventListener(
+  "visibilitychange",
+  ()=>{
+
+    if(document.hidden){
+
+      privacyMask.classList.add("show");
+
+    }else{
+
+      privacyMask.classList.remove("show");
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  ()=>{
+
+    /*
+      لا نُظهر أي مؤقت قبل بدء الاختبار.
+      المؤقت الوحيد في النظام هو:
+      60 ثانية لكل سؤال.
+    */
+
+    tryResume();
+
+  }
 );
 
 </script>
 
 </body>
-  </html>
+</html>
