@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 <meta name="theme-color" content="#0f172a">
-<title>General Pathology Quiz</title>
+<title>General Pathology Exam - 148 MCQs</title>
 
 <style>
 *{
@@ -71,19 +71,19 @@ button{
 h1{
   text-align:center;
   margin:0 0 8px;
-  font-size:27px;
+  font-size:26px;
 }
 
 .subtitle{
   text-align:center;
   color:#64748b;
-  margin-bottom:25px;
+  margin-bottom:20px;
 }
 
 .rules{
   display:grid;
   gap:10px;
-  margin:20px 0;
+  margin:18px 0;
 }
 
 .rule{
@@ -136,24 +136,40 @@ h1{
   background:#0f172a;
   color:white;
   border-radius:18px;
-  padding:14px;
+  padding:12px 16px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
 }
 
+.topbar-info{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+
+.stage-badge{
+  font-size:12px;
+  background:#2563eb;
+  padding:2px 8px;
+  border-radius:6px;
+  width:fit-content;
+  font-weight:bold;
+}
+
 .counter{
   font-weight:800;
+  font-size:14px;
 }
 
 .timer{
-  min-width:88px;
+  min-width:75px;
   text-align:center;
   background:#fff;
   color:#0f172a;
   border-radius:12px;
-  padding:8px 12px;
+  padding:8px 10px;
   font-weight:900;
 }
 
@@ -188,8 +204,8 @@ h1{
 }
 
 .question-text{
-  font-size:20px;
-  line-height:1.65;
+  font-size:19px;
+  line-height:1.6;
   font-weight:800;
   margin-bottom:10px;
 }
@@ -234,11 +250,6 @@ h1{
   transform:scale(.99);
 }
 
-.option.selected{
-  border-color:#2563eb;
-  background:#eff6ff;
-}
-
 .option.correct{
   border-color:#16a34a;
   background:#dcfce7;
@@ -255,6 +266,9 @@ h1{
 
 .next-area{
   margin-top:18px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
 .next-btn{
@@ -278,26 +292,26 @@ h1{
   font-weight:700;
 }
 
-/* RESULT */
+/* RESULTS & STAGES */
 .result{
   text-align:center;
 }
 
 .score-circle{
-  width:150px;
-  height:150px;
+  width:140px;
+  height:140px;
   border-radius:50%;
   background:#eff6ff;
-  border:10px solid #2563eb;
+  border:8px solid #2563eb;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  margin:20px auto;
+  margin:18px auto;
 }
 
 .score{
-  font-size:36px;
+  font-size:32px;
   font-weight:900;
 }
 
@@ -335,17 +349,6 @@ h1{
   color:#64748b;
 }
 
-.restart{
-  width:100%;
-  border:0;
-  border-radius:15px;
-  padding:15px;
-  background:#2563eb;
-  color:#fff;
-  font-weight:800;
-  font-size:16px;
-}
-
 .status{
   margin-top:12px;
   font-size:13px;
@@ -369,28 +372,21 @@ h1{
   display:flex;
 }
 
+.btn-secondary{
+  background:#64748b;
+  color:#fff;
+  border:none;
+  border-radius:15px;
+  padding:13px;
+  font-weight:700;
+}
+
 @media(max-width:480px){
-  .app{
-    padding:10px;
-  }
-
-  .card{
-    padding:16px;
-    border-radius:18px;
-  }
-
-  h1{
-    font-size:23px;
-  }
-
-  .question-text{
-    font-size:18px;
-  }
-
-  .option{
-    padding:13px;
-    font-size:15px;
-  }
+  .app{ padding:10px; }
+  .card{ padding:16px; border-radius:18px; }
+  h1{ font-size:22px; }
+  .question-text{ font-size:17px; }
+  .option{ padding:13px; font-size:15px; }
 }
 </style>
 </head>
@@ -399,21 +395,19 @@ h1{
 
 <div class="app">
 
-  <!-- START -->
+  <!-- START SCREEN -->
   <section id="startScreen" class="card">
-
     <div class="logo">GP</div>
-
-    <h1>General Pathology Quiz</h1>
-    <div class="subtitle">اختبار علم الأمراض العام</div>
+    <h1>General Pathology Exam</h1>
+    <div class="subtitle">بنك أسئلة طب الأسنان الشامل (148 سؤالاً)</div>
 
     <div class="rules">
-      <div class="rule">📚 عدد الأسئلة: <b>43 سؤالًا</b></div>
-      <div class="rule">⏱️ الوقت: <b>دقيقة واحدة لكل سؤال</b></div>
-      <div class="rule">🔀 الأسئلة والاختيارات عشوائية</div>
-      <div class="rule">🌐 الترجمة متاحة اختياريًا</div>
-      <div class="rule">⏰ انتهاء الوقت = إجابة خاطئة ثم إظهار الصحيح والانتقال تلقائيًا</div>
-      <div class="rule">💾 يتم حفظ التقدم تلقائيًا</div>
+      <div class="rule">🟢 <b>4 مراحل:</b> كل مرحلة تحتوي على 37 سؤالاً.</div>
+      <div class="rule">⏱️ <b>الوقت:</b> دقيقة واحدة (60 ثانية) لكل سؤال.</div>
+      <div class="rule">🔀 <b>عشوائية:</b> ترتيب عشوائي للأسئلة والخيارات.</div>
+      <div class="rule">🌐 <b>الترجمة:</b> متوفرة لكل سؤال عبر زر إظهار الترجمة.</div>
+      <div class="rule">📲 <b>إرسال فوري:</b> تقرير فوري عبر التيليجرام بعد كل مرحلة وعند إنهاء الاختبار كاملاً.</div>
+      <div class="rule">💾 <b>حفظ تلقائي:</b> يمكنك إغلاق الصفحة والعودة لمتابعة نفس السؤال والمرحلة.</div>
     </div>
 
     <input
@@ -421,651 +415,338 @@ h1{
       class="name-input"
       type="text"
       maxlength="80"
-      placeholder="اكتب اسم الطالب"
+      placeholder="اكتب اسم الطالب الثلاثي"
       autocomplete="off"
     >
 
     <button id="startBtn" class="primary">
-      بدء الاختبار 🚀
+      بدء المرحلة الأولى 🚀
     </button>
-
   </section>
 
 
-  <!-- QUIZ -->
+  <!-- QUIZ SCREEN -->
   <section id="quizScreen" class="hidden">
-
     <div class="quiz-header">
-
       <div class="topbar">
-        <div id="counter" class="counter">
-          السؤال 1 من 43
+        <div class="topbar-info">
+          <span id="stageBadge" class="stage-badge">المرحلة 1 من 4</span>
+          <span id="counter" class="counter">السؤال 1 من 37</span>
         </div>
-
-        <div id="timer" class="timer">
-          01:00
-        </div>
+        <div id="timer" class="timer">01:00</div>
       </div>
 
       <div class="progress">
         <div id="progressBar" class="progress-bar"></div>
       </div>
-
     </div>
 
     <div class="card question-card">
-
       <div id="questionNumber" class="question-number"></div>
-
       <div id="questionText" class="question-text"></div>
 
-      <button
-        id="translationToggle"
-        class="translation-toggle"
-        type="button"
-      >
+      <button id="translationToggle" class="translation-toggle" type="button">
         🌐 إظهار الترجمة
       </button>
 
-      <div
-        id="translation"
-        class="translation hidden"
-      ></div>
-
+      <div id="translation" class="translation hidden"></div>
       <div id="options" class="options"></div>
 
       <div id="timeoutMessage" class="timeout hidden">
-        ⏰ انتهى الوقت — الإجابة تُحسب خطأ
+        ⏰ انتهى الوقت — تُحسب الإجابة خطأ
       </div>
 
       <div class="next-area">
-        <button
-          id="nextBtn"
-          class="next-btn hidden"
-          type="button"
-        >
+        <button id="nextBtn" class="next-btn hidden" type="button">
           السؤال التالي →
         </button>
       </div>
-
     </div>
-
   </section>
 
 
-  <!-- RESULT -->
-  <section id="resultScreen" class="card result hidden">
-
-    <div class="logo">✓</div>
-
-    <h1>انتهى الاختبار 🎉</h1>
-
-    <div id="resultName" class="result-name"></div>
+  <!-- STAGE COMPLETED MODAL SCREEN -->
+  <section id="stageScreen" class="card result hidden">
+    <div class="logo">🎯</div>
+    <h1 id="stageTitle">اكتملت المرحلة!</h1>
+    <div id="stageSubtitle" class="subtitle">تم إنهاء مرحلة بنجاح وإرسال نتائجها للتيليجرام</div>
 
     <div class="score-circle">
-      <div id="score" class="score">0/43</div>
-      <div class="score-label">النتيجة</div>
+      <div id="stageScore" class="score">0/37</div>
+      <div class="score-label">نتيجة المرحلة</div>
     </div>
 
-    <div id="percentage"></div>
+    <div id="stagePercentage" style="font-weight:bold; font-size:18px;"></div>
 
     <div class="stats">
       <div class="stat">
-        <strong id="correctCount">0</strong>
+        <strong id="stageCorrect">0</strong>
         <span>صحيح</span>
       </div>
-
       <div class="stat">
-        <strong id="wrongCount">0</strong>
+        <strong id="stageWrong">0</strong>
         <span>خطأ</span>
       </div>
-
       <div class="stat">
-        <strong id="timeoutCount">0</strong>
+        <strong id="stageTimeout">0</strong>
         <span>انتهى الوقت</span>
       </div>
     </div>
 
-    <button
-      id="restartBtn"
-      class="restart"
-      type="button"
-    >
-      🔄 إعادة الاختبار
+    <div id="stageSendStatus" class="status" style="margin-bottom:15px;"></div>
+
+    <button id="resumeNextStageBtn" class="primary" type="button">
+      الانتقال إلى المرحلة التالية 🚀
     </button>
+  </section>
 
-    <div id="sendStatus" class="status"></div>
 
+  <!-- FINAL RESULT SCREEN -->
+  <section id="resultScreen" class="card result hidden">
+    <div class="logo">🎓</div>
+    <h1>انتهى الاختبار بالكامل 🎉</h1>
+    <div id="resultName" class="result-name"></div>
+
+    <div class="score-circle">
+      <div id="finalScore" class="score">0/148</div>
+      <div class="score-label">النتيجة الإجمالية</div>
+    </div>
+
+    <div id="finalPercentage" style="font-weight:800; font-size:22px; color:#2563eb;"></div>
+
+    <div class="stats">
+      <div class="stat">
+        <strong id="finalCorrect">0</strong>
+        <span>صحيح</span>
+      </div>
+      <div class="stat">
+        <strong id="finalWrong">0</strong>
+        <span>خطأ</span>
+      </div>
+      <div class="stat">
+        <strong id="finalTimeout">0</strong>
+        <span>انتهى الوقت</span>
+      </div>
+    </div>
+
+    <div id="finalSendStatus" class="status"></div>
+
+    <button id="restartBtn" class="primary" type="button" style="margin-top:15px;">
+      🔄 إعادة الاختبار من البداية
+    </button>
   </section>
 
 </div>
 
 <div id="privacyMask" class="privacy-mask">
   <div>
-    <h2>🔒 الشاشة مخفية مؤقتًا</h2>
-    <p>العودة إلى الاختبار لاستكماله.</p>
+    <h2>🔒 الشاشة مخفية مؤقتاً</h2>
+    <p>يرجى العودة للنافذة لاستكمال الاختبار.</p>
   </div>
 </div>
-
 
 <script>
 "use strict";
 
 /* =========================================================
-   QUESTIONS
+   148 MCQs - GENERAL PATHOLOGY
 ========================================================= */
-
 const quizData = [
-
-{
-q:"The fundamental difference between simple atrophy and numerical atrophy is:",
-t:"ما الفرق الأساسي بين الضمور البسيط والضمور العددي؟",
-o:[
-"Physiologic etiology vs pathologic etiology",
-"Loss of cell size only vs loss of cell size and number via apoptosis",
-"Reversible vs irreversible injury",
-"Cytoplasmic swelling vs fragmentation"
-],a:1
-},
-
-{
-q:"Which cellular adaptation is characterized by an increase in the size of parenchymal cells resulting in organ enlargement?",
-t:"أي تكيف خلوي يتميز بزيادة حجم الخلايا البرنشيمية مما يؤدي إلى تضخم العضو؟",
-o:[
-"Hyperplasia",
-"Metaplasia",
-"Hypertrophy",
-"Atrophy"
-],a:2
-},
-
-{
-q:"Left ventricular hypertrophy in systemic hypertension is classified as:",
-t:"يُصنّف تضخم البطين الأيسر في ارتفاع ضغط الدم الجهازي على أنه:",
-o:[
-"Compensatory hypertrophy due to increased workload",
-"Physiologic hyperplasia",
-"Pathologic metaplasia",
-"Disuse atrophy"
-],a:0
-},
-
-{
-q:"Hyperplasia can occur alongside hypertrophy in various tissues EXCEPT in:",
-t:"يمكن أن يحدث فرط التنسج بالتزامن مع التضخم في أنسجة مختلفة ما عدا:",
-o:[
-"Uterine smooth muscle",
-"Breast glandular tissue",
-"Liver parenchyma",
-"Cardiac and skeletal muscles"
-],a:3
-},
-
-{
-q:"Cigarette smoking classically induces which adaptive epithelial change in the bronchi?",
-t:"ما التغير التكيفي الظهاري الذي يسببه تدخين السجائر بشكل كلاسيكي في القصبات؟",
-o:[
-"Glandular hyperplasia",
-"Squamous metaplasia",
-"Simple atrophy",
-"Dysplastic hypertrophy"
-],a:1
-},
-
-{
-q:"The hallmark reversible changes visible on light microscopy following cellular injury are:",
-t:"ما التغيرات العكوسة المميزة التي يمكن رؤيتها بالمجهر الضوئي بعد إصابة الخلية؟",
-o:[
-"Pyknosis and karyolysis",
-"Caseous necrosis and calcification",
-"Hydropic change and fatty change",
-"Fibrinoid degeneration"
-],a:2
-},
-
-{
-q:"Which type of necrosis characteristically maintains the structural cellular architecture ('ghost cells')?",
-t:"أي نوع من النخر يحافظ بشكل مميز على البنية المعمارية للخلايا، مكوّنًا ما يسمى بالخلايا الشبحية؟",
-o:[
-"Liquefactive necrosis",
-"Coagulative necrosis",
-"Caseous necrosis",
-"Fat necrosis"
-],a:1
-},
-
-{
-q:"Ischemic necrosis occurring in the brain classically manifests as:",
-t:"النخر الإقفاري الذي يحدث في الدماغ يظهر بشكل كلاسيكي على هيئة:",
-o:[
-"Coagulative necrosis",
-"Caseous necrosis",
-"Fibrinoid necrosis",
-"Liquefactive necrosis"
-],a:3
-},
-
-{
-q:"Langhans multinucleated giant cells characteristically feature nuclei arranged in:",
-t:"تتميز الخلايا العملاقة متعددة الأنوية من نوع Langhans بترتيب الأنوية في:",
-o:[
-"A peripheral horseshoe pattern",
-"A random scatter throughout the cytoplasm",
-"Two parallel linear rows",
-"A single centrally clumped mass"
-],a:0
-},
-
-{
-q:"In contrast to foreign body giant cells, Langhans giant cells are typically diagnostic of:",
-t:"بخلاف الخلايا العملاقة من نوع الجسم الغريب، ترتبط خلايا Langhans العملاقة بشكل نموذجي بـ:",
-o:[
-"Silicosis",
-"Tuberculosis",
-"Asbestosis",
-"Suture reactions"
-],a:1
-},
-
-{
-q:"The predominant leukocyte present during the initial 24 hours of acute inflammation is the:",
-t:"ما الكريات البيضاء السائدة خلال أول 24 ساعة من الالتهاب الحاد؟",
-o:[
-"Macrophage",
-"Lymphocyte",
-"Neutrophil",
-"Plasma cell"
-],a:2
-},
-
-{
-q:"Leukocyte rolling along endothelial surfaces is primarily mediated by:",
-t:"يتم توسط تدحرج الكريات البيضاء على سطح الخلايا البطانية بشكل أساسي بواسطة:",
-o:[
-"Selectins",
-"Integrins",
-"PECAM-1 (CD31)",
-"Histamine"
-],a:0
-},
-
-{
-q:"Firm adhesion of leukocytes to endothelial cells requires binding mediated by:",
-t:"يتطلب الالتصاق المحكم للكريات البيضاء بالخلايا البطانية ارتباطًا يتم بواسطة:",
-o:[
-"Selectins",
-"Integrins (ICAM-1 interactions)",
-"Prostaglandins",
-"Bradykinin"
-],a:1
-},
-
-{
-q:"Which cytokine is recognized as the most potent activator of macrophages in chronic inflammation?",
-t:"أي سايتوكين يُعد أقوى منشط للخلايا البلعمية في الالتهاب المزمن؟",
-o:[
-"Interleukin-1 (IL-1)",
-"Tumor necrosis factor-alpha",
-"Histamine",
-"Interferon-gamma (IFN-γ)"
-],a:3
-},
-
-{
-q:"The elevated Erythrocyte Sedimentation Rate (ESR) seen in the acute-phase response is driven by increased hepatic synthesis of:",
-t:"ارتفاع سرعة ترسيب كريات الدم الحمراء ESR في استجابة الطور الحاد ينتج عن زيادة تصنيع الكبد لـ:",
-o:[
-"Albumin",
-"Fibrinogen",
-"Transferrin",
-"Superoxide dismutase"
-],a:1
-},
-
-{
-q:"Cells that continuously divide throughout life to replace lost cells (e.g., surface epithelia) are classified as:",
-t:"الخلايا التي تنقسم باستمرار طوال الحياة لتعويض الخلايا المفقودة، مثل الظهارات السطحية، تُصنف على أنها:",
-o:[
-"Labile cells",
-"Stable cells",
-"Permanent cells",
-"Quiescent cells"
-],a:0
-},
-
-{
-q:"Cardiac myocytes and neurons are incapable of postnatal division and are classified as:",
-t:"الخلايا العضلية القلبية والخلايا العصبية غير قادرة على الانقسام بعد الولادة، وتُصنف على أنها:",
-o:[
-"Stable cells",
-"Labile cells",
-"Permanent cells",
-"Stem cells"
-],a:2
-},
-
-{
-q:"Histologically, granulation tissue is composed of:",
-t:"نسيج التحبيب يتكون نسيجيًا من:",
-o:[
-"Dense mature collagen with complete absence of vessels",
-"Newly formed vessels (angiogenesis), fibroblasts, and inflammatory cells",
-"Amorphous caseous debris",
-"Purely squamous keratinized layers"
-],a:1
-},
-
-{
-q:"The cellular element responsible for wound contraction during tissue repair is the:",
-t:"العنصر الخلوي المسؤول عن انكماش الجرح أثناء إصلاح الأنسجة هو:",
-o:[
-"Myofibroblast",
-"Endothelial cell",
-"Neutrophil",
-"Keratinocyte"
-],a:0
-},
-
-{
-q:"A complication of wound healing characterized by excessive collagen accumulation protruding beyond original wound margins is:",
-t:"ما مضاعفة التئام الجروح التي تتميز بتراكم مفرط للكولاجين يمتد خارج حدود الجرح الأصلية؟",
-o:[
-"Hypertrophic scar",
-"Contracture",
-"Keloid",
-"Ulcer"
-],a:2
-},
-
-{
-q:"Irreversible nuclear condensation characterized by shrinkage and increased basophilia is known as:",
-t:"تكثف النواة غير العكوس الذي يتميز بانكماش النواة وزيادة قاعديتها يُعرف باسم:",
-o:[
-"Karyorrhexis",
-"Pyknosis",
-"Karyolysis",
-"Autophagy"
-],a:1
-},
-
-{
-q:"The fragmentation of a pyknotic nucleus during cell death is defined as:",
-t:"تفتت النواة المتكثفة أثناء موت الخلية يُعرّف بأنه:",
-o:[
-"Karyolysis",
-"Apoptosis",
-"Heterophagy",
-"Karyorrhexis"
-],a:3
-},
-
-{
-q:"Enzymatic fat necrosis, classically observed in acute pancreatitis, results in chalky white deposits via:",
-t:"النخر الدهني الإنزيمي، الذي يُشاهد بشكل كلاسيكي في التهاب البنكرياس الحاد، يؤدي إلى ترسبات بيضاء طباشيرية عن طريق:",
-o:[
-"Caseation necrosis",
-"Saponification with calcium",
-"Lipofuscin deposition",
-"Hyaline accumulation"
-],a:1
-},
-
-{
-q:"Fibrinoid necrosis is most commonly encountered in which of the following conditions?",
-t:"في أي من الحالات التالية يُشاهد النخر الليفيني بشكل أكثر شيوعًا؟",
-o:[
-"Myocardial infarction",
-"Bacterial abscesses",
-"Immune complex-mediated vasculitis",
-"Tuberculous lymphadenitis"
-],a:2
-},
-
-{
-q:"Which pathway of apoptosis is initiated by the release of Cytochrome c from mitochondria?",
-t:"أي مسار من مسارات الاستماتة يبدأ بتحرير Cytochrome c من الميتوكوندريا؟",
-o:[
-"Intrinsic (mitochondrial) pathway",
-"Extrinsic (death receptor) pathway",
-"Perforin-granzyme pathway",
-"Necroptotic pathway"
-],a:0
-},
-
-{
-q:"The extrinsic pathway of apoptosis is triggered via the activation of:",
-t:"يتم تحفيز المسار الخارجي للاستماتة من خلال تنشيط:",
-o:[
-"Bcl-2 overexpression",
-"Fas (CD95) and TNF receptor 1",
-"Caspase-9 directly",
-"C-reactive protein"
-],a:1
-},
-
-{
-q:"Which of the following is considered an anti-apoptotic protein?",
-t:"أي مما يلي يُعد بروتينًا مضادًا للاستماتة؟",
-o:[
-"Bax",
-"Bak",
-"Bcl-2",
-"Bid"
-],a:2
-},
-
-{
-q:"'Brown atrophy' of the heart in aging or malnourished patients is caused by cytoplasmic accumulation of:",
-t:"الضمور البني للقلب في الشيخوخة أو سوء التغذية ينتج عن تراكم:",
-o:[
-"Hemosiderin",
-"Lipofuscin",
-"Melanin",
-"Glycogen"
-],a:1
-},
-
-{
-q:"Dystrophic calcification occurs under which of the following biochemical conditions?",
-t:"يحدث التكلس الحثلي تحت أي من الظروف الكيميائية الحيوية التالية؟",
-o:[
-"Elevated serum calcium levels in normal tissues",
-"Systemic hyperparathyroidism",
-"Normal serum calcium levels in necrotic or degenerating tissues",
-"Hypervitaminosis D"
-],a:2
-},
-
-{
-q:"Metastatic calcification is primarily driven by:",
-t:"ينتج التكلس المنتشر بشكل أساسي عن:",
-o:[
-"Systemic hypercalcemia",
-"Localized tissue necrosis",
-"Decreased serum phosphate",
-"Atherosclerotic plaques only"
-],a:0
-},
-
-{
-q:"The primary chemical mediator responsible for the immediate transient phase of vascular permeability in acute inflammation is:",
-t:"الوسيط الكيميائي الأساسي المسؤول عن المرحلة الفورية العابرة من نفاذية الأوعية الدموية في الالتهاب الحاد هو:",
-o:[
-"Leukotriene B4",
-"Histamine",
-"Transforming growth factor-beta",
-"Platelet-derived growth factor"
-],a:1
-},
-
-{
-q:"The transmigration of leukocytes across the vascular basement membrane is termed:",
-t:"عبور الكريات البيضاء عبر الغشاء القاعدي الوعائي يُسمى:",
-o:[
-"Chemotaxis",
-"Margination",
-"Opsonization",
-"Diapedesis"
-],a:3
-},
-
-{
-q:"The fifth clinical sign of acute inflammation, 'Functio laesa' (loss of function), was added by:",
-t:"من أضاف العلامة السريرية الخامسة للالتهاب الحاد Functio laesa، أي فقدان الوظيفة؟",
-o:[
-"John Hunter",
-"Julius Cohnheim",
-"Rudolf Virchow",
-"Elie Metchnikoff"
-],a:2
-},
-
-{
-q:"A localized collection of purulent exudate (pus) within an organ or confined tissue space is termed:",
-t:"التجمع الموضعي للإفراز القيحي داخل عضو أو مساحة نسيجية محددة يسمى:",
-o:[
-"Abscess",
-"Ulcer",
-"Phlegmon",
-"Seroma"
-],a:0
-},
-
-{
-q:"Granulomatous inflammation is a distinctive histologic pattern of:",
-t:"الالتهاب الحبيبي هو نمط نسيجي مميز لـ:",
-o:[
-"Acute suppurative inflammation",
-"Chronic inflammation characterized by aggregated epithelioid macrophages",
-"Serous inflammation seen in burns",
-"Purely non-immune hypersensitivity"
-],a:1
-},
-
-{
-q:"Non-caseating granulomas are characteristically identified in which systemic granulomatous disorder?",
-t:"في أي اضطراب حبيبي جهازي تُشاهد الحبيبات غير المتجبنة بشكل مميز؟",
-o:[
-"Tuberculosis",
-"Histoplasmosis",
-"Sarcoidosis",
-"Coccidioidomycosis"
-],a:2
-},
-
-{
-q:"Which key growth factor is central to collagen synthesis, fibroblast migration, and terminating chronic inflammation?",
-t:"أي عامل نمو مهم له دور أساسي في تصنيع الكولاجين وهجرة الخلايا الليفية وإنهاء الالتهاب المزمن؟",
-o:[
-"Histamine",
-"TGF-beta",
-"TNF-alpha",
-"Interleukin-8"
-],a:1
-},
-
-{
-q:"Healing by primary intention differs from secondary intention because primary intention exhibits:",
-t:"يختلف الالتئام بالنية الأولى عن النية الثانية لأن الالتئام بالنية الأولى يتميز بـ:",
-o:[
-"Extensive tissue defects requiring abundant granulation tissue",
-"Clean, closely approximated margins with minimal tissue loss and scar",
-"Prominent wound contraction by myofibroblasts",
-"Higher rates of ulceration and delayed re-epithelialization"
-],a:1
-},
-
-{
-q:"An essential dietary cofactor required for the post-translational hydroxylation of proline and lysine in collagen synthesis is:",
-t:"ما العامل الغذائي المساعد الضروري لهيدروكسلة البرولين واللايسين بعد الترجمة أثناء تصنيع الكولاجين؟",
-o:[
-"Vitamin C",
-"Vitamin D",
-"Vitamin A",
-"Vitamin K"
-],a:0
-},
-
-{
-q:"Trace element essential for collagen cross-linking via lysyl oxidase is:",
-t:"ما العنصر النزري الضروري للربط المتقاطع للكولاجين بواسطة إنزيم lysyl oxidase؟",
-o:[
-"Iron",
-"Zinc",
-"Copper",
-"Magnesium"
-],a:2
-},
-
-{
-q:"Edema fluid with low protein content, low specific gravity (<1.012), and caused by altered hemodynamic forces is a:",
-t:"سائل الوذمة منخفض البروتين ومنخفض الكثافة النوعية (<1.012) والناجم عن تغيرات في القوى الديناميكية الدموية يسمى:",
-o:[
-"Exudate",
-"Transudate",
-"Purulent fluid",
-"Fibrinous effusion"
-],a:1
-},
-
-{
-q:"An inflammatory edema fluid characterized by high protein content and cellular debris is termed:",
-t:"سائل الوذمة الالتهابي الذي يتميز بارتفاع محتوى البروتين ووجود الحطام الخلوي يسمى:",
-o:[
-"Transudate",
-"Exudate",
-"Lymph fluid",
-"Interstitial filtrate"
-],a:1
-},
-
-{
-q:"The classic triad of Virchow contributing to pathologic intravascular thrombosis includes:",
-t:"الثلاثية الكلاسيكية لفيرشو التي تساهم في حدوث الخثار داخل الأوعية تشمل:",
-o:[
-"Hypertension, hyperlipidemia, and diabetes",
-"Infection, fever, and leukocytosis",
-"Endothelial injury, stasis/turbulent flow, and hypercoagulability",
-"Vasoconstriction, vasodilation, and vascular stasis"
-],a:2
-}
-
+{q:"1. An example of a tissue or organ composed of permanent Parenchymal cells is:",t:"مثال على نسيج أو عضو يتكون من خلايا برنشيمية دائمة (Permanent):",o:["Liver","Bone Marrow","Small Intestinal Mucosa","Heart","Renal Tubules"],a:3},
+{q:"2. The type of necrosis that occurs in Peripancreatic tissue in Acute Pancreatitis is:",t:"نوع النخر الذي يحدث في الأنسجة المحيطة بالبنكرياس في التهاب البنكرياس الحاد هو:",o:["Liquefaction","Fat","Coagulation","Gummatous","Fibrinoid"],a:1},
+{q:"3. Change of Columnar Epithelium of the Bronchi into Mature Squamous Epithelium is called:",t:"تحول الظهارة العمودية في القصبات الهوائية إلى ظهارة حرشفية ناضجة يسمى:",o:["Metaplasia","Dysplasia","Hyperplasia","Neoplasia","Hypertrophy"],a:0},
+{q:"4. Which of the following is a feature of Irreversible Cell Injury:",t:"أي مما يلي يُعد من سمات إصابة الخلية غير العكوسة (الموت الخلوي):",o:["Glycogen stores are depleted","Cytoplasmic sodium increases","Nuclei undergo karyorrhexis","Intracellular pH diminishes","Blebs form on cell membranes"],a:2},
+{q:"5. Which of the following processes that occur in the breast allows a mother to feed the infant:",t:"أي من العمليات التالية التي تحدث في الثدي تمكن الأم من إرضاع الرضيع:",o:["Stromal hypertrophy","Epithelial dysplasia","Statocyst atrophy","Ductuli epithelial metaplasia","Lobular hyperplasia"],a:4},
+{q:"6. An Amputated lower limb from a diabetic patient showing black discoloration of the skin and soft tissues with areas of yellowish exudates is characterized as:",t:"طرف سفلي مبتور لمريض سكري يظهر تلوناً أسود في الجلد والأنسجة الرخوة مع إفرازات مصلية يوصف بأنه:",o:["Neoplasia","Gangrenous Necrosis","Coagulopathy","Hemosiderosis","Gas gangrene"],a:1},
+{q:"7. Focal fat necrosis, with flecks of chalky tan-white material seen in the omentum is most often associated with:",t:"النخر الدهني البؤري مع بقع طباشيرية بيضاء في الثرب (Omentum) يرتبط غالباً بـ:",o:["Gangrenous appendicitis","Chronic salpingitis","Acute pancreatitis","Hepatitis","Acute gastritis"],a:2},
+{q:"8. In a 60-year-old male, Gangrene of toes is most likely associated with:",t:"في رجل يبلغ 60 عاماً، ترتبط غرغرينا أصابع القدمين غالباً بـ:",o:["Diabetes Mellitus","Heart Failure","Blunt force trauma","AIDS","Type III hypersensitivity reaction"],a:0},
+{q:"9. The presence of Columnar Epithelium with Goblet cells in the Lower Esophagus is most consistent with:",t:"وجود ظهارة عمودية بخلايا كأسية في أسفل المريء يتوافق مع (مريء باريت):",o:["Dysplasia","Hyperplasia","Carcinoma","Ischemia","Metaplasia"],a:4},
+{q:"10. Which of the following cellular changes is most likely to present irreversible cellular injury:",t:"أي التغيرات الخلوية التالية يمثل دليلاً مؤكداً على إصابة خلوية غير عكوسة:",o:["Epithelial dysplasia","Cytoplasmic fatty metamorphosis","Nuclear pyknosis","Atrophy","Anaerobic Glycolysis"],a:2},
+{q:"11. Which of the following is the most likely pathologic alteration following occlusion of the left middle cerebral artery by a sterile thrombus:",t:"ما التغير المرضي الأكثر ترجيحاً بعد انسداد الشريان المخي الأوسط بخثرة معقمة:",o:["Cerebral softening from liquefactive necrosis","Pale infarction with coagulative necrosis","Predominantly the loss of glial cells","Recovery of damaged neurons if the vascular supply is re-established","Wet gangrene with secondary bacterial infection"],a:0},
+{q:"12. The action of putrefactive bacteria on necrotic tissue results in:",t:"فعل بكتيريا التعفن على الأنسجة المتنخرة يؤدي إلى حدوث:",o:["Coagulation","Infarction","Gangrene","Embolism","Caseation"],a:2},
+{q:"13. Which of the following type of necrosis is most commonly associated with ischaemic injury:",t:"أي أنواع النخر التالية يرتبط بشكل أكثر شيوعاً بالإصابة الإقفارية في معظم الأعضاء الصلبة:",o:["Coagulation Necrosis","Liquefaction Necrosis","Caseous Necrosis","Fat Necrosis","Gangrenous Necrosis"],a:0},
+{q:"14. Hepatocytes are an example of:",t:"تعتبر خلايا الكبد (Hepatocytes) مثالاً على الخلايا:",o:["Permanent cells","Stable cells","Labile cells","Metaplasia","Mesenchymal cells"],a:1},
+{q:"15. Calcium may play a role in cell injury by:",t:"يلعب الكالسيوم دوراً في إصابة الخلية من خلال:",o:["Causing ATP depletion","Activating phospholipases","Inducing auto phagocytosis","Regulating pyknosis","Reducing intracellular pH"],a:1},
+{q:"16. A common manifestation of sublethal cell injury (reversible injury) in organs such as the heart and liver is:",t:"المظهر الشائع للإصابة الخلوية دون القاتلة (العكوسة) في أعضاء مثل القلب والكبد هو:",o:["Glycogen accumulation","Fatty change","Calcium deposition","Apoptosis","Deposition of melanin"],a:1},
+{q:"17. An area of keratinizing squamous epithelium lining a major bronchus is an example of:",t:"وجود ظهارة حرشفية متقرنة تبطن قصبة هوائية رئيسية هو مثال على:",o:["Heterotopia","Metaplasia","Dysplasia","Atrophy","Neoplasia"],a:1},
+{q:"18. Each of the following is an example of hyperplasia except:",t:"كل مما يلي مثال على فرط التنسج (Hyperplasia) ما عدا:",o:["Enlargement of one kidney after surgical removal of the other kidney","Changes in the thyroid gland in response to increased demand for thyroid hormones","Changes in breast tissue during pregnancy","Enlargement of lymph nodes during a viral infection","Enlargement of skeletal muscles after weight training"],a:4},
+{q:"19. Select the wrong statement. Apoptosis:",t:"اختر العبارة الخاطئة فيما يخص الاستماتة (Apoptosis):",o:["Occurs in single cells or in small cluster of cells","Is programmed cell death","Is seen in toxic or viral hepatitis","Appears cheesy in appearance","Does not elicit an inflammatory reaction"],a:3},
+{q:"20. Which of the following can undergo apoptosis:",t:"أي من الخلايا التالية يمكن أن تخضع لعملية الاستماتة الخلوية:",o:["Cells infected with virus","Cells with DNA damage","Increased oxidant within the cell","None of the above","All of the above"],a:4},
+{q:"21. Apoptosis is defined as:",t:"تُعرّف الاستماتة (Apoptosis) بأنها:",o:["Massive necrosis","Foreign body phagocytosis","Lipoprotein synthesis","Programmed cell death","Wet gangrene"],a:3},
+{q:"22. The following is true about hyperplasia except:",t:"ما يلي صحيح عن فرط التنسج (Hyperplasia) ما عدا:",o:["Can be physiological","Is a precancerous condition","Is reversible","Is due to excess hormone stimulation","Can be associated with hypertrophy"],a:1},
+{q:"23. Digestion of tissue with soap formation and calcification is characteristic of:",t:"هضم الأنسجة مع تكوّن الصابون والتكلس يميز نخر:",o:["Coagulation Necrosis","Caseous Necrosis","Fibrinoid Necrosis","Liquefaction Necrosis","Enzymatic Fat Necrosis"],a:4},
+{q:"24. All of the following findings represent changes seen within cells that represent reversible cellular injury, except:",t:"جميع التغيرات التالية تدل على إصابة خلوية عكوسة، ما عدا:",o:["Fatty change in hepatocytes","Neuronal cell swelling","Skeletal muscle fiber anaerobic glycolysis","Renal tubular cell nuclear pyknosis","Kupffer cell iron deposition"],a:3},
+{q:"25. Which is most likely to happen following a stroke with loss of blood supply to a lobe of the brain:",t:"ما الذي يُرجح حدوثه بعد سكتة دماغية مع انقطاع التروية عن فص دماغي:",o:["Cerebral softening from liquefactive necrosis","Pale infarction with coagulative necrosis","Predominantly the loss of glial cells","Recovery of damaged neurons if the vascular supply is reestablished","Wet gangrene with secondary bacterial infection"],a:0},
+{q:"26. Which of the following cellular changes represents the best evidence for irreversible cellular injury:",t:"أي التغيرات الخلوية التالية يمثل أفضل دليل على حدوث إصابة خلوية غير عكوسة:",o:["Epithelial dysplasia","Cytoplasmic fatty metamorphosis","Nuclear pyknosis","Atrophy","Anaerobic glycolysis"],a:2},
+{q:"27. The presence of differentiated columnar epithelium with goblet cells in lower esophagus is consistent with:",t:"وجود ظهارة عمودية متمايزة بخلايا كأسية في أسفل المريء يتوافق مع:",o:["Dysplasia","Hyperplasia","Carcinoma","Ischemia","Metaplasia"],a:4},
+{q:"28. Which of the following will show hypertrophy:",t:"أي من الحالات التالية تُظهر تضخماً حقيقياً (Hypertrophy) في حجم الخلايا:",o:["The uterine myometrium in pregnancy","The female breast at puberty","The liver following partial resection","The ovary following menopause","The cervix with chronic inflammation"],a:0},
+{q:"29. An amputated foot of a diabetic will most likely show:",t:"قدم مبتورة لمريض سكري ستظهر على الأرجح:",o:["Neoplasia","Gangrenous Necrosis","Coagulopathy","Hemosiderosis","Caseation"],a:1},
+{q:"30. Which of the following types of necrosis is grossly opaque & 'chalk' white:",t:"أي أنواع النخر التالية يظهر بالعين المجردة ككتل بيضاء معتمة كالطبشور:",o:["Coagulation necrosis","Liquefaction","Caseous necrosis","Fat necrosis","Gangrenous necrosis"],a:3},
+{q:"31. Dystrophic Calcification is most closely associated with:",t:"يرتبط التكلس الحثلي (Dystrophic Calcification) بشكل وثيق بـ:",o:["Hypercalcemia","Necrosis","Chronic irritation","Diminished blood supply","Increased workload"],a:1},
+{q:"32. Which of the following types of necrosis is characterized by amorphous granular debris:",t:"أي أنواع النخر التالية يتميز بوجود حطام حبيبي لاشكلي (جبني):",o:["Coagulation Necrosis","Liquefaction Necrosis","Caseous Necrosis","Fat Necrosis","Gangrenous Necrosis"],a:2},
+{q:"33. Hypertrophy is most closely associated with:",t:"يرتبط تضخم الخلايا (Hypertrophy) بشكل مباشر بـ:",o:["Hypercalcemia","Necrosis","Chronic Irritation","Diminished Blood Supply","Increased Work Load"],a:4},
+{q:"34. Which of the following is most susceptible to liquefaction necrosis following ischemic injury:",t:"أي الأعضاء التالية أكثر عرضة للنخر التمييعي بعد الإصابة الإقفارية:",o:["Pancreas","Liver","Spleen","Brain","Intestine"],a:3},
+{q:"35. Hypoplasia is due to:",t:"نقص التنسج الخلقي (Hypoplasia) ينتج عن:",o:["Cell Loss","Atrophy","Inadequate development","Disuse","Ischemia"],a:2},
+{q:"36. The loss of individual cell through fragmentation of individual cell nucleus is best described as:",t:"فقدان خلية فردية من خلال تفتت نواتها دون التهاب يوصف بـ:",o:["Coagulative Necrosis","Mitochondrial Poisoning","Phagocytosis","Apoptosis","Liquefaction"],a:3},
+{q:"37. Gangrene of the big toe in a 60 year old female is most likely associated with:",t:"غرغرينا إصبع القدم الكبير لدى امرأة بعمر 60 عاماً ترتبط على الأرجح بـ:",o:["Diabetes Mellitus","Temporal Arteritis","AIDS","Type III Hypersensitivity","Carcinoma of the Bronchus"],a:0},
+{q:"38. Focal Fat Necrosis is associated with:",t:"النخر الدهني البؤري يرتبط بـ:",o:["Fibrinous Pericarditis","Chronic Appendicitis","Acute Pancreatitis","Periportal Fibrosis","Gas Gangrene"],a:2},
+{q:"39. Which of the following is responsible for gangrene of lower extremities:",t:"أي مما يلي مسؤول عن حدوث الغرغرينا في الأطراف السفلية:",o:["Obesity","Hyperlipidemia","Cigarette Smoking","Diabetes Mellitus","Hypercalcemia"],a:3},
+{q:"40. Which of the following is not a feature of reversible cell injury:",t:"أي مما يلي لا يُعد من مظاهر الإصابة الخلوية العكوسة:",o:["Swollen cell","Swollen mitochondria","Pyknotic Nucleus","Dilated Endoplasmic Reticulum","Cell surface blebs"],a:2},
+{q:"41. Which of the following is not a feature of reversible cell injury:",t:"أي مما يلي لا يحدث في الإصابة الخلوية العكوسة:",o:["Increased DNA synthesis","Reduction of ATP","Failure of Sodium Pump","Influx of Calcium","Accumulation of Metabolites"],a:0},
+{q:"42. Which of the following is a feature of Colliquative (Liquefactive) Necrosis:",t:"أي مما يلي يُعد من ميزات النخر التمييعي (Colliquative):",o:["Complete loss of architecture","Cyst formation","Occurs in tissues with high water content","A and C","All of the above"],a:4},
+{q:"43. Which of the following is (are) true about apoptosis:",t:"أي مما يلي صحيح بخصوص الاستماتة (Apoptosis):",o:["It is programmed cell death","It requires cell energy","Induces a severe inflammatory reaction","Both A and B","Both B and C"],a:3},
+{q:"44. Calcium may play a role in cell injury by:",t:"يلعب الكالسيوم دوراً في موت الخلية عن طريق:",o:["Causing ATP depletion","Activating Phospholipases","Inducing Auto phagocytosis","Regulating Pyknosis"],a:1},
+{q:"45. Irreversible cellular changes include all of the following except:",t:"التغيرات الخلوية غير العكوسة تشمل كل ما يلي ما عدا:",o:["Hydropic Change","Pyknosis","Karyorrhexis","Karyolysis"],a:0},
+{q:"46. Which of the following is not a feature of Necrosis:",t:"أي مما يلي لا يُعد من سمات النخر النسيجي بالمجهر:",o:["Karyolysis","Karyorrhectic","Cytoplasmic Basophilia","Pyknosis","Loss of RNA"],a:2},
+{q:"47. Which of the following is most likely associated with Caseation Necrosis:",t:"أي مما يلي يرتبط كلاسيكياً بالنخر المتجبن (Caseation Necrosis):",o:["Diabetic Gangrene","Gas Gangrene","Myocardial Infarction","Inspissated Pus (Tuberculosis)","Splenic Infarction"],a:3},
+{q:"48. Which of the following pathologic changes would be considered irreversible?",t:"أي التغيرات المرضية التالية تُعد غير عكوسة إطلاقاً:",o:["Fatty change in liver cells","Hydropic vacuolization of renal tubular epithelial cells","Karyolysis in myocardial cells","Glycogen deposition in hepatocyte nuclei","Hyperplasia of the breast during pregnancy"],a:2},
+{q:"49. Colliquative (Liquefactive) Necrosis occurs in:",t:"يحدث النخر التمييعي الإقفاري كلاسيكياً في:",o:["Spleen","Liver","Heart","Brain","Kidneys"],a:3},
+{q:"50. Which of the following is a feature of irreversible cell injury:",t:"أي مما يلي سمة لإصابة الخلية غير العكوسة:",o:["Swelling of Endoplasmic Reticulum","Formation of Blebs","Karyolysis of Nuclei","Fatty Change","Mitochondrial Swelling"],a:2},
+{q:"51. A common manifestation of sublethal cell injury seen in organs such as the heart and liver is:",t:"المظهر الشائع للإصابة الخلوية تحت القاتلة (العكوسة) في الكبد والقلب:",o:["Glycogen accumulation","Fatty change","Calcium deposition","Apoptosis","Deposition of Amyloid"],a:1},
+{q:"52. In the process of necrosis, a reduction in the size of the nucleus and a condensation of nuclear material is known as:",t:"في النخر، يُعرف انكماش النواة وتكثف المادة الوراثية باسم:",o:["Karyolysis","Pyknophrasia","Karyorrhexis","Pyknosis","Metachromasia"],a:3},
+{q:"53. A cardinal sign of Inflammation is:",t:"من العلامات الأساسية الخمس للالتهاب:",o:["Vasoconstriction","Redness (Rubor)","Leukocyte Margination","Vasodilation","Slowing of the Circulation"],a:1},
+{q:"54. Which of the following is most associated with Acute Inflammation:",t:"أي مما يلي يرتبط بشكل وثيق بالالتهاب الحاد:",o:["Neutrophils","Connective Tissue","Macrophages","Granulation Tissue","Granuloma"],a:0},
+{q:"55. By definition, which cells are involved in organization:",t:"بالتعريف، ما الخلايا المسؤولة عن عملية التنظيم النسيجي (Organization):",o:["Kidney tubular and Liver Parenchymal cells","Macrophages and Endothelial Cells","Endothelial Cells and Fibroblasts","Fibroblasts and Fat Cells"],a:2},
+{q:"56. Phagocytosis is enhanced by:",t:"يتم تعزيز البلعمة (Opsonization) بشكل رئيسي بواسطة:",o:["C5a","Bradykinin","Lysozyme","C3b","Serotonin"],a:3},
+{q:"57. The tumor (swelling) of inflammation is due primarily to:",t:"تورم الالتهاب (Tumor) يعود في المقام الأول إلى:",o:["Arteriolar Dilation","Venous Dilation","Capillary Dilation","Increased Intracellular Fluid","Increased Extracellular Fluid (Exudate)"],a:4},
+{q:"58. A mediator of acute inflammation that causes increased vascular permeability and pain is:",t:"وسيط التهابي يسبب زيادة نفاذية الأوعية الدموية والألم في وقت واحد هو:",o:["Endotoxin","Complement","Histamine","Bradykinin","Endogenous Pyrogen"],a:3},
+{q:"59. Histamine is thought to be the direct cause of:",t:"يُعتبر الهيستامين المسبب المباشر لـ:",o:["Leukocytosis","Emigration","Phagocytosis","Increased Vascular Permeability","All of the Above"],a:3},
+{q:"60. An Abscess is best defined as:",t:"يُعرّف الخراج (Abscess) بأنه:",o:["A local defect in the surface of a tissue","An abnormal accumulation between two surfaces","A localized collection of pus","An epithelium-lined sac filled with viscous fluid"],a:2},
+{q:"61. Which of the following best describes a granuloma:",t:"أي مما يلي يصف الورم الحبيبي (Granuloma) بشكل أدق:",o:["A small nodule of granulation tissue","A tumor composed of granulocytes","A small hard mass of fibroblasts and collagen","Inflammation primarily composed of lymphocytes","An aggregate of activated macrophages (epithelioid cells)"],a:4},
+{q:"62. The emigration and accumulation of neutrophils in the acute inflammation reaction is primarily the result of:",t:"هجرة وتراكم العدلات في تفاعل الالتهاب الحاد ناتج بالدرجة الأولى عن:",o:["Active hyperemia","Hydrostatic Pressure","Increased Microvascular Permeability","Chemotaxis","None of the above"],a:3},
+{q:"63. Which of the following is expressed on endothelial cells in acute inflammation for leukocyte binding:",t:"أي من الجزيئات التالية يُعبَّر عنه على الخلايا البطانية لربط الكريات البيضاء أثناء الالتهاب:",o:["Interferon Gamma","Hageman Factor","Lysozyme","E-selectin","Prostacyclin"],a:3},
+{q:"64. Fever and Leukocytosis in which most leukocytes are neutrophils is typical of:",t:"الحمى وكثرة الكريات البيضاء حيث معظمها عدلات تميز:",o:["Acute Bacterial Infection","Acute Viral Infection","Chronic Viral Infection","Parasitemia","Foreign Body Giant Cell Reaction"],a:0},
+{q:"65. Epithelioid Cells and Langerhans Giant Cells in granulomas are derived from:",t:"الخلايا أشباه الظهارية والخلايا العملاقة في الورم الحبيبي مشتقة من:",o:["Neutrophils","Eosinophils","Mast Cells","Macrophages","Lymphocytes"],a:3},
+{q:"66. Prostaglandins are formed from Arachidonic Acid through the action of which enzyme pathway?",t:"تتشكل البروستاجلاندينات من حمض الأراكيدونيك عبر إنزيم:",o:["Cyclooxygenase","Lipoxygenase","Myeloperoxidase","Phospholipase A","Glutathione Reductase"],a:0},
+{q:"67. The cavity of an Abscess contains:",t:"يحتوي تجويف الخراج على:",o:["Caseous Necrosis","Hyalin","Giant Cells","Pus","Granulation Tissue"],a:3},
+{q:"68. Transudate can be found in the following settings except:",t:"يمكن العثور على الرشيح (Transudate) في الحالات التالية ما عدا:",o:["Congestive Heart Failure","Nephrotic Syndrome","Superior Vena cava Obstruction","Pericarditis","None of the Above"],a:3},
+{q:"69. The diagnostic feature of granuloma is the presence of:",t:"الميزة التشخيصية المميزة للورم الحبيبي نسيجياً هي وجود:",o:["Giant cells","Epithelioid cells","Lymphocytes","Fibrosis","Caseation"],a:1},
+{q:"70. The following have a granuloma except:",t:"كل الحالات التالية تتميز بالتهاب حبيبي (Granuloma) ما عدا:",o:["T.B","Syphilis","Leprosy","Schistosomiasis","Staphylococcal Infection"],a:4},
+{q:"71. The first inflammatory cell to show at the site of acute inflammation is the:",t:"أول خلية التهابية تهاجر وتصل لموقع الالتهاب الحاد هي:",o:["Monocyte","B-lymphocyte","T-lymphocyte","Neutrophils","Mast cell"],a:3},
+{q:"72. Which of the following is the most powerful chemotactic agent:",t:"أي من العوامل التالية يُعد أقوى عامل جذب كيميائي (Chemotactic factor):",o:["Histamine","Prostaglandin","Hageman Factor","Bradykinin","Complement C5a"],a:4},
+{q:"73. Following an attack of chest infection for three days, a patient becomes very ill and his chest x-rays shows a 3cm rounded density. He is most likely having:",t:"بعد التهاب صدري حاد لـ 3 أيام، تدهورت حالة المريض وأظهرت الأشعة كثافة دائرية 3 سم. التشخيص الأرجح هو:",o:["Hypertrophic scar","Abscess formation","Regeneration","Bronchogenic carcinoma","Progression to chronic inflammation"],a:1},
+{q:"74. Which of the following cells is the most important in the development of tuberculous granuloma:",t:"أي الخلايا التالية هي الأهم في تطور ورم السل الحبيبي:",o:["Macrophages","Fibroblast","Neutrophil","Mast Cell","Platelet"],a:0},
+{q:"75. Which of the following mediators are predominantly responsible for pain in acute inflammation:",t:"أي الوسائط مسؤولة بالدرجة الأولى عن الألم في الالتهاب الحاد:",o:["Complement C3b and IgG","Interleukin-1 and tumor necrosis factor","Histamine and Serotonin","Prostaglandin and Bradykinin","Leukotriene and E-selectin"],a:3},
+{q:"76. Deficiency of which of the following will reduce phagocytosis by neutrophils:",t:"نقص أي من التالي سيقلل من عملية البلعمة بواسطة العدلات:",o:["C3a","Leukotriene A4","C3b","Leukotriene B4","C5a"],a:2},
+{q:"77. Matrix components in early granulation tissue include:",t:"تشمل مكونات مصفوفة نسيج التحبيب المبكر:",o:["Fibronectin","Type III collagen","Both A and B","Neither A nor B","Granuloma"],a:2},
+{q:"78. Apoptosis does not induce inflammation because:",t:"لا تحفز الاستماتة (Apoptosis) الالتهاب لأن:",o:["The injury is too mild to induce inflammation","Phagocytic cells secrete cytokines that inhibit inflammation and membrane remains intact","The process occurs only in avascular tissues","Apoptosis occurs only in immune deficient tissues","The patient is using antibiotics"],a:1},
+{q:"79. Opsonization is the:",t:"الطهاية (Opsonization) هي عملية:",o:["Formation of free radicals","Degradation of bacteria by lysozymes","Engulfment of antigen by leukocytes","Coating of antigen by antibodies/complement to enhance phagocytosis","Processing of antigens by antigen presenting cells"],a:3},
+{q:"80. Which of the following has a large number of eosinophils in exudates:",t:"أي من الحالات التالية يوجد بها عدد كبير من اليوزينيات (Eosinophils) في الإفرازات:",o:["Sarcoidosis","Bronchiectasis","Syphilis","Bronchial Asthma","Chronic Bronchitis"],a:3},
+{q:"81. Which of the following are involved in organization:",t:"أي مما يلي يشارك في عملية التنظيم والترميم النسيجي:",o:["Endothelial cells and osteocytes","Endothelial cells and chondroblasts","Endothelial cells and fibroblasts","Fibroblasts and fat cells","Fibroblasts and plasma cells"],a:2},
+{q:"82. One of the following is a Chemotactic Factor:",t:"واحد من العوامل التالية يُعد عاملاً جاذباً كيميائياً للعدلات:",o:["Histamine","Bradykinin","Interleukin 1","Leukotriene B4","Serotonin"],a:3},
+{q:"83. Phagocytosis is enhanced by:",t:"تتعزز عملية البلعمة بواسطة:",o:["C1","Bradykinin","Lysozyme","Opsonin","Serotonin"],a:3},
+{q:"84. Which one of the following is a harmful effect of acute inflammation:",t:"أي مما يلي يُعد من التأثيرات الضارة للالتهاب الحاد:",o:["Dilution of toxins","Phagocytosis","Formation of fibrin","Swelling of tissue (e.g., laryngeal edema)","Stimulation of immune response"],a:3},
+{q:"85. The high protein content of the inflammatory exudates is mainly due to:",t:"المحتوى البروتيني المرتفع لإفرازات الالتهاب (Exudate) يعود أساساً إلى:",o:["Protein released from dead tissue","Production of protein by inflammatory cells","Increased capillary permeability","Increased capillary hydrostatic pressure","Increased blood flow in the site of inflammation"],a:2},
+{q:"86. Which of the following are involved in organization:",t:"أي من الخلايا التالية تشارك مباشرة في عملية الـ Organization:",o:["Liver parenchymal cells","Macrophages and endothelial cells","Endothelial cells and fibroblasts","Fibroblasts and fat cells","Neurons and glial cells"],a:2},
+{q:"87. Chronic Inflammation is characterized by the presence of:",t:"يتميز الالتهاب المزمن بوجود ارتشاح خلوي يتكون من:",o:["Polymorphs, monocytes and exudate","Plasma cells, lymphocytes, fibroblasts and monocytes","Plasma cells, polymorphs, lymphocytes and monocytes","Plasma cells, basophils, eosinophils, fibroblasts and monocytes"],a:1},
+{q:"88. Which of the following is true about an Exudate:",t:"أي مما يلي صحيح بخصوص النضحة الالتهابية (Exudate):",o:["Occurs in heart failure","Is due to low plasma oncotic pressure","Has a low specific gravity","Has a high protein content","Is due to lymphatic obstruction"],a:3},
+{q:"89. The most important factor in the formation of acute inflammatory exudates is:",t:"أهم عامل ميكانيكي في تكوين النضحة الالتهابية الحادة هو:",o:["Increased Hydrostatic Pressure","Increased Blood Flow","Chemotaxis","Increased Vascular Permeability","Lymphatic Obstruction"],a:3},
+{q:"90. Increased Vascular Permeability is due to:",t:"زيادة نفاذية الأوعية الدموية أثناء الالتهاب تحدث بسبب:",o:["Damage to endothelial cells","Widening of gaps between endothelial cells","Slowing of blood flow","Both A & B","Both A & C"],a:3},
+{q:"91. Which of the following does not promote fracture healing:",t:"أي مما يلي يعيق التئام الكسور ولا يعززه:",o:["Steroid therapy","Adequate blood supply","Immobilization","Adequate Vitamin C supply"],a:0},
+{q:"92. The causes of Hypovolemic shock do not include:",t:"أسباب الصدمة الناتجة عن نقص حجم الدم (Hypovolemic shock) لا تشمل:",o:["Severe vomiting","Severe diarrhea","Extensive burning","Myocardial Infarction","Severe Trauma"],a:3},
+{q:"93. What type of shock is most associated with severe burns:",t:"نوع الصدمة الأكثر ارتباطاً بالحروق الواسعة هو:",o:["Cardiogenic shock","Hypovolemic shock","Septic shock","Neurogenic shock"],a:1},
+{q:"94. The following are true about arterial thrombi except:",t:"العبارات التالية صحيحة عن الخثرات الشريانية ما عدا:",o:["Are usually due to endothelial injury","Can be precipitated by atherosclerosis","Grow in the direction of blood flow","Lead to ischemia and infarction","Commonly cause systemic emboli"],a:2},
+{q:"95. Which of the following are sequelae to thrombosis:",t:"أي مما يلي يُعد من مآلات ومضاعفات حدوث التخثر (Thrombosis):",o:["Embolization","Organization and Recanalization","Propagation","Both A and B","All of the above"],a:4},
+{q:"96. Disseminated Intravascular Coagulation is associated with the following except:",t:"يرتبط التخثر المنتشر داخل الأوعية (DIC) بالتالي ما عدا:",o:["Microangiopathic hemolytic anemia","Thrombocytosis","Low fibrinogen level","Disseminated malignancy","Crush injuries"],a:1},
+{q:"97. Which cells are targeted by HIV:",t:"أي الخلايا التالية يستهدفها فيروس نقص المناعة البشرية (HIV):",o:["CD4+ cells","Plasma cells","Macrophages","Both A & B","Both A & C"],a:4},
+{q:"98. Which one of the following is not a cause of thrombosis:",t:"أي مما يلي لا يُعد سبباً لتكون الجلطات والتخثر:",o:["Damage of endothelial lining","Aneurysms","Polycythemia","Disseminated Carcinomatosis","High level of antithrombin III"],a:4},
+{q:"99. The following predispose to deep vein thrombosis except:",t:"كل مما يلي يؤهب لحدوث خثار الأوردة العميقة (DVT) ما عدا:",o:["Malnutrition","Cancer","Factor VIII deficiency (Hemophilia)","Abdominal Surgery","Immobilization"],a:2},
+{q:"100. Which of the following is not associated with Thrombosis:",t:"أي مما يلي لا يرتبط بزيادة خطر التخثر:",o:["Cancer","Prolonged bed rest","Sickle cell anemia","Hemophilia","Tissue damage"],a:3},
+{q:"101. Fat emboli can be precipitated by:",t:"الصمة الدهنية (Fat embolism) تحدث غالباً نتيجة:",o:["Excessive fats intake","Rupture of an atheromatous plaque","Rupture of the uterus","Fracture of the femur","Changes in atmospheric pressure"],a:3},
+{q:"102. Pulmonary emboli have each of the following characteristics except:",t:"تتميز الصمات الرئوية بكل الخصائص التالية ما عدا:",o:["Commonly arise in leg veins","Pass through the right heart before reaching the lung","Consistently cause infarction in the lung","Are usually thrombotic emboli"],a:2},
+{q:"103. A detached intravascular solid, liquid or gas carried to a site distant from its point of origin is most associated with:",t:"كتلة صلبة أو سائلة أو غازية مفصولة تنتقل عبر الدم إلى موقع بعيد عن منشئها تسمى:",o:["Ascites","Petechiae","Infarction","Emboli","Hematoma"],a:3},
+{q:"104. Neoplasia is defined as:",t:"يُعرّف التنشؤ الورمي (Neoplasia) بأنه:",o:["Excessive but controlled growth","New, coordinated, and reversible growth","Uncontrolled, autonomous growth","Inflammation-induced tissue growth"],a:2},
+{q:"105. A tumor composed of well-differentiated cells and remains localized is called:",t:"ورم يتكون من خلايا جيدة التمايز ويبقى موضعياً دون غزو يسمى:",o:["Malignant tumor","Benign tumor","Carcinoma","Sarcoma"],a:1},
+{q:"106. The component of a tumor responsible for naming and biological behavior is:",t:"الجزء المكون للورم والمسؤول عن تسميته وسلوكه البيولوجي هو:",o:["Parenchyma","Stroma","Capsule","Cytoplasm"],a:0},
+{q:"107. Anaplasia is:",t:"اللانمطية أو فقد التمايز (Anaplasia) هي:",o:["Increased differentiation","Loss of cellular differentiation","Increase in stromal components","Feature of benign tumors only"],a:1},
+{q:"108. Hyperchromatic nuclei in tumors indicate:",t:"الأنوية مفرطة التصبغ (Hyperchromatic) في الأورام تشير إلى:",o:["Increased cytoplasmic content","Increased nuclear DNA content","Loss of vascularity","Benign behavior"],a:1},
+{q:"109. Which of the following is a feature of malignant tumors, but not benign:",t:"أي مما يلي يميز الأورام الخبيثة عن الأورام الحميدة:",o:["Well-differentiated cells","Invasion of adjacent tissues","Localized growth","Encapsulation"],a:1},
+{q:"110. A tumor arising from glandular epithelium and showing benign features is called:",t:"ورم ينشأ من ظهارة غدية ويظهر خصائص حميدة يسمى:",o:["Papilloma","Adenoma","Carcinoma","Sarcoma"],a:1},
+{q:"111. Carcinoma-in-situ is defined as:",t:"تُعرّف السرطانة اللابدّة (Carcinoma-in-situ) بأنها:",o:["Benign tumor with dysplasia","Malignant cells not crossing basement membrane","Metastatic tumor","Invasive carcinoma"],a:1},
+{q:"112. A malignant tumor of bone origin is called:",t:"الورم الخبيث الذي ينشأ من النسيج العظمي يسمى:",o:["Osteoma","Osteosarcoma","Chondroma","Myoma"],a:1},
+{q:"113. The most important route of spread for sarcomas is:",t:"المسار الأكثر أهمية وشيوعاً لانتشار الساركوما هو:",o:["Lymphatics","Hematogenous","Direct seeding","Transcoelomic spread"],a:1},
+{q:"114. Grading of tumors refers to:",t:"درجة الورم النسيجية (Grading) تشير إلى:",o:["Extent of metastasis","Degree of cellular differentiation","Tumor size","Lymph node involvement"],a:1},
+{q:"115. Staging of cancer is based on:",t:"تحديد مرحلة السرطان (Staging) يعتمد سريرياً على نظام TNM وهو:",o:["TNM system: Tumor size, Node, Metastasis","Cell pleomorphism","Mitotic index only","p53 mutation presence"],a:0},
+{q:"116. Cachexia in cancer patients is due to:",t:"الدنف ونقص الوزن الشديد (Cachexia) لدى مرضى السرطان يعود أساساً إلى:",o:["Tumor hemorrhage","Protein-losing enteropathy","TNF-alpha and anorexia","Direct brain metastasis"],a:2},
+{q:"117. A hallmark of malignant tumors is:",t:"من السمات المميزة الشائعة للخلايا السرطانية الخبيثة:",o:["Absence of mitosis","High cytoplasmic content","High nuclear-to-cytoplasmic ratio","Absence of metastasis"],a:2},
+{q:"118. Which of the following is a tumor suppressor gene:",t:"أي مما يلي يُعد جيناً كابحاً للأورام (Tumor suppressor gene):",o:["Ras","HER2","p53","Bcl-2"],a:2},
+{q:"119. Thrombosis is defined as:",t:"يُعرّف التخثر (Thrombosis) بأنه:",o:["A clot formed after vessel rupture","A clot formed within a cardiovascular lumen during life and attached to wall","A clot formed outside the circulation","Any mass circulating in blood"],a:1},
+{q:"120. The classic triad of factors predisposing to thrombosis is known as:",t:"الثلاثية الكلاسيكية المؤهبة لحدوث التخثر تُعرف باسم:",o:["Monroe's triad","Virchow's triad","Charcot's triad","Reynold's triad"],a:1},
+{q:"121. Components of Virchow's triad include all EXCEPT:",t:"تشمل مكونات ثلاثية فيرشو كل مما يلي ما عدا:",o:["Endothelial injury","Abnormal blood flow","Increased platelet count","Hypercoagulability"],a:2},
+{q:"122. Turbulent blood flow contributes to thrombosis by:",t:"يساهم تدفق الدم المضطرب في حدوث التخثر من خلال:",o:["Causing endothelial injury and stasis","Decreasing blood viscosity","Increasing blood oxygen","None of the above"],a:0},
+{q:"123. A mural thrombus is defined as:",t:"تُعرّف الخثرة الجدارية (Mural thrombus) بأنها:",o:["A thrombus attached to the wall of the heart chambers or aorta","A free-floating thrombus","A thrombus in superficial veins","A thrombus causing immediate infarction"],a:0},
+{q:"124. Deep vein thrombosis (DVT) most commonly leads to:",t:"خثار الأوردة العميقة في الساق يؤدي غالباً إلى حدوث:",o:["Stroke","Pulmonary embolism","Myocardial infarction","Liver cirrhosis"],a:1},
+{q:"125. A thrombus that forms with infection is called:",t:"الخثرة التي تتكون وتترافق مع عدوى بكتيرية تسمى:",o:["Septic thrombus","Sterile thrombus","Fibrin thrombus","Laminar thrombus"],a:0},
+{q:"126. Fate of a thrombus includes all of the following EXCEPT:",t:"يشمل مصير الخثرة في الأوعية كل مما يلي ما عدا:",o:["Propagation","Embolization","Differentiation","Organization"],a:2},
+{q:"127. Recanalization of a thrombus means:",t:"إعادة الاستقناء (Recanalization) للخثرة تعني:",o:["Formation of new vascular channels within the thrombus","Rupture of the thrombus","Dissolution of the thrombus","Calcification of the thrombus"],a:0},
+{q:"128. An embolus is defined as:",t:"الصمة (Embolus) تُعرّف بأنها:",o:["A mass carried through blood to a distant site","A ruptured artery","A clot within the lymphatics","A thrombus confined to a capillary"],a:0},
+{q:"129. The most common type of embolism is:",t:"النوع الأكثر شيوعاً من الصمات الوعائية هو:",o:["Air embolism","Thromboembolism","Fat embolism","Amniotic embolism"],a:1},
+{q:"130. A saddle embolus refers to:",t:"الصمة السرجيّة (Saddle embolus) تشير إلى:",o:["An embolus lodged at the bifurcation of the pulmonary trunk","An embolus in cerebral circulation","An embolus in hepatic veins","A chronic embolus in renal artery"],a:0},
+{q:"131. Systemic emboli mostly arise from:",t:"الصمات الجهازية الشريانية تنشأ في معظمها من:",o:["Intracardiac mural thrombi (Left ventricle/atrium)","Deep veins of the legs","Right atrial wall","Portal vein"],a:0},
+{q:"132. Fat embolism commonly occurs after:",t:"تحدث الصمة الدهنية بشكل شائع بعد:",o:["Rib fracture","Long bone fracture (e.g., femur)","Skin burn","Head trauma"],a:1},
+{q:"133. Which of the following is true about pulmonary embolism:",t:"أي العبارات التالية صحيحة بخصوص الانصمام الرئوي:",o:["It originates from DVT of the lower limb","It never causes infarction","It leads only to local hemorrhage","It is always fatal"],a:0},
+{q:"134. Hyperemia is defined as:",t:"يُعرّف احتقان الدم الفعال (Hyperemia) بأنه:",o:["Passive blood accumulation","Active arteriolar dilation with increased inflow","Impaired venous outflow","Increased lymphatic drainage"],a:1},
+{q:"135. Congestion is characterized by:",t:"يتميز الاحتقان الوريدي المنفعل (Congestion) بـ:",o:["Increased arterial pressure","Bright red tissues","Passive accumulation of deoxygenated venous blood","Inflammatory arteriolar dilation"],a:2},
+{q:"136. Pulmonary congestion is commonly caused by:",t:"الاحتقان الرئوي ينتج بشكل شائع عن:",o:["Right heart failure","Left heart failure","Renal failure","Portal hypertension"],a:1},
+{q:"137. 'Nutmeg liver' is a result of:",t:"مظهر كبد جوزة الطيب (Nutmeg liver) ينتج عن:",o:["Chronic passive hepatic congestion","Hepatic cirrhosis","Acute hepatitis","Portal vein thrombosis"],a:0},
+{q:"138. Generalized edema (anasarca) is best defined as:",t:"الوذمة المعممة الشديدة (Anasarca) تُعرّف بأنها:",o:["Local fluid collection","Inflammatory fluid accumulation","Severe widespread accumulation of fluid in subcutaneous and interstitial spaces","Localized swelling due to trauma"],a:2},
+{q:"139. Hypoproteinemia causes edema due to:",t:"نقص بروتينات الدم يؤدي إلى حدوث الوذمة بسبب:",o:["Increased hydrostatic pressure","Decreased plasma oncotic pressure","Lymphatic obstruction","Increased vascular permeability"],a:1},
+{q:"140. A major cause of lymphatic obstruction is:",t:"أحد الأسباب الرئيسية لانسداد الأوعية اللمفاوية وحدوث الوذمة الفيلية:",o:["Filariasis (elephantiasis)","Hypertension","Diabetes","Vitamin D deficiency"],a:0},
+{q:"141. Pitting edema is typically caused by:",t:"الوذمة الانطباعية (Pitting edema) تنتج عادة عن:",o:["Increased hydrostatic or reduced oncotic pressure","Lymphatic obstruction","Tumor pressure","Inflammation"],a:0},
+{q:"142. Exudate is:",t:"النضحة الالتهابية (Exudate) هي:",o:["Fluid with low protein content","Inflammatory fluid rich in proteins and cells","Transudate from renal failure","Fluid found in ascites only"],a:1},
+{q:"143. Ascites refers to fluid accumulation in the:",t:"الاستسقاء (Ascites) يشير إلى تجمع السوائل في:",o:["Pleural cavity","Peritoneal cavity","Pericardial space","Joint cavity"],a:1},
+{q:"144. Petechiae are:",t:"الحَبَرات (Petechiae) هي نزوف نقطية في الجلد حجمها:",o:[">1 cm hemorrhages","Subcutaneous bruises","1-2 mm pinpoint hemorrhages","Blood clots in arteries"],a:2},
+{q:"145. Ecchymosis is a:",t:"الكدمة (Ecchymosis) هي ورم دموي تحت جلدي حجمه:",o:["1-2 cm subcutaneous hematoma (bruise)","Type of edema","Small pinpoint bleeding","Sign of anemia only"],a:0},
+{q:"146. Chronic external bleeding can lead to:",t:"النزيف الخارجي المزمن يؤدي إلى الإصابة بـ:",o:["Hypovolemia","Iron deficiency anemia","Leukopenia","Hyperkalemia"],a:1},
+{q:"147. Hemopericardium refers to bleeding into:",t:"تدمي التامور (Hemopericardium) يشير إلى تجمع الدم داخل:",o:["Pleural space","Pericardial cavity","Joint space","Brain ventricles"],a:1},
+{q:"148. Increased capillary permeability in edema is seen in:",t:"زيادة نفاذية الشعيرات الدموية المسببة للوذمة تُشاهد في:",o:["Type I hypersensitivity and burns","Venous obstruction","Hypoalbuminemia","Renal failure"],a:0}
 ];
 
-
 /* =========================================================
-   STATE
+   CONFIG & STATE (4 STAGES x 37 QUESTIONS = 148)
 ========================================================= */
-
-const TOTAL = quizData.length;
+const TOTAL_QUESTIONS = 148;
+const QUESTIONS_PER_STAGE = 37;
+const TOTAL_STAGES = 4;
 const QUESTION_TIME = 60 * 1000;
-const STORAGE_KEY = "general_pathology_quiz_v2";
+const STORAGE_KEY = "gp_dental_exam_4stages_v1";
+
+/* Apps Script URL */
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzUQLJN40vyblri1MGbY6ZjvsOYUhGeC12HHl64X2sS8piWUmjx8fq1eH9tYgmUIg_Shw/exec";
 
 let questions = [];
-let currentIndex = 0;
+let currentIndex = 0; // 0 to 147
+let currentStage = 1; // 1 to 4
 let studentName = "";
-let correctAnswers = 0;
-let wrongAnswers = 0;
-let timeoutAnswers = 0;
+
+/* Total stats */
+let totalCorrect = 0;
+let totalWrong = 0;
+let totalTimeout = 0;
+
+/* Stage stats */
+let stageCorrect = 0;
+let stageWrong = 0;
+let stageTimeout = 0;
 
 let answered = false;
 let questionDeadline = null;
-
 let questionTimer = null;
 let transitionTimer = null;
 
 
 /* =========================================================
-   DOM
+   DOM ELEMENTS
 ========================================================= */
-
 const startScreen = document.getElementById("startScreen");
 const quizScreen = document.getElementById("quizScreen");
+const stageScreen = document.getElementById("stageScreen");
 const resultScreen = document.getElementById("resultScreen");
 
 const studentNameInput = document.getElementById("studentName");
 const startBtn = document.getElementById("startBtn");
 
+const stageBadge = document.getElementById("stageBadge");
 const counter = document.getElementById("counter");
 const timer = document.getElementById("timer");
 const progressBar = document.getElementById("progressBar");
@@ -1074,491 +755,346 @@ const questionNumber = document.getElementById("questionNumber");
 const questionText = document.getElementById("questionText");
 const translation = document.getElementById("translation");
 const translationToggle = document.getElementById("translationToggle");
-
 const optionsBox = document.getElementById("options");
 
 const timeoutMessage = document.getElementById("timeoutMessage");
 const nextBtn = document.getElementById("nextBtn");
 
+/* Stage Screen DOM */
+const stageTitle = document.getElementById("stageTitle");
+const stageSubtitle = document.getElementById("stageSubtitle");
+const stageScoreEl = document.getElementById("stageScore");
+const stagePercentageEl = document.getElementById("stagePercentage");
+const stageCorrectEl = document.getElementById("stageCorrect");
+const stageWrongEl = document.getElementById("stageWrong");
+const stageTimeoutEl = document.getElementById("stageTimeout");
+const stageSendStatus = document.getElementById("stageSendStatus");
+const resumeNextStageBtn = document.getElementById("resumeNextStageBtn");
+
+/* Final Screen DOM */
 const resultName = document.getElementById("resultName");
-const score = document.getElementById("score");
-const percentage = document.getElementById("percentage");
-
-const correctCount = document.getElementById("correctCount");
-const wrongCount = document.getElementById("wrongCount");
-const timeoutCount = document.getElementById("timeoutCount");
-
+const finalScoreEl = document.getElementById("finalScore");
+const finalPercentageEl = document.getElementById("finalPercentage");
+const finalCorrectEl = document.getElementById("finalCorrect");
+const finalWrongEl = document.getElementById("finalWrong");
+const finalTimeoutEl = document.getElementById("finalTimeout");
+const finalSendStatus = document.getElementById("finalSendStatus");
 const restartBtn = document.getElementById("restartBtn");
-const sendStatus = document.getElementById("sendStatus");
 
 const privacyMask = document.getElementById("privacyMask");
 
 
 /* =========================================================
-   HELPERS
+   UTILITIES
 ========================================================= */
-
 function shuffle(array){
   const arr = [...array];
-
   for(let i = arr.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
-
   return arr;
 }
 
-
 function formatTime(ms){
   ms = Math.max(0, ms);
-
   const seconds = Math.ceil(ms / 1000);
-
-  const m = Math.floor(seconds / 60)
-    .toString()
-    .padStart(2,"0");
-
-  const s = (seconds % 60)
-    .toString()
-    .padStart(2,"0");
-
+  const m = Math.floor(seconds / 60).toString().padStart(2,"0");
+  const s = (seconds % 60).toString().padStart(2,"0");
   return `${m}:${s}`;
 }
-
 
 function stopTimers(){
   if(questionTimer){
     clearInterval(questionTimer);
     questionTimer = null;
   }
-
   if(transitionTimer){
     clearTimeout(transitionTimer);
     transitionTimer = null;
   }
 }
 
-
 function showScreen(screen){
   startScreen.classList.add("hidden");
   quizScreen.classList.add("hidden");
+  stageScreen.classList.add("hidden");
   resultScreen.classList.add("hidden");
-
   screen.classList.remove("hidden");
 }
 
 
 /* =========================================================
-   RANDOMIZE
+   RANDOMIZATION
 ========================================================= */
-
-function buildQuestions(){
-
-  questions = quizData.map(item => {
-
+function buildAllQuestions(){
+  const shuffledQuiz = shuffle(quizData);
+  questions = shuffledQuiz.map(item => {
     const correctText = item.o[item.a];
-
     const options = shuffle(item.o);
-
     return {
-      q:item.q,
-      t:item.t,
-      o:options,
-      a:options.indexOf(correctText)
+      q: item.q,
+      t: item.t,
+      o: options,
+      a: options.indexOf(correctText)
     };
-
   });
-
 }
 
 
 /* =========================================================
-   STORAGE
+   LOCAL STORAGE (AUTOSAVE & RESUME)
 ========================================================= */
-
 function saveProgress(){
-
   try{
-
-    const data = {
+    const state = {
       questions,
       currentIndex,
+      currentStage,
       studentName,
-      correctAnswers,
-      wrongAnswers,
-      timeoutAnswers,
+      totalCorrect,
+      totalWrong,
+      totalTimeout,
+      stageCorrect,
+      stageWrong,
+      stageTimeout,
       questionDeadline
     };
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(data)
-    );
-
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }catch(e){
-    console.warn("Could not save progress",e);
+    console.warn("Autosave failed", e);
   }
 }
-
 
 function loadProgress(){
-
   try{
-
     const raw = localStorage.getItem(STORAGE_KEY);
-
     if(!raw) return false;
-
     const data = JSON.parse(raw);
-
-    if(
-      !data ||
-      !Array.isArray(data.questions) ||
-      data.questions.length !== TOTAL
-    ){
+    if(!data || !Array.isArray(data.questions) || data.questions.length !== TOTAL_QUESTIONS){
       return false;
     }
-
     questions = data.questions;
     currentIndex = Number(data.currentIndex) || 0;
+    currentStage = Number(data.currentStage) || 1;
     studentName = data.studentName || "";
 
-    correctAnswers = Number(data.correctAnswers) || 0;
-    wrongAnswers = Number(data.wrongAnswers) || 0;
-    timeoutAnswers = Number(data.timeoutAnswers) || 0;
+    totalCorrect = Number(data.totalCorrect) || 0;
+    totalWrong = Number(data.totalWrong) || 0;
+    totalTimeout = Number(data.totalTimeout) || 0;
 
-    questionDeadline =
-      data.questionDeadline || null;
+    stageCorrect = Number(data.stageCorrect) || 0;
+    stageWrong = Number(data.stageWrong) || 0;
+    stageTimeout = Number(data.stageTimeout) || 0;
 
+    questionDeadline = data.questionDeadline || null;
     return true;
-
   }catch(e){
-
-    console.warn("Could not load progress",e);
+    console.warn("Load progress failed", e);
     return false;
-
   }
-
 }
 
-
 function clearProgress(){
-
   try{
     localStorage.removeItem(STORAGE_KEY);
   }catch(e){}
-
 }
 
 
 /* =========================================================
-   START
+   START EXAM
 ========================================================= */
-
 function startExam(){
-
-  studentName =
-    studentNameInput.value.trim() ||
-    "طالب بدون اسم";
-
-  correctAnswers = 0;
-  wrongAnswers = 0;
-  timeoutAnswers = 0;
+  studentName = studentNameInput.value.trim() || "طالب بدون اسم";
   currentIndex = 0;
+  currentStage = 1;
 
-  buildQuestions();
+  totalCorrect = 0;
+  totalWrong = 0;
+  totalTimeout = 0;
 
+  stageCorrect = 0;
+  stageWrong = 0;
+  stageTimeout = 0;
+
+  buildAllQuestions();
   showScreen(quizScreen);
-
   renderQuestion();
-
   saveProgress();
 }
 
-
-startBtn.addEventListener("click",startExam);
+startBtn.addEventListener("click", startExam);
 
 
 /* =========================================================
    RENDER QUESTION
 ========================================================= */
-
 function renderQuestion(){
-
   stopTimers();
-
   answered = false;
 
   timeoutMessage.classList.add("hidden");
   nextBtn.classList.add("hidden");
-
   translation.classList.add("hidden");
-  translationToggle.textContent =
-    "🌐 إظهار الترجمة";
+  translationToggle.textContent = "🌐 إظهار الترجمة";
+
+  currentStage = Math.floor(currentIndex / QUESTIONS_PER_STAGE) + 1;
+  const questionInStage = (currentIndex % QUESTIONS_PER_STAGE) + 1;
+
+  stageBadge.textContent = `المرحلة ${currentStage} من ${TOTAL_STAGES}`;
+  counter.textContent = `السؤال ${questionInStage} من ${QUESTIONS_PER_STAGE} (الإجمالي: ${currentIndex + 1}/${TOTAL_QUESTIONS})`;
 
   const item = questions[currentIndex];
-
-  questionNumber.textContent =
-    `السؤال ${currentIndex + 1} من ${TOTAL}`;
-
-  counter.textContent =
-    `السؤال ${currentIndex + 1} من ${TOTAL}`;
-
+  questionNumber.textContent = `سؤال رقم [${currentIndex + 1}]`;
   questionText.textContent = item.q;
-
   translation.textContent = item.t;
 
-  progressBar.style.width =
-    `${((currentIndex + 1) / TOTAL) * 100}%`;
+  progressBar.style.width = `${((questionInStage) / QUESTIONS_PER_STAGE) * 100}%`;
 
   optionsBox.innerHTML = "";
-
-  item.o.forEach((optionText,index)=>{
-
-    const option = document.createElement("button");
-
-    option.type = "button";
-    option.className = "option";
-
-    option.textContent =
-      `${String.fromCharCode(65 + index)}. ${optionText}`;
-
-    option.addEventListener(
-      "click",
-      ()=>selectAnswer(index)
-    );
-
-    optionsBox.appendChild(option);
-
+  item.o.forEach((optionText, idx)=>{
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "option";
+    btn.textContent = `${String.fromCharCode(65 + idx)}. ${optionText}`;
+    btn.addEventListener("click", () => selectAnswer(idx));
+    optionsBox.appendChild(btn);
   });
 
-  questionDeadline =
-    Date.now() + QUESTION_TIME;
-
+  questionDeadline = Date.now() + QUESTION_TIME;
   startQuestionTimer();
-
   saveProgress();
 }
 
 
 /* =========================================================
-   TRANSLATION
+   TRANSLATION TOGGLE
 ========================================================= */
-
-translationToggle.addEventListener(
-  "click",
-  ()=>{
-
-    const hidden =
-      translation.classList.contains("hidden");
-
-    if(hidden){
-
-      translation.classList.remove("hidden");
-
-      translationToggle.textContent =
-        "🌐 إخفاء الترجمة";
-
-    }else{
-
-      translation.classList.add("hidden");
-
-      translationToggle.textContent =
-        "🌐 إظهار الترجمة";
-
-    }
-
+translationToggle.addEventListener("click", ()=>{
+  const isHidden = translation.classList.contains("hidden");
+  if(isHidden){
+    translation.classList.remove("hidden");
+    translationToggle.textContent = "🌐 إخفاء الترجمة";
+  }else{
+    translation.classList.add("hidden");
+    translationToggle.textContent = "🌐 إظهار الترجمة";
   }
-);
+});
 
 
 /* =========================================================
-   TIMER
+   QUESTION TIMER (60s)
 ========================================================= */
-
 function startQuestionTimer(){
-
   stopQuestionTimer();
-
   if(!questionDeadline){
-    questionDeadline =
-      Date.now() + QUESTION_TIME;
+    questionDeadline = Date.now() + QUESTION_TIME;
   }
-
   updateTimer();
-
-  questionTimer = setInterval(
-    updateTimer,
-    200
-  );
+  questionTimer = setInterval(updateTimer, 250);
 }
 
-
 function stopQuestionTimer(){
-
   if(questionTimer){
     clearInterval(questionTimer);
     questionTimer = null;
   }
-
 }
 
-
 function updateTimer(){
-
-  if(answered){
-    return;
-  }
-
-  const remaining =
-    questionDeadline - Date.now();
+  if(answered) return;
+  const remaining = questionDeadline - Date.now();
 
   if(remaining <= 0){
-
     timer.textContent = "00:00";
-
     timer.classList.add("warning");
-
     stopQuestionTimer();
-
     handleTimeout();
-
     return;
   }
 
-  timer.textContent =
-    formatTime(remaining);
-
+  timer.textContent = formatTime(remaining);
   if(remaining <= 10000){
     timer.classList.add("warning");
   }else{
     timer.classList.remove("warning");
   }
-
 }
 
 
 /* =========================================================
-   ANSWER
+   ANSWER & TIMEOUT
 ========================================================= */
-
 function selectAnswer(index){
-
   if(answered) return;
-
   answered = true;
-
   stopQuestionTimer();
 
   const item = questions[currentIndex];
+  const optionButtons = [...optionsBox.querySelectorAll(".option")];
 
-  const optionButtons =
-    [...optionsBox.querySelectorAll(".option")];
-
-  optionButtons.forEach(btn=>{
-    btn.classList.add("disabled");
-  });
+  optionButtons.forEach(b => b.classList.add("disabled"));
 
   if(index === item.a){
-
-    correctAnswers++;
-
-    optionButtons[index]
-      .classList.add("correct");
-
+    totalCorrect++;
+    stageCorrect++;
+    optionButtons[index].classList.add("correct");
   }else{
-
-    wrongAnswers++;
-
-    optionButtons[index]
-      .classList.add("wrong");
-
-    optionButtons[item.a]
-      .classList.add("correct");
-
+    totalWrong++;
+    stageWrong++;
+    optionButtons[index].classList.add("wrong");
+    optionButtons[item.a].classList.add("correct");
   }
 
   saveProgress();
-
   showNextButton();
-
 }
 
-
-/* =========================================================
-   TIMEOUT
-========================================================= */
-
 function handleTimeout(){
-
   if(answered) return;
-
   answered = true;
 
-  timeoutAnswers++;
-  wrongAnswers++;
+  totalTimeout++;
+  totalWrong++;
+  stageTimeout++;
+  stageWrong++;
 
   const item = questions[currentIndex];
-
-  const optionButtons =
-    [...optionsBox.querySelectorAll(".option")];
-
-  optionButtons.forEach(btn=>{
-    btn.classList.add("disabled");
-  });
+  const optionButtons = [...optionsBox.querySelectorAll(".option")];
+  optionButtons.forEach(b => b.classList.add("disabled"));
 
   if(optionButtons[item.a]){
-    optionButtons[item.a]
-      .classList.add("correct");
+    optionButtons[item.a].classList.add("correct");
   }
 
   timeoutMessage.classList.remove("hidden");
-
   saveProgress();
 
-  /*
-    إظهار الإجابة الصحيحة للحظات ثم الانتقال
-  */
-
-  transitionTimer = setTimeout(
-    nextQuestion,
-    1200
-  );
-
+  transitionTimer = setTimeout(nextQuestion, 1400);
 }
 
 
 /* =========================================================
-   NEXT
+   NAVIGATION (NEXT QUESTION / FINISH STAGE)
 ========================================================= */
-
 function showNextButton(){
+  const isEndOfStage = ((currentIndex + 1) % QUESTIONS_PER_STAGE === 0);
+  const isEndOfExam = (currentIndex + 1 >= TOTAL_QUESTIONS);
 
-  if(currentIndex >= TOTAL - 1){
-
-    nextBtn.textContent =
-      "إنهاء الاختبار ✓";
-
+  if(isEndOfExam){
+    nextBtn.textContent = "عرض النتيجة النهائية 🎓";
+  }else if(isEndOfStage){
+    nextBtn.textContent = `إنهاء المرحلة ${currentStage} وحفظها ✓`;
   }else{
-
-    nextBtn.textContent =
-      "السؤال التالي →";
-
+    nextBtn.textContent = "السؤال التالي →";
   }
-
   nextBtn.classList.remove("hidden");
 }
 
-
-nextBtn.addEventListener(
-  "click",
-  nextQuestion
-);
-
+nextBtn.addEventListener("click", nextQuestion);
 
 function nextQuestion(){
-
   if(!answered) return;
 
   if(transitionTimer){
@@ -1566,338 +1102,238 @@ function nextQuestion(){
     transitionTimer = null;
   }
 
-  currentIndex++;
+  const isEndOfStage = ((currentIndex + 1) % QUESTIONS_PER_STAGE === 0);
+  const isEndOfExam = (currentIndex + 1 >= TOTAL_QUESTIONS);
 
-  if(currentIndex >= TOTAL){
-
-    finishExam();
+  if(isEndOfExam){
+    finishEntireExam();
     return;
   }
 
+  if(isEndOfStage){
+    finishCurrentStage();
+    return;
+  }
+
+  currentIndex++;
   renderQuestion();
 }
 
 
 /* =========================================================
-   FINISH
+   STAGE COMPLETION & TELEGRAM DISPATCH
 ========================================================= */
-
-function finishExam(){
-
+function finishCurrentStage(){
   stopTimers();
 
-  clearProgress();
+  const completedStageNum = currentStage;
+  const stageScore = stageCorrect;
+  const percent = Math.round((stageScore / QUESTIONS_PER_STAGE) * 100);
 
-  const finalScore =
-    correctAnswers;
+  stageTitle.textContent = `اكتملت المرحلة ${completedStageNum} بنجاح! 🎯`;
+  stageScoreEl.textContent = `${stageScore}/${QUESTIONS_PER_STAGE}`;
+  stagePercentageEl.textContent = `${percent}%`;
 
-  const percent =
-    Math.round((finalScore / TOTAL) * 100);
+  stageCorrectEl.textContent = stageCorrect;
+  stageWrongEl.textContent = stageWrong;
+  stageTimeoutEl.textContent = stageTimeout;
 
-  score.textContent =
-    `${finalScore}/${TOTAL}`;
+  stageSendStatus.textContent = "جاري إرسال تقرير المرحلة إلى تيليجرام...";
 
-  percentage.textContent =
-    `${percent}%`;
+  showScreen(stageScreen);
 
-  resultName.textContent =
-    studentName;
-
-  correctCount.textContent =
-    correctAnswers;
-
-  wrongCount.textContent =
-    wrongAnswers;
-
-  timeoutCount.textContent =
-    timeoutAnswers;
-
-  sendStatus.textContent =
-    "جاري حفظ النتيجة...";
-
-  showScreen(resultScreen);
-
-  sendResult({
-    name:studentName,
-    score:finalScore,
-    total:TOTAL,
-    percentage:percent,
-    correct:correctAnswers,
-    wrong:wrongAnswers,
-    timeout:timeoutAnswers
+  // Send stage result via Google Apps Script
+  sendTelegramData({
+    type: "STAGE",
+    stage: completedStageNum,
+    name: studentName,
+    stageScore: stageScore,
+    stageTotal: QUESTIONS_PER_STAGE,
+    stagePercent: percent,
+    totalProgressScore: totalCorrect,
+    totalQuestionsAnswered: currentIndex + 1,
+    statusEl: stageSendStatus
   });
 
+  // Prepare next stage index
+  currentIndex++;
+  stageCorrect = 0;
+  stageWrong = 0;
+  stageTimeout = 0;
+  saveProgress();
+}
+
+resumeNextStageBtn.addEventListener("click", ()=>{
+  currentStage = Math.floor(currentIndex / QUESTIONS_PER_STAGE) + 1;
+  showScreen(quizScreen);
+  renderQuestion();
+});
+
+
+/* =========================================================
+   FINAL EXAM COMPLETION & FINAL TELEGRAM DISPATCH
+========================================================= */
+function finishEntireExam(){
+  stopTimers();
+  clearProgress();
+
+  const finalScore = totalCorrect;
+  const percent = Math.round((finalScore / TOTAL_QUESTIONS) * 100);
+
+  resultName.textContent = studentName;
+  finalScoreEl.textContent = `${finalScore}/${TOTAL_QUESTIONS}`;
+  finalPercentageEl.textContent = `${percent}%`;
+
+  finalCorrectEl.textContent = totalCorrect;
+  finalWrongEl.textContent = totalWrong;
+  finalTimeoutEl.textContent = totalTimeout;
+
+  finalSendStatus.textContent = "جاري إرسال التقرير النهائي الشامل إلى تيليجرام...";
+  showScreen(resultScreen);
+
+  // Send Final Result via Google Apps Script
+  sendTelegramData({
+    type: "FINAL",
+    name: studentName,
+    score: finalScore,
+    total: TOTAL_QUESTIONS,
+    percentage: percent,
+    correct: totalCorrect,
+    wrong: totalWrong,
+    timeout: totalTimeout,
+    statusEl: finalSendStatus
+  });
 }
 
 
 /* =========================================================
-   SEND RESULT
+   SEND DATA TO APPS SCRIPT / TELEGRAM
 ========================================================= */
-
-async function sendResult(result){
-
-  /*
-    ضع رابط Google Apps Script هنا إذا كان مستخدمًا
-    لحفظ النتائج.
-  */
-
-  const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbzUQLJN40vyblri1MGbY6ZjvsOYUhGeC12HHl64X2sS8piWUmjx8fq1eH9tYgmUIg_Shw/exec";
-
+async function sendTelegramData(payload){
   try{
-
     const params = new URLSearchParams();
+    params.append("type", payload.type);
+    params.append("name", payload.name);
 
-    params.append("name",result.name);
-    params.append("score",result.score);
-    params.append("total",result.total);
-    params.append("percentage",result.percentage);
-    params.append("correct",result.correct);
-    params.append("wrong",result.wrong);
-    params.append("timeout",result.timeout);
+    if(payload.type === "STAGE"){
+      params.append("stage", payload.stage);
+      params.append("stageScore", payload.stageScore);
+      params.append("stageTotal", payload.stageTotal);
+      params.append("stagePercent", payload.stagePercent);
+      params.append("totalProgressScore", payload.totalProgressScore);
+      params.append("totalQuestionsAnswered", payload.totalQuestionsAnswered);
+    }else{
+      params.append("score", payload.score);
+      params.append("total", payload.total);
+      params.append("percentage", payload.percentage);
+      params.append("correct", payload.correct);
+      params.append("wrong", payload.wrong);
+      params.append("timeout", payload.timeout);
+    }
 
-    await fetch(
-      SCRIPT_URL + "?" + params.toString(),
-      {
-        method:"GET",
-        mode:"no-cors"
-      }
-    );
+    await fetch(`${APPS_SCRIPT_URL}?${params.toString()}`, {
+      method: "GET",
+      mode: "no-cors"
+    });
 
-    sendStatus.textContent =
-      "✅ تم إرسال النتيجة بنجاح";
-
-  }catch(error){
-
-    console.warn(error);
-
-    sendStatus.textContent =
-      "⚠️ تعذر تأكيد إرسال النتيجة، لكن تم حسابها على الجهاز.";
-
+    if(payload.statusEl){
+      payload.statusEl.textContent = "✅ تم إرسال التقرير بنجاح إلى التيليجرام";
+    }
+  }catch(err){
+    console.warn("Transmission error", err);
+    if(payload.statusEl){
+      payload.statusEl.textContent = "⚠️ تم حفظ نتيجتك محلياً على المتصفح";
+    }
   }
-
 }
 
 
 /* =========================================================
-   RESTART
+   RESTART SYSTEM
 ========================================================= */
+restartBtn.addEventListener("click", ()=>{
+  stopTimers();
+  clearProgress();
 
-restartBtn.addEventListener(
-  "click",
-  ()=>{
+  studentNameInput.value = "";
+  studentName = "";
+  currentIndex = 0;
+  currentStage = 1;
 
-    stopTimers();
+  totalCorrect = 0;
+  totalWrong = 0;
+  totalTimeout = 0;
 
-    clearProgress();
+  stageCorrect = 0;
+  stageWrong = 0;
+  stageTimeout = 0;
 
-    studentNameInput.value = "";
-
-    studentName = "";
-
-    correctAnswers = 0;
-    wrongAnswers = 0;
-    timeoutAnswers = 0;
-    currentIndex = 0;
-
-    questionDeadline = null;
-
-    showScreen(startScreen);
-
-  }
-);
+  questionDeadline = null;
+  showScreen(startScreen);
+});
 
 
 /* =========================================================
-   RESUME
+   TRY RESUME PREVIOUS SESSION
 ========================================================= */
-
-function tryResume(){
-
-  const restored =
-    loadProgress();
-
+function tryResumeSession(){
+  const restored = loadProgress();
   if(!restored) return;
 
-  if(
-    currentIndex >= TOTAL ||
-    !questions.length
-  ){
-
+  if(currentIndex >= TOTAL_QUESTIONS || !questions.length){
     clearProgress();
     return;
-
   }
 
-  studentNameInput.value =
-    studentName;
+  studentNameInput.value = studentName;
 
-  /*
-    إذا انتهى الوقت أثناء إغلاق الصفحة،
-    يبدأ السؤال التالي بدل تجميد الاختبار.
-  */
-
-  if(
-    questionDeadline &&
-    Date.now() >= questionDeadline
-  ){
-
-    showScreen(quizScreen);
-
-    answered = false;
-
-    renderQuestion();
-
+  // If page was reloaded right at the end of a stage
+  if(currentIndex > 0 && currentIndex % QUESTIONS_PER_STAGE === 0 && answered){
+    currentStage = Math.floor(currentIndex / QUESTIONS_PER_STAGE);
+    finishCurrentStage();
     return;
-
   }
 
   showScreen(quizScreen);
-
+  answered = false;
   renderQuestion();
-
-  /*
-    استعادة الوقت المتبقي
-  */
-
-  if(questionDeadline){
-
-    stopQuestionTimer();
-
-    startQuestionTimer();
-
-  }
-
 }
 
 
 /* =========================================================
-   PAGE VISIBILITY
+   SAFETY, PRIVACY & SECURITY LOCKS
 ========================================================= */
-
-document.addEventListener(
-  "visibilitychange",
-  ()=>{
-
-    if(document.hidden){
-
-      saveProgress();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   BEFORE UNLOAD
-========================================================= */
-
-window.addEventListener(
-  "beforeunload",
-  ()=>{
+document.addEventListener("visibilitychange", ()=>{
+  if(document.hidden){
     saveProgress();
+    privacyMask.classList.add("show");
+  }else{
+    privacyMask.classList.remove("show");
   }
-);
+});
+
+window.addEventListener("beforeunload", ()=>{
+  saveProgress();
+});
+
+document.addEventListener("copy", e => e.preventDefault());
+document.addEventListener("cut", e => e.preventDefault());
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+
+document.addEventListener("keydown", e => {
+  if((e.ctrlKey || e.metaKey) && ["c","x","a","u","s"].includes(e.key.toLowerCase())){
+    e.preventDefault();
+  }
+});
 
 
 /* =========================================================
-   ANTI COPY
-   لا يمنع screenshots بشكل مضمون.
-   ولا يستخدم touchstart حتى لا يعطل الضغط على الإجابات.
+   INITIALIZATION
 ========================================================= */
-
-document.addEventListener(
-  "copy",
-  e=>{
-    e.preventDefault();
-  }
-);
-
-document.addEventListener(
-  "cut",
-  e=>{
-    e.preventDefault();
-  }
-);
-
-document.addEventListener(
-  "contextmenu",
-  e=>{
-    e.preventDefault();
-  }
-);
-
-document.addEventListener(
-  "selectstart",
-  e=>{
-    e.preventDefault();
-  }
-);
-
-
-/* =========================================================
-   KEYBOARD COPY SHORTCUTS
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  e=>{
-
-    if(
-      (e.ctrlKey || e.metaKey) &&
-      ["c","x","a","u","s"].includes(
-        e.key.toLowerCase()
-      )
-    ){
-      e.preventDefault();
-    }
-
-  }
-);
-
-
-/* =========================================================
-   PRIVACY MASK
-========================================================= */
-
-document.addEventListener(
-  "visibilitychange",
-  ()=>{
-
-    if(document.hidden){
-
-      privacyMask.classList.add("show");
-
-    }else{
-
-      privacyMask.classList.remove("show");
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  ()=>{
-
-    /*
-      لا نُظهر أي مؤقت قبل بدء الاختبار.
-      المؤقت الوحيد في النظام هو:
-      60 ثانية لكل سؤال.
-    */
-
-    tryResume();
-
-  }
-);
-
+document.addEventListener("DOMContentLoaded", ()=>{
+  tryResumeSession();
+});
 </script>
 
 </body>
