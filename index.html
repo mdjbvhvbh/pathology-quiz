@@ -372,15 +372,6 @@ h1{
   display:flex;
 }
 
-.btn-secondary{
-  background:#64748b;
-  color:#fff;
-  border:none;
-  border-radius:15px;
-  padding:13px;
-  font-weight:700;
-}
-
 @media(max-width:480px){
   .app{ padding:10px; }
   .card{ padding:16px; border-radius:18px; }
@@ -406,7 +397,6 @@ h1{
       <div class="rule">⏱️ <b>الوقت:</b> دقيقة واحدة (60 ثانية) لكل سؤال.</div>
       <div class="rule">🔀 <b>عشوائية:</b> ترتيب عشوائي للأسئلة والخيارات.</div>
       <div class="rule">🌐 <b>الترجمة:</b> متوفرة لكل سؤال عبر زر إظهار الترجمة.</div>
-      <div class="rule">📲 <b>إرسال فوري:</b> تقرير فوري عبر التيليجرام بعد كل مرحلة وعند إنهاء الاختبار كاملاً.</div>
       <div class="rule">💾 <b>حفظ تلقائي:</b> يمكنك إغلاق الصفحة والعودة لمتابعة نفس السؤال والمرحلة.</div>
     </div>
 
@@ -469,7 +459,7 @@ h1{
   <section id="stageScreen" class="card result hidden">
     <div class="logo">🎯</div>
     <h1 id="stageTitle">اكتملت المرحلة!</h1>
-    <div id="stageSubtitle" class="subtitle">تم إنهاء مرحلة بنجاح وإرسال نتائجها للتيليجرام</div>
+    <div id="stageSubtitle" class="subtitle">تم إنهاء مرحلة بنجاح وحفظ تقدمك</div>
 
     <div class="score-circle">
       <div id="stageScore" class="score">0/37</div>
@@ -493,9 +483,7 @@ h1{
       </div>
     </div>
 
-    <div id="stageSendStatus" class="status" style="margin-bottom:15px;"></div>
-
-    <button id="resumeNextStageBtn" class="primary" type="button">
+    <button id="resumeNextStageBtn" class="primary" type="button" style="margin-top:15px;">
       الانتقال إلى المرحلة التالية 🚀
     </button>
   </section>
@@ -528,8 +516,6 @@ h1{
         <span>انتهى الوقت</span>
       </div>
     </div>
-
-    <div id="finalSendStatus" class="status"></div>
 
     <button id="restartBtn" class="primary" type="button" style="margin-top:15px;">
       🔄 إعادة الاختبار من البداية
@@ -703,20 +689,20 @@ const quizData = [
 ];
 
 /* =========================================================
-   CONFIG & STATE (4 STAGES x 37 QUESTIONS = 148)
+   CONFIG & STATE
 ========================================================= */
 const TOTAL_QUESTIONS = 148;
 const QUESTIONS_PER_STAGE = 37;
 const TOTAL_STAGES = 4;
 const QUESTION_TIME = 60 * 1000;
-const STORAGE_KEY = "gp_dental_exam_4stages_v1";
+const STORAGE_KEY = "gp_dental_exam_4stages_v2";
 
 /* Apps Script URL */
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzUQLJN40vyblri1MGbY6ZjvsOYUhGeC12HHl64X2sS8piWUmjx8fq1eH9tYgmUIg_Shw/exec";
 
 let questions = [];
-let currentIndex = 0; // 0 to 147
-let currentStage = 1; // 1 to 4
+let currentIndex = 0;
+let currentStage = 1;
 let studentName = "";
 
 /* Total stats */
@@ -762,13 +748,11 @@ const nextBtn = document.getElementById("nextBtn");
 
 /* Stage Screen DOM */
 const stageTitle = document.getElementById("stageTitle");
-const stageSubtitle = document.getElementById("stageSubtitle");
 const stageScoreEl = document.getElementById("stageScore");
 const stagePercentageEl = document.getElementById("stagePercentage");
 const stageCorrectEl = document.getElementById("stageCorrect");
 const stageWrongEl = document.getElementById("stageWrong");
 const stageTimeoutEl = document.getElementById("stageTimeout");
-const stageSendStatus = document.getElementById("stageSendStatus");
 const resumeNextStageBtn = document.getElementById("resumeNextStageBtn");
 
 /* Final Screen DOM */
@@ -778,7 +762,6 @@ const finalPercentageEl = document.getElementById("finalPercentage");
 const finalCorrectEl = document.getElementById("finalCorrect");
 const finalWrongEl = document.getElementById("finalWrong");
 const finalTimeoutEl = document.getElementById("finalTimeout");
-const finalSendStatus = document.getElementById("finalSendStatus");
 const restartBtn = document.getElementById("restartBtn");
 
 const privacyMask = document.getElementById("privacyMask");
@@ -1085,7 +1068,7 @@ function showNextButton(){
   if(isEndOfExam){
     nextBtn.textContent = "عرض النتيجة النهائية 🎓";
   }else if(isEndOfStage){
-    nextBtn.textContent = `إنهاء المرحلة ${currentStage} وحفظها ✓`;
+    nextBtn.textContent = `إنهاء المرحلة ${currentStage} ✓`;
   }else{
     nextBtn.textContent = "السؤال التالي →";
   }
@@ -1121,7 +1104,7 @@ function nextQuestion(){
 
 
 /* =========================================================
-   STAGE COMPLETION & TELEGRAM DISPATCH
+   STAGE COMPLETION & TELEGRAM DISPATCH (SILENT)
 ========================================================= */
 function finishCurrentStage(){
   stopTimers();
@@ -1138,12 +1121,10 @@ function finishCurrentStage(){
   stageWrongEl.textContent = stageWrong;
   stageTimeoutEl.textContent = stageTimeout;
 
-  stageSendStatus.textContent = "جاري إرسال تقرير المرحلة إلى تيليجرام...";
-
   showScreen(stageScreen);
 
-  // Send stage result via Google Apps Script
-  sendTelegramData({
+  // Send stage result silently via Google Apps Script
+  sendTelegramDataSilently({
     type: "STAGE",
     stage: completedStageNum,
     name: studentName,
@@ -1151,8 +1132,7 @@ function finishCurrentStage(){
     stageTotal: QUESTIONS_PER_STAGE,
     stagePercent: percent,
     totalProgressScore: totalCorrect,
-    totalQuestionsAnswered: currentIndex + 1,
-    statusEl: stageSendStatus
+    totalQuestionsAnswered: currentIndex + 1
   });
 
   // Prepare next stage index
@@ -1171,7 +1151,7 @@ resumeNextStageBtn.addEventListener("click", ()=>{
 
 
 /* =========================================================
-   FINAL EXAM COMPLETION & FINAL TELEGRAM DISPATCH
+   FINAL EXAM COMPLETION & FINAL TELEGRAM DISPATCH (SILENT)
 ========================================================= */
 function finishEntireExam(){
   stopTimers();
@@ -1188,11 +1168,10 @@ function finishEntireExam(){
   finalWrongEl.textContent = totalWrong;
   finalTimeoutEl.textContent = totalTimeout;
 
-  finalSendStatus.textContent = "جاري إرسال التقرير النهائي الشامل إلى تيليجرام...";
   showScreen(resultScreen);
 
-  // Send Final Result via Google Apps Script
-  sendTelegramData({
+  // Send Final Result silently via Google Apps Script
+  sendTelegramDataSilently({
     type: "FINAL",
     name: studentName,
     score: finalScore,
@@ -1200,16 +1179,15 @@ function finishEntireExam(){
     percentage: percent,
     correct: totalCorrect,
     wrong: totalWrong,
-    timeout: totalTimeout,
-    statusEl: finalSendStatus
+    timeout: totalTimeout
   });
 }
 
 
 /* =========================================================
-   SEND DATA TO APPS SCRIPT / TELEGRAM
+   SEND DATA TO APPS SCRIPT / TELEGRAM (SILENT MODE)
 ========================================================= */
-async function sendTelegramData(payload){
+async function sendTelegramDataSilently(payload){
   try{
     const params = new URLSearchParams();
     params.append("type", payload.type);
@@ -1235,15 +1213,8 @@ async function sendTelegramData(payload){
       method: "GET",
       mode: "no-cors"
     });
-
-    if(payload.statusEl){
-      payload.statusEl.textContent = "✅ تم إرسال التقرير بنجاح إلى التيليجرام";
-    }
   }catch(err){
-    console.warn("Transmission error", err);
-    if(payload.statusEl){
-      payload.statusEl.textContent = "⚠️ تم حفظ نتيجتك محلياً على المتصفح";
-    }
+    console.warn("Silent transmission background log:", err);
   }
 }
 
@@ -1287,7 +1258,6 @@ function tryResumeSession(){
 
   studentNameInput.value = studentName;
 
-  // If page was reloaded right at the end of a stage
   if(currentIndex > 0 && currentIndex % QUESTIONS_PER_STAGE === 0 && answered){
     currentStage = Math.floor(currentIndex / QUESTIONS_PER_STAGE);
     finishCurrentStage();
@@ -1301,7 +1271,7 @@ function tryResumeSession(){
 
 
 /* =========================================================
-   SAFETY, PRIVACY & SECURITY LOCKS
+   SECURITY & VISIBILITY
 ========================================================= */
 document.addEventListener("visibilitychange", ()=>{
   if(document.hidden){
@@ -1329,7 +1299,7 @@ document.addEventListener("keydown", e => {
 
 
 /* =========================================================
-   INITIALIZATION
+   INIT
 ========================================================= */
 document.addEventListener("DOMContentLoaded", ()=>{
   tryResumeSession();
